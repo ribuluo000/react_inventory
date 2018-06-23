@@ -10,7 +10,6 @@ import { Helmet } from "react-helmet";
 import { FormattedMessage } from "react-intl";
 import { makeSelectError, makeSelectLoading, makeSelectRepos } from "containers/App/selectors";
 import H2 from "components/H2";
-import ReposList from "components/ReposList";
 import AtPrefix from "./AtPrefix";
 import CenteredSection from "./CenteredSection";
 import Form from "./Form";
@@ -40,13 +39,13 @@ export default class ViewLogin extends React.PureComponent {
     return (
       <article>
         <Helmet>
-          <title>Login Page</title>
-          <meta
-            name="description"
-            content="A React.js Boilerplate application LoginPage"
-          />
+          <title>Login222 Page</title>
         </Helmet>
-        <div>
+
+        <div onClick={() => {
+          alert('aaa');
+          this.props.onPress_login
+        }}>
           <CenteredSection>
             <H2>
               <FormattedMessage {...messages.startProjectHeader} />
@@ -59,7 +58,7 @@ export default class ViewLogin extends React.PureComponent {
             <H2>
               <FormattedMessage {...messages.trymeHeader} />
             </H2>
-            <Form onSubmit={this.props.onSubmitForm}>
+            <Form onSubmit={this.props.onPress_login}>
               <label htmlFor="user_name">
                 <FormattedMessage {...messages.trymeMessage} />
                 <AtPrefix>
@@ -72,9 +71,15 @@ export default class ViewLogin extends React.PureComponent {
                   value={this.props.user_name}
                   onChange={this.props.onChange_user_name}
                 />
+                <Input
+                  id="password"
+                  type="text"
+                  placeholder="mxstbr"
+                  value={this.props.password}
+                  onChange={this.props.onChange_password}
+                />
               </label>
             </Form>
-            <ReposList {...reposListProps} />
           </Section>
         </div>
       </article>
@@ -86,8 +91,10 @@ ViewLogin.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
   repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onSubmitForm : PropTypes.func,
+  onPress_login : PropTypes.func,
   user_name : PropTypes.string,
   onChange_user_name : PropTypes.func,
+  onChange_password : PropTypes.func,
+
 };
 

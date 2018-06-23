@@ -15,18 +15,88 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import {
+  CHANGE_USER_NAME,
+  CHANGE_PASSWORD,
+
+  /****************************** network start **************************************/
+
+    API_LOGIN,
+    API_LOGIN_SUCCESS,
+    API_LOGIN_ERROR,
+  /****************************** network end **************************************/
+
+} from './constants';
 
 /**
  * Changes the input field of the form
  *
- * @param  {name} name The new text of the input field
+ * @param  {user_name} user_name The new text of the input field
  *
  * @return {object}    An action object with a type of CHANGE_USERNAME
  */
-export function changeUsername(name) {
+export function change_user_name(user_name) {
   return {
-    type: CHANGE_USERNAME,
-    name,
+    type: CHANGE_USER_NAME,
+    user_name,
   };
 }
+/**
+ * Changes the input field of the form
+ *
+ * @param  {password} password The new text of the input field
+ *
+ * @return {object}    An action object with a type of CHANGE_USERNAME
+ */
+export function change_password(password) {
+  return {
+    type: CHANGE_PASSWORD,
+    password,
+  };
+}
+
+/****************************** network start **************************************/
+
+/**
+ * fetch the interface login, this action starts the request saga
+ *
+ * @return {object} An action object with a type of API_LOGIN
+ */
+export function api_login() {
+  return {
+    type: API_LOGIN,
+  };
+}
+
+/**
+ * Dispatched when the jsonObj are loaded by the request saga
+ *
+ * @param  {object} jsonObj The data come from the server
+ *
+ * @return {object}      An action object with a type of API_LOGIN_SUCCESS passing the repos
+ */
+export function api_login_success(jsonObj) {
+  return {
+    type: API_LOGIN_SUCCESS,
+    jsonObj,
+  };
+}
+
+/**
+ * Dispatched when loading the jsonObj fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of API_LOGIN_ERROR passing the error
+ */
+export function api_login_error(error) {
+  return {
+    type: API_LOGIN_ERROR,
+    error,
+  };
+}
+
+
+/****************************** network end **************************************/
+
+
