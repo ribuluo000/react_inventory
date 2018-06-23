@@ -16,7 +16,8 @@ import Form from "./Form";
 import Input from "./Input";
 import Section from "./Section";
 import messages from "./messages";
-
+import { Button,DatePickerView } from 'antd-mobile';
+// import 'antd-mobile/dist/antd-mobile.css';
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewLogin extends React.PureComponent {
   /**
@@ -41,11 +42,18 @@ export default class ViewLogin extends React.PureComponent {
         <Helmet>
           <title>Login222 Page</title>
         </Helmet>
+        <Button children={'11111'} onClick={()=>{alert('1111')}}/>
 
+        <div >
+          <Button children={'22222'} onClick={()=>{alert('22222')}}/>
+          <DatePickerView/>
+        </div>
         <div onClick={() => {
           alert('aaa');
           this.props.onPress_login
         }}>
+          <Button children={'3333'} onClick={()=>{alert('3333')}}/>
+
           <CenteredSection>
             <H2>
               <FormattedMessage {...messages.startProjectHeader} />
