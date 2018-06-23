@@ -27,4 +27,21 @@ export default defineMessages({
     id: 'boilerplate.containers.HomePage.tryme.atPrefix',
     defaultMessage: '@',
   },
+
+  title__login:{
+    id:'inventory.containers.LoginPage.title__login',
+    defaultMessage:'登录',
+  },
+  button__login:{
+    id:'inventory.containers.LoginPage.button__login',
+    defaultMessage:'登录',
+  },
+  placeholder__user_name:{
+    id:'inventory.containers.LoginPage.placeholder__user_name',
+    defaultMessage:'请输入用户名',
+  },
+  placeholder__password:{
+    id:'inventory.containers.LoginPage.placeholder__password',
+    defaultMessage:'请输入密码',
+  },
 });

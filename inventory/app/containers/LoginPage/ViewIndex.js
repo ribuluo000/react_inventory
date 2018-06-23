@@ -9,17 +9,12 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { FormattedMessage } from "react-intl";
 import { makeSelectError, makeSelectLoading, makeSelectRepos } from "containers/App/selectors";
-import H2 from "components/H2";
-import AtPrefix from "./AtPrefix";
-import CenteredSection from "./CenteredSection";
-import Form from "./Form";
-import Input from "./Input";
-import Section from "./Section";
+import MyButton from "components/MyButton";
 import messages from "./messages";
-import { Button,DatePickerView } from 'antd-mobile';
+import { InputItem, List, View, WhiteSpace } from "antd-mobile";
 // import 'antd-mobile/dist/antd-mobile.css';
 /* eslint-disable react/prefer-stateless-function */
-export default class ViewLogin extends React.PureComponent {
+export default class ViewIndex extends React.PureComponent {
   /**
    * when initial state user_name is not null, submit the form to load repos
    */
@@ -38,64 +33,67 @@ export default class ViewLogin extends React.PureComponent {
     };
 
     return (
-      <article>
+      <View>
         <Helmet>
-          <title>Login222 Page</title>
+          <title>登录</title>
         </Helmet>
-        <Button children={'11111'} onClick={()=>{alert('1111')}}/>
 
-        <div >
-          <Button children={'22222'} onClick={()=>{alert('22222')}}/>
-          <DatePickerView/>
-        </div>
-        <div onClick={() => {
-          alert('aaa');
-          this.props.onPress_login
-        }}>
-          <Button children={'3333'} onClick={()=>{alert('3333')}}/>
+        <List renderHeader={() => ''}>
+          <WhiteSpace />
 
-          <CenteredSection>
-            <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
-            </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
-          </CenteredSection>
-          <Section>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-            <Form onSubmit={this.props.onPress_login}>
-              <label htmlFor="user_name">
-                <FormattedMessage {...messages.trymeMessage} />
-                <AtPrefix>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </AtPrefix>
-                <Input
+          <FormattedMessage {...messages.placeholder__user_name}>
+            {
+              msg => (
+                <InputItem
                   id="user_name"
                   type="text"
-                  placeholder="mxstbr"
                   value={this.props.user_name}
                   onChange={this.props.onChange_user_name}
+                  placeholder={msg}
                 />
-                <Input
+              )
+            }
+
+          </FormattedMessage>
+
+          <WhiteSpace />
+
+          <FormattedMessage {...messages.placeholder__password}>
+            {
+              msg => (
+                <InputItem
                   id="password"
-                  type="text"
-                  placeholder="mxstbr"
+                  type="password"
                   value={this.props.password}
                   onChange={this.props.onChange_password}
+                  placeholder={msg}
                 />
-              </label>
-            </Form>
-          </Section>
-        </div>
-      </article>
+              )
+            }
+
+          </FormattedMessage>
+
+          <WhiteSpace/>
+
+          <FormattedMessage {...messages.button__login}>
+            {
+              msg => (
+                <MyButton children={msg} onPress={this.props.onPress_login}/>
+              )
+            }
+
+          </FormattedMessage>
+
+        </List>
+
+        <WhiteSpace />
+
+      </View>
     );
   }
 }
 
-ViewLogin.propTypes = {
+ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
   repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),

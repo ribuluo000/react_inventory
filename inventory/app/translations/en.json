@@ -42,5 +42,11 @@
     "Show Github repositories by",
   "boilerplate.containers.LocaleToggle.de": "de",
   "boilerplate.containers.LocaleToggle.en": "en",
-  "boilerplate.containers.NotFoundPage.header": "Page not found."
+  "boilerplate.containers.NotFoundPage.header": "Page not found.",
+
+  "inventory.containers.LoginPage.placeholder__user_name": "请输入用户名",
+  "inventory.containers.LoginPage.placeholder__password": "请输入密码",
+  "inventory.containers.LoginPage.button__login": "登录",
+  "inventory.containers.LoginPage.title__login": "登录"
+
 }
