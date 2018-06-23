@@ -12,12 +12,14 @@ import { createStructuredSelector } from "reselect";
 
 import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
-import { makeSelectError, makeSelectLoading } from "containers/App/selectors";
-import { change_user_name,change_password,api_login } from "./actions";
-import { makeSelect_user_name,makeSelect_password } from "./selectors";
+import { makeSelect__is_authenticated, makeSelectError, makeSelectLoading } from "containers/App/selectors";
+import { api_login, change_password, change_user_name } from "./actions";
+import { router_to_login } from "router/actions";
+import { makeSelect_password, makeSelect_user_name } from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
+import { Redirect, Route } from "react-router-dom";
 
 /* eslint-disable react/prefer-stateless-function */
 export class LoginPage extends React.PureComponent {
@@ -28,9 +30,26 @@ export class LoginPage extends React.PureComponent {
   }
 
   render() {
+
+    let {
+      is_authenticated,
+      ...props
+    } = this.props;
     return (
-      <ViewIndex {...this.props}/>
-    );
+      <Route
+        {...props}
+        render={props =>
+          !is_authenticated
+            ? <ViewIndex {...this.props}/>
+            : (
+            <Redirect to={{
+              pathname : '/home',
+              state : { from : props.location }
+            }}/>
+          )
+        }
+      />
+    )
   }
 }
 
@@ -38,7 +57,6 @@ LoginPage.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
   repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onSubmitForm : PropTypes.func,
   user_name : PropTypes.string,
   onChange_user_name : PropTypes.func,
   onChange_password : PropTypes.func,
@@ -46,18 +64,20 @@ LoginPage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChange_user_name : evt => dispatch(change_user_name(evt.target.value)),
-    onChange_password : evt => dispatch(change_password(evt.target.value)),
+    onChange_user_name : value => dispatch(change_user_name(value)),
+    onChange_password : value => dispatch(change_password(value)),
     onPress_login : evt => {
       if (evt !== undefined && evt.preventDefault) {
         evt.preventDefault();
       }
       dispatch(api_login());
+      // dispatch(push('/features'));
     },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
+  is_authenticated : makeSelect__is_authenticated(),
   user_name : makeSelect_user_name(),
   password : makeSelect_password(),
   loading : makeSelectLoading(),

@@ -19,9 +19,7 @@ export default class ViewIndex extends React.PureComponent {
    * when initial state user_name is not null, submit the form to load repos
    */
   componentDidMount() {
-    if (this.props.user_name && this.props.user_name.trim().length > 0) {
-      this.props.onSubmitForm();
-    }
+
   }
 
   render() {
@@ -78,7 +76,11 @@ export default class ViewIndex extends React.PureComponent {
           <FormattedMessage {...messages.button__login}>
             {
               msg => (
-                <MyButton children={msg} onPress={this.props.onPress_login}/>
+                <MyButton
+                  type="primary"
+                  children={msg}
+                  onPress={this.props.onPress_login}
+                />
               )
             }
 

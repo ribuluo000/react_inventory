@@ -13,3 +13,10 @@ export const LOAD_REPOS = 'inventory/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'inventory/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'inventory/App/LOAD_REPOS_ERROR';
 
+/************************************************** 授权相关 start ********************************************************************************/
+
+export const ACTION__IS_AUTHENTICATED_SUCCESS = 'inventory/App/ACTION__IS_AUTHENTICATED_SUCCESS';
+export const ACTION__IS_AUTHENTICATED_FAILURE = 'inventory/App/ACTION__IS_AUTHENTICATED_FAILURE';
+
+/************************************************** 授权相关 end ********************************************************************************/
+

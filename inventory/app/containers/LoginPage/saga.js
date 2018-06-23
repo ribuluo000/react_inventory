@@ -6,9 +6,11 @@ import { call, put, select, takeLatest } from "redux-saga/effects";
 import { API_LOGIN_URL } from "utils/constant_api_url";
 import { API_LOGIN } from "./constants";
 import { api_login_error, api_login_success } from "./actions";
+import { action__is_authenticated_success, action__is_authenticated_failure  } from "containers/App/actions";
 
 import { options_common, request } from "utils/request";
 import { makeSelect_password, makeSelect_user_name } from "./selectors";
+import { LOCATION_CHANGE } from "react-router-redux";
 
 /**
  * Github repos request/response handler
@@ -30,14 +32,18 @@ export function* api_request() {
     const jsonObj = yield call(request, requestURL, options_common(bodyObj));
     if (jsonObj.code === 0) {
       yield put(api_login_success(jsonObj));
+      yield put(action__is_authenticated_success());
 
     } else {
       let err = jsonObj.msg;
       yield put(api_login_error(err));
+      yield put(action__is_authenticated_failure());
 
     }
   } catch (err) {
     yield put(api_login_error(err));
+    yield put(action__is_authenticated_failure());
+
   }
 }
 

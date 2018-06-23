@@ -16,8 +16,13 @@
  */
 
 import {
-  LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR,
-} from './constants';
+  /************************************************** 授权相关 start ********************************************************************************/
+
+    ACTION__IS_AUTHENTICATED_FAILURE, ACTION__IS_AUTHENTICATED_SUCCESS,
+  /************************************************** 授权相关 end ********************************************************************************/
+
+    LOAD_REPOS, LOAD_REPOS_ERROR, LOAD_REPOS_SUCCESS
+} from "./constants";
 
 /**
  * Load the repositories, this action starts the request saga
@@ -26,7 +31,7 @@ import {
  */
 export function loadRepos() {
   return {
-    type: LOAD_REPOS,
+    type : LOAD_REPOS,
   };
 }
 
@@ -40,7 +45,7 @@ export function loadRepos() {
  */
 export function reposLoaded(repos, username) {
   return {
-    type: LOAD_REPOS_SUCCESS,
+    type : LOAD_REPOS_SUCCESS,
     repos,
     username,
   };
@@ -55,7 +60,31 @@ export function reposLoaded(repos, username) {
  */
 export function repoLoadingError(error) {
   return {
-    type: LOAD_REPOS_ERROR,
+    type : LOAD_REPOS_ERROR,
     error,
+  };
+}
+
+/**
+ * Dispatched when ACTION__IS_AUTHENTICATED_SUCCESS
+ *
+ *
+ * @return {object}       An action object with a type of ACTION__IS_AUTHENTICATED_SUCCESS
+ */
+export function action__is_authenticated_success() {
+  return {
+    type : ACTION__IS_AUTHENTICATED_SUCCESS,
+  };
+}
+
+/**
+ * Dispatched when ACTION__IS_AUTHENTICATED_FAILURE
+ *
+ *
+ * @return {object}       An action object with a type of ACTION__IS_AUTHENTICATED_FAILURE
+ */
+export function action__is_authenticated_failure() {
+  return {
+    type : ACTION__IS_AUTHENTICATED_FAILURE,
   };
 }

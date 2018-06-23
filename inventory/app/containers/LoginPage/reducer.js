@@ -12,15 +12,20 @@
 import { fromJS } from "immutable";
 
 import {
-  /****************************** network start **************************************/
+  /********************************************************* network start ******************************************************************/
 
-    API_LOGIN, API_LOGIN_ERROR, API_LOGIN_SUCCESS, CHANGE_PASSWORD, CHANGE_USER_NAME
+    API_LOGIN, API_LOGIN_ERROR, API_LOGIN_SUCCESS,
+  /********************************************************** network end ******************************************************************/
+
+
+    CHANGE_PASSWORD, CHANGE_USER_NAME
 } from "./constants";
 
 // The initial state of the App
 export const initialState = fromJS({
   user_name : '',
   password : '',
+  isAuthenticated : false,
 
   /****************************** network start **************************************/
 
@@ -47,6 +52,7 @@ function loginReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
+        .set('isAuthenticated', false)
         .set('data_user', {
           access_token : '',
           user_id : '',
@@ -54,13 +60,17 @@ function loginReducer(state = initialState, action) {
     case API_LOGIN_SUCCESS:
       let { access_token, user_id } = action.jsonObj.data;
       return state
-        .setIn([ 'data_user', 'access_token' ], access_token)
-        .setIn([ 'data_user', 'user_id' ], user_id)
+        .set('data_user', {
+          access_token : access_token,
+          user_id : user_id,
+        })
+        .set('isAuthenticated', true)
         .set('loading', false);
     case API_LOGIN_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false)
+        .set('isAuthenticated', false)
         .set('data_user', {
           access_token : '',
           user_id : '',
