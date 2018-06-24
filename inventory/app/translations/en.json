@@ -111,9 +111,10 @@
 
   "please_input_key":"请输入关键字",
 
+  "bill_type":"账单类型",
   "receive_money":"收钱",
   "Pay":"付钱",
-  "transaction_amount ":"交易金额",
+  "transaction_amount":"交易金额",
   "total_price":"总价",
   "monetary_unit":"元",
 

@@ -398,6 +398,11 @@ export default defineMessages(
       "defaultMessage":"请输入关键字",
     },
 
+    "bill_type":{
+      "id":"bill_type",
+      "defaultMessage":"账单类型",
+    },
+
     "receive_money":{
       "id":"receive_money",
       "defaultMessage":"收钱",
@@ -408,8 +413,8 @@ export default defineMessages(
       "defaultMessage":"付钱",
     },
 
-    "transaction_amount ":{
-      "id":"transaction_amount ",
+    "transaction_amount":{
+      "id":"transaction_amount",
       "defaultMessage":"交易金额",
     },
 
