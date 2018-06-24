@@ -15,6 +15,9 @@ import PrivateRoute from "containers/Base/PrivateRoute";
 import LoginPage from "containers/LoginPage/Loadable";
 import MyPage from "containers/MyPage/Loadable";
 import MyBillPage from "containers/MyPage/Bill/Loadable";
+import BillAddPage from "containers/MyPage/Bill/BillAdd/Loadable";
+import BillAddAddProductPage from "containers/MyPage/Bill/BillAdd/AddProduct/Loadable";
+import BillDetailPage from "containers/MyPage/Bill/BillDetail/Loadable";
 
 import MyProviderPage from "containers/MyPage/Provider/Loadable";
 import ProviderAddPage from "containers/MyPage/Provider/ProviderAdd/Loadable";
@@ -65,8 +68,9 @@ export default function App() {
         <Route path="/features" component={FeaturePage}/>
         <Route path="/base_info" component={FeaturePage}/>
         <Route path="/bill" component={MyBillPage}/>
-        <Route path="/bill/add" component={MyBillPage}/>
-        <Route path="/bill/detail" component={MyBillPage}/>
+        <Route path="/bill/add" component={BillAddPage}/>
+        <Route path="/bill/add/add_product" component={BillAddAddProductPage}/>
+        <Route path="/bill/detail" component={BillDetailPage}/>
 
         <Route path="/provider" component={MyProviderPage}/>
         <Route path="/provider/add" component={ProviderAddPage}/>

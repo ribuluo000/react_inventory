@@ -452,6 +452,10 @@ export default defineMessages(
       "id":"create_time",
       "defaultMessage":"创建时间",
     },
+    "order_number":{
+      "id":"order_number",
+      "defaultMessage":"订单号",
+    },
 
     "look_batch":{
       "id":"look_batch",
