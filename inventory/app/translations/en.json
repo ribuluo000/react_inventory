@@ -47,6 +47,14 @@
   "inventory.containers.LoginPage.placeholder__user_name": "请输入用户名",
   "inventory.containers.LoginPage.placeholder__password": "请输入密码",
   "inventory.containers.LoginPage.button__login": "登录",
-  "inventory.containers.LoginPage.title__login": "登录"
+  "inventory.containers.LoginPage.title__login": "登录",
+
+  "inventory.containers.MyPage.title__my":"我的",
+  "inventory.containers.MyPage.button__base_info":"基本信息",
+  "inventory.containers.MyPage.button__bill":"账单",
+  "inventory.containers.MyPage.button__provider":"供应商",
+  "inventory.containers.MyPage.button__customer":"客户",
+  "inventory.containers.MyPage.button__product":"产品",
+  "inventory.containers.MyPage.button__logout":"退出登录"
 
 }

@@ -8,13 +8,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { FormattedMessage } from "react-intl";
-import { makeSelectError, makeSelectLoading, makeSelectRepos } from "containers/App/selectors";
-import MyButton from "components/MyButton";
 import messages from "./messages";
-import { InputItem, List, View, WhiteSpace } from "antd-mobile";
-// import 'antd-mobile/dist/antd-mobile.css';
+import { List, View, WhiteSpace } from "antd-mobile";
+import BaseComponent from "containers/Base/BaseComponent";
+const Item = List.Item;
 /* eslint-disable react/prefer-stateless-function */
-export default class ViewIndex extends React.PureComponent {
+export default class ViewIndex extends BaseComponent {
+
+  constructor(props) {
+    super(props);
+  }
+
   /**
    * when initial state user_name is not null, submit the form to load repos
    */
@@ -23,72 +27,146 @@ export default class ViewIndex extends React.PureComponent {
   }
 
   render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
-      loading,
-      error,
-      repos,
-    };
+
+    const {
+      // intl,
+      user_name,
+
+      onPress__button__base_info,
+
+      onPress__button__bill,
+
+      onPress__button__provider,
+
+      onPress__button__customer,
+
+      onPress__button__product,
+
+      onPress__button__logout,
+
+    } = this.props;
+    // console.log(intl);
 
     return (
       <View>
         <Helmet>
-          <title>登录</title>
+          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
+          <title>我的</title>
         </Helmet>
+
+        <List>
+          <Item
+            arrow="horizontal"
+            extra={''}
+            onClick={onPress__button__logout}
+          >
+            {user_name}
+          </Item>
+        </List>
 
         <List renderHeader={() => ''}>
           <WhiteSpace />
 
-          <FormattedMessage {...messages.placeholder__user_name}>
+          <FormattedMessage {...messages.button__base_info}>
             {
               msg => (
-                <InputItem
-                  id="user_name"
-                  type="text"
-                  value={this.props.user_name}
-                  onChange={this.props.onChange_user_name}
-                  placeholder={msg}
-                />
+                <Item
+                  arrow="horizontal"
+                  extra={''}
+                  onClick={onPress__button__base_info}
+                >
+                  {msg}
+                </Item>
               )
             }
 
           </FormattedMessage>
 
-          <WhiteSpace />
-
-          <FormattedMessage {...messages.placeholder__password}>
+          <FormattedMessage {...messages.button__bill}>
             {
               msg => (
-                <InputItem
-                  id="password"
-                  type="password"
-                  value={this.props.password}
-                  onChange={this.props.onChange_password}
-                  placeholder={msg}
-                />
+                <Item
+                  arrow="horizontal"
+                  extra={''}
+                  onClick={onPress__button__bill}
+
+                >
+                  {msg}
+                </Item>
               )
             }
 
           </FormattedMessage>
 
-          <WhiteSpace/>
-
-          <FormattedMessage {...messages.button__login}>
+          <FormattedMessage {...messages.button__provider}>
             {
               msg => (
-                <MyButton
-                  type="primary"
-                  children={msg}
-                  onPress={this.props.onPress_login}
-                />
+                <Item
+                  arrow="horizontal"
+                  extra={''}
+                  onClick={onPress__button__provider}
+                >
+                  {msg}
+                </Item>
+              )
+            }
+
+          </FormattedMessage>
+
+          <FormattedMessage {...messages.button__customer}>
+            {
+              msg => (
+                <Item
+                  arrow="horizontal"
+                  extra={''}
+                  onClick={onPress__button__customer}
+                >
+                  {msg}
+                </Item>
+              )
+            }
+
+          </FormattedMessage>
+
+          <FormattedMessage {...messages.button__product}>
+            {
+              msg => (
+                <Item
+                  arrow="horizontal"
+                  extra={''}
+                  onClick={onPress__button__product}
+                >
+                  {msg}
+                </Item>
               )
             }
 
           </FormattedMessage>
 
         </List>
+        < WhiteSpace/>
+        < WhiteSpace/>
+        < WhiteSpace/>
+        < WhiteSpace/>
+        < WhiteSpace/>
 
-        <WhiteSpace />
+        <List>
+          <FormattedMessage {...messages.button__logout}>
+            {
+              msg => (
+                <Item
+                  arrow="horizontal"
+                  extra={''}
+                  onClick={onPress__button__logout}
+                >
+                  {msg}
+                </Item>
+              )
+            }
+
+          </FormattedMessage>
+
+        </List>
 
       </View>
     );
@@ -105,4 +183,5 @@ ViewIndex.propTypes = {
   onChange_password : PropTypes.func,
 
 };
+
 

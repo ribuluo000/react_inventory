@@ -6,42 +6,32 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  startProjectHeader: {
-    id: 'boilerplate.containers.HomePage.start_project.header11',
-    defaultMessage: 'Start your next react project in seconds33',
+  title__my:{
+    id:'inventory.containers.MyPage.title__my',
+    defaultMessage:'我的',
   },
-  startProjectMessage: {
-    id: 'boilerplate.containers.HomePage.start_project.message',
-    defaultMessage:
-      'A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices',
+  button__base_info:{
+    id:'inventory.containers.MyPage.button__base_info',
+    defaultMessage:'基本信息',
   },
-  trymeHeader: {
-    id: 'boilerplate.containers.HomePage.tryme.header',
-    defaultMessage: 'Try me!',
+  button__bill:{
+    id:'inventory.containers.MyPage.button__bill',
+    defaultMessage:'账单',
   },
-  trymeMessage: {
-    id: 'boilerplate.containers.HomePage.tryme.message',
-    defaultMessage: 'Show Github repositories by',
+  button__provider:{
+    id:'inventory.containers.MyPage.button__provider',
+    defaultMessage:'供应商',
   },
-  trymeAtPrefix: {
-    id: 'boilerplate.containers.HomePage.tryme.atPrefix',
-    defaultMessage: '@',
+  button__customer:{
+    id:'inventory.containers.MyPage.button__customer',
+    defaultMessage:'客户',
   },
-
-  title__login:{
-    id:'inventory.containers.LoginPage.title__login',
-    defaultMessage:'登录',
+  button__product:{
+    id:'inventory.containers.MyPage.button__product',
+    defaultMessage:'产品',
   },
-  button__login:{
-    id:'inventory.containers.LoginPage.button__login',
-    defaultMessage:'登录',
-  },
-  placeholder__user_name:{
-    id:'inventory.containers.LoginPage.placeholder__user_name',
-    defaultMessage:'请输入用户名',
-  },
-  placeholder__password:{
-    id:'inventory.containers.LoginPage.placeholder__password',
-    defaultMessage:'请输入密码',
+  button__logout:{
+    id:'inventory.containers.MyPage.button__logout',
+    defaultMessage:'退出登录',
   },
 });
