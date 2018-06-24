@@ -10,7 +10,7 @@ import { Icon, List, NavBar, SearchBar, Text, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
 import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
-import MyButton from "components/MyButton/";
+import MyButton from "components/MyButton";
 const Item = List.Item;
 const Brief = Item.Brief;
 /* eslint-disable react/prefer-stateless-function */
@@ -96,7 +96,7 @@ export default class ViewIndex extends BaseComponent {
 
           ]}
         >
-          <FormattedMessage {...messages.provider}>
+          <FormattedMessage {...messages.product}>
             {
               msg => (
                 <Text>

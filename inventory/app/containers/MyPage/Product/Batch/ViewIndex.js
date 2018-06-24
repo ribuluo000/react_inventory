@@ -96,7 +96,7 @@ export default class ViewIndex extends BaseComponent {
 
           ]}
         >
-          <FormattedMessage {...messages.provider}>
+          <FormattedMessage {...messages.batch}>
             {
               msg => (
                 <Text>

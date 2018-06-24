@@ -15,6 +15,10 @@ import PrivateRoute from "containers/Base/PrivateRoute";
 import LoginPage from "containers/LoginPage/Loadable";
 import MyPage from "containers/MyPage/Loadable";
 import MyBillPage from "containers/MyPage/Bill/Loadable";
+import MyProviderPage from "containers/MyPage/Provider/Loadable";
+import MyCustomerPage from "containers/MyPage/Customer/Loadable";
+import MyProductBatchPage from "containers/MyPage/Product/Batch/Loadable";
+import MyProductPage from "containers/MyPage/Product/Loadable";
 import HomePage from "containers/HomePage/Loadable";
 import FeaturePage from "containers/FeaturePage/Loadable";
 import NotFoundPage from "containers/NotFoundPage/Loadable";
@@ -48,9 +52,10 @@ export default function App() {
         <Route path="/features" component={FeaturePage}/>
         <Route path="/base_info" component={FeaturePage}/>
         <Route path="/bill" component={MyBillPage}/>
-        <Route path="/provider" component={FeaturePage}/>
-        <Route path="/customer" component={FeaturePage}/>
-        <Route path="/product" component={FeaturePage}/>
+        <Route path="/provider" component={MyProviderPage}/>
+        <Route path="/customer" component={MyCustomerPage}/>
+        <Route path="/product" component={MyProductPage}/>
+        <Route path="/product/batch" component={MyProductBatchPage}/>
         <Route path="" component={NotFoundPage}/>
       </Switch>
       <Footer />
