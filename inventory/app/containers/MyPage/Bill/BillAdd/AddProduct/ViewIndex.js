@@ -32,10 +32,19 @@ export default class ViewIndex extends BaseComponent {
 
       onChange_name,
       onChange_telephone,
+
       onChange_remark,
       name,
       telephone,
       remark,
+      product_name,
+      batch_name,
+      product_price,
+      product_count,
+
+      onChange_product_price,
+      onChange_product_count,
+
 
       onPress__button__back,
 
@@ -71,6 +80,11 @@ export default class ViewIndex extends BaseComponent {
       ];
     }
 
+    let product_total_price = '';
+    if(false){  //todo need change
+
+    }
+
     return (
       <View>
         <Helmet>
@@ -103,7 +117,7 @@ export default class ViewIndex extends BaseComponent {
 
           ]}
         >
-          <FormattedMessage {...messages.add_customer}>
+          <FormattedMessage {...messages.basic_information_on_trading_products}>
             {
               msg => (
                 <Text>
@@ -117,15 +131,39 @@ export default class ViewIndex extends BaseComponent {
 
         <List>
 
+          <FormattedMessage {...messages.product_name}>
+            {
+              msg => (
+                <Item
+                  extra={product_name}
+                >
+                  {msg}
+                </Item>
+              )
+            }
 
-          <FormattedMessage {...messages.name}>
+          </FormattedMessage>
+          <FormattedMessage {...messages.batch_name}>
+            {
+              msg => (
+                <Item
+                  extra={batch_name}
+                >
+                  {msg}
+                </Item>
+              )
+            }
+
+          </FormattedMessage>
+
+          <FormattedMessage {...messages.product_price}>
             {
               msg => (
                 <InputItem
-                  id="name"
+                  id="product_price"
                   type="text"
-                  value={name}
-                  onChange={onChange_name}
+                  value={product_price}
+                  onChange={onChange_product_price}
                   placeholder={msg}
                 />
               )
@@ -133,14 +171,14 @@ export default class ViewIndex extends BaseComponent {
 
           </FormattedMessage>
 
-          <FormattedMessage {...messages.telephone}>
+          <FormattedMessage {...messages.product_count}>
             {
               msg => (
                 <InputItem
-                  id="telephone"
+                  id="product_count"
                   type="text"
-                  value={telephone}
-                  onChange={onChange_telephone}
+                  value={product_count}
+                  onChange={onChange_product_count}
                   placeholder={msg}
                 />
               )
@@ -148,6 +186,18 @@ export default class ViewIndex extends BaseComponent {
 
           </FormattedMessage>
 
+          <FormattedMessage {...messages.product_total_price}>
+            {
+              msg => (
+                <Item
+                  extra={product_total_price}
+                >
+                  {msg}
+                </Item>
+              )
+            }
+
+          </FormattedMessage>
 
           <FormattedMessage {...messages.remark}>
             {

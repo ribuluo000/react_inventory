@@ -487,8 +487,8 @@ export default defineMessages(
       "defaultMessage":"选择批次",
     },
 
-    "basic_information_on_trading_products ":{
-      "id":"basic_information_on_trading_products ",
+    "basic_information_on_trading_products":{
+      "id":"basic_information_on_trading_products",
       "defaultMessage":"交易产品基本信息",
     },
 
