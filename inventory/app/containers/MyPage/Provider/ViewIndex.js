@@ -96,7 +96,7 @@ export default class ViewIndex extends BaseComponent {
 
           ]}
         >
-          <FormattedMessage {...messages.bill}>
+          <FormattedMessage {...messages.provider}>
             {
               msg => (
                 <Text>
@@ -136,7 +136,8 @@ export default class ViewIndex extends BaseComponent {
                   }}
 
                 >
-                  {item.title} <Brief>{item.subtitle}</Brief>
+                  {item.title}
+                  {/*<Brief>{item.subtitle}</Brief>*/}
                 </Item>
               );
               return v;
