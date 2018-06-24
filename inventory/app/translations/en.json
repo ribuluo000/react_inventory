@@ -8,7 +8,7 @@
   "boilerplate.containers.FeaturePage.css.message": "Next generation CSS",
   "boilerplate.containers.FeaturePage.feedback.header": "Instant feedback",
   "boilerplate.containers.FeaturePage.feedback.message":
-    "Enjoy the best DX and code your app at the speed of thought! Your\n    saved changes to the CSS and JS are reflected instantaneously\n    without refreshing the page. Preserve application state even when\n    you update something in the underlying code!",
+    "Enjoy the best DX and code your app at the speed of thought! Your    saved changes to the CSS and JS are reflected instantaneously    without refreshing the page. Preserve application state even when    you update something in the underlying code!",
   "boilerplate.containers.FeaturePage.header": "Features",
   "boilerplate.containers.FeaturePage.internationalization.header":
     "Complete i18n Standard Internationalization & Pluralization",
@@ -17,21 +17,21 @@
   "boilerplate.containers.FeaturePage.javascript.header":
     "Next generation JavaScript",
   "boilerplate.containers.FeaturePage.javascript.message":
-    "Use template strings, object destructuring, arrow functions, JSX\n    syntax and more, today.",
+    "Use template strings, object destructuring, arrow functions, JSX    syntax and more, today.",
   "boilerplate.containers.FeaturePage.network.header": "Offline-first",
   "boilerplate.containers.FeaturePage.network.message":
-    "The next frontier in performant web apps: availability without a\n      network connection from the instant your users load the app.",
+    "The next frontier in performant web apps: availability without a      network connection from the instant your users load the app.",
   "boilerplate.containers.FeaturePage.routing.header":
     "Industry-standard routing",
   "boilerplate.containers.FeaturePage.routing.message":
-    "Write composable CSS that's co-located with your components for\n    complete modularity. Unique generated class names keep the\n    specificity low while eliminating style clashes. Ship only the\n    styles that are on the page for the best performance.",
+    "Write composable CSS that's co-located with your components for    complete modularity. Unique generated class names keep the    specificity low while eliminating style clashes. Ship only the    styles that are on the page for the best performance.",
   "boilerplate.containers.FeaturePage.scaffolding.header": "Quick scaffolding",
   "boilerplate.containers.FeaturePage.scaffolding.message":
-    "Automate the creation of components, containers, routes, selectors\n  and sagas - and their tests - right from the CLI!",
+    "Automate the creation of components, containers, routes, selectors  and sagas - and their tests - right from the CLI!",
   "boilerplate.containers.FeaturePage.state_management.header":
     "Predictable state management",
   "boilerplate.containers.FeaturePage.state_management.message":
-    "Unidirectional data flow allows for change logging and time travel\n    debugging.",
+    "Unidirectional data flow allows for change logging and time travel    debugging.",
   "boilerplate.containers.HomePage.start_project.header":
     "Start your next react project in seconds11",
   "boilerplate.containers.HomePage.start_project.message":
@@ -55,6 +55,87 @@
   "inventory.containers.MyPage.button__provider":"供应商",
   "inventory.containers.MyPage.button__customer":"客户",
   "inventory.containers.MyPage.button__product":"产品",
-  "inventory.containers.MyPage.button__logout":"退出登录"
+  "inventory.containers.MyPage.button__logout":"退出登录",
+
+
+  "user_name":"用户名",
+  "password":"密码",
+  "confirm_password":"确认密码",
+  "login":"登录",
+  "register":"注册",
+  "no_account_?_go_register":"没有账号？去注册",
+
+  "my":"我的",
+  "base_info":"基本信息",
+  "balance":"余额",
+  "money_out":"支出",
+  "money_in":"收入",
+
+  "logout":"退出登录",
+
+  "add":"添加",
+  "edit":"编辑",
+  "done":"完成",
+
+  "name":"名称",
+  "telephone":"手机号",
+  "remark":"备注",
+
+  "bill":"账单",
+  "provider":"供应商",
+  "customer":"客户",
+  "product":"产品",
+  "batch":"批次",
+
+
+  "add_bill":"添加账单",
+  "add_provider":"添加供应商",
+  "add_customer":"添加客户",
+  "add_product":"添加产品",
+  "add_batch":"添加批次",
+
+
+
+  "bill_detail":"账单详情",
+  "provider_detail":"供应商详情",
+  "customer_detail":"客户详情",
+  "product_detail":"产品详情",
+  "batch_detail":"批次详情",
+
+
+  "provider_name":"供应商名称",
+  "customer_name":"客户名称",
+  "product_name":"产品名称",
+  "batch_name":"批次名称",
+
+
+  "please_input_key":"请输入关键字",
+
+  "receive_money":"收钱",
+  "Pay":"付钱",
+  "transaction_amount ":"交易金额",
+  "total_price":"总价",
+  "monetary_unit":"元",
+
+  "product_del":"删除",
+  "product_batch":"产品批次",
+  "product_price":"产品单价",
+  "product_count":"产品数量",
+  "product_total_price":"产品总价",
+
+
+  "create_time":"创建时间",
+  "look_batch":"查看批次",
+
+
+  "select_provider":"选择供应商",
+  "select_customer":"选择客户",
+  "select_product":"选择产品",
+  "select_batch":"选择批次",
+
+  "basic_information_on_trading_products ":"交易产品基本信息"
+
+
+
 
 }

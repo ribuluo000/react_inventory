@@ -1,17 +1,18 @@
 /*
- * LoginPage
+ * My Bill Page
  *
- * This is the first thing users see of our App, at the '/' route
  */
 
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { FormattedMessage } from "react-intl";
-import messages from "./messages";
-import { List, View, WhiteSpace } from "antd-mobile";
+import { Icon, List, NavBar, SearchBar, Text, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
+import { FormattedMessage } from "react-intl";
+import messages from "containers/App/messages";
+import MyButton from "../../../components/MyButton/index";
 const Item = List.Item;
+const Brief = Item.Brief;
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewIndex extends BaseComponent {
 
@@ -19,9 +20,6 @@ export default class ViewIndex extends BaseComponent {
     super(props);
   }
 
-  /**
-   * when initial state user_name is not null, submit the form to load repos
-   */
   componentDidMount() {
 
   }
@@ -29,145 +27,123 @@ export default class ViewIndex extends BaseComponent {
   render() {
 
     const {
-      // intl,
       user_name,
+      data,
 
-      onPress__button__base_info,
+      onPress__button__back,
 
-      onPress__button__bill,
+      onPress__button__add,
 
-      onPress__button__provider,
+      onPress__button__done,
 
-      onPress__button__customer,
+      onPress__button__edit,
 
-      onPress__button__product,
+      onPress__list_item,
 
-      onPress__button__logout,
+      onPress__button__search,
 
     } = this.props;
-    // console.log(intl);
+
+    let dataList = [];
+    if (data && data.dataList) {
+      dataList = data.dataList;
+    } else {
+      dataList = [
+        {
+          key : 'key',
+          title : 'title',
+          subtitle : 'subtitle',
+          extra : 'extra',
+        },
+        {
+          key : 'key2',
+          title : 'title2',
+          subtitle : 'subtitle',
+          extra : 'extra',
+        },
+      ];
+    }
 
     return (
       <View>
         <Helmet>
           {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title>我的</title>
+          <title>账单</title>
         </Helmet>
+        <NavBar
+          mode="dark"
+          icon={<Icon type="left"/>}
+          onLeftClick={onPress__button__back}
+          rightContent={[
+
+            <FormattedMessage
+              key={messages.add.id}
+              {...messages.add}>
+              {
+                msg => (
+                  <MyButton
+                    // type="primary"
+                    inline={false}
+                    size="small"
+                    onClick={onPress__button__add}
+                  >
+                    {msg}
+                  </MyButton>
+                )
+              }
+
+            </FormattedMessage>,
+
+          ]}
+        >
+          <FormattedMessage {...messages.bill}>
+            {
+              msg => (
+                <Text>
+                  {msg}
+                </Text>
+              )
+            }
+
+          </FormattedMessage>
+        </NavBar>
+
+        <FormattedMessage {...messages.please_input_key}>
+          {
+            msg => (
+              <SearchBar
+                placeholder={msg}
+                ref={ref => this.ref__SearchBar = ref}
+                onChange={onPress__button__search}
+              />
+            )
+          }
+
+        </FormattedMessage>
 
         <List>
-          <Item
-            arrow="horizontal"
-            extra={''}
-            onClick={onPress__button__logout}
-          >
-            {user_name}
-          </Item>
-        </List>
 
-        <List renderHeader={() => ''}>
-          <WhiteSpace />
-
-          <FormattedMessage {...messages.button__base_info}>
-            {
-              msg => (
+          {
+            dataList.map((item, i) => {
+              let v = (
                 <Item
+                  key={item.key}
                   arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__base_info}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.button__bill}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__bill}
+                  multipleLine
+                  extra={item.extra}
+                  onClick={() => {
+                    onPress__list_item && onPress__list_item(item, i)
+                  }}
 
                 >
-                  {msg}
+                  {item.title} <Brief>{item.subtitle}</Brief>
                 </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.button__provider}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__provider}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.button__customer}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__customer}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.button__product}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__product}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
+              );
+              return v;
+            })
+          }
 
         </List>
-        < WhiteSpace/>
-        < WhiteSpace/>
-        < WhiteSpace/>
-        < WhiteSpace/>
-        < WhiteSpace/>
-
-        <List>
-          <FormattedMessage {...messages.button__logout}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__logout}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-        </List>
-
       </View>
     );
   }
@@ -181,6 +157,7 @@ ViewIndex.propTypes = {
   user_name : PropTypes.string,
   onChange_user_name : PropTypes.func,
   onChange_password : PropTypes.func,
+  data : PropTypes.object,
 
 };
 
