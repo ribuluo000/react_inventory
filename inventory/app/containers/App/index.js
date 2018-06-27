@@ -61,32 +61,32 @@ export default function App() {
       </Helmet>
       <Header />
       <Switch>
-        <Route exact path="/" component={ProductBatchAddPage}/>
+        <Route exact path="/" component={BillAddPage}/>
         <Route path="/login" component={LoginPage}/>
         <Route path="/my" component={MyPage}/>
         <PrivateRoute path="/home" component={HomePage}/>
         <Route path="/features" component={FeaturePage}/>
         <Route path="/base_info" component={FeaturePage}/>
         <Route path="/bill" component={MyBillPage}/>
-        <Route path="/bill/add" component={BillAddPage}/>
-        <Route path="/bill/add/add_product" component={BillAddAddProductPage}/>
-        <Route path="/bill/detail" component={BillDetailPage}/>
+        <Route path="/bill__add" component={BillAddPage}/>
+        <Route path="/bill__add__add_product" component={BillAddAddProductPage}/>
+        <Route path="/bill__detail" component={BillDetailPage}/>
 
         <Route path="/provider" component={MyProviderPage}/>
-        <Route path="/provider/add" component={ProviderAddPage}/>
-        <Route path="/provider/detail" component={ProviderDetailPage}/>
+        <Route path="/provider__add" component={ProviderAddPage}/>
+        <Route path="/provider__detail" component={ProviderDetailPage}/>
 
         <Route path="/customer" component={MyCustomerPage}/>
-        <Route path="/customer/add" component={CustomerAddPage}/>
-        <Route path="/customer/detail" component={CustomerDetailPage}/>
+        <Route path="/customer__add" component={CustomerAddPage}/>
+        <Route path="/customer__detail" component={CustomerDetailPage}/>
 
         <Route path="/product" component={MyProductPage}/>
-        <Route path="/product/add" component={ProductAddPage}/>
-        <Route path="/product/detail" component={ProductDetailPage}/>
+        <Route path="/product__add" component={ProductAddPage}/>
+        <Route path="/product__detail" component={ProductDetailPage}/>
 
-        <Route path="/product/batch" component={MyProductBatchPage}/>
-        <Route path="/product/batch/add" component={ProductBatchAddPage}/>
-        <Route path="/product/batch/detail" component={ProductBatchDetailPage}/>
+        <Route path="/product__batch" component={MyProductBatchPage}/>
+        <Route path="/product__batch__add" component={ProductBatchAddPage}/>
+        <Route path="/product__batch__detail" component={ProductBatchDetailPage}/>
 
 
         <Route path="" component={NotFoundPage}/>

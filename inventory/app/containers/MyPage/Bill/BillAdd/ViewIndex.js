@@ -59,7 +59,7 @@ export default class ViewIndex extends BaseComponent {
     let dataList = [];
     let data2 = {
       "id" : "id",
-      "type" : 1,
+      "type" : "1",
       "remark" : "remark",
       "order_number" : "1111111111",
       "transaction_amount" : 100,
@@ -116,13 +116,14 @@ export default class ViewIndex extends BaseComponent {
     }
 
     let bill_type_dataList = [
+
       {
-        label : '2013',
-        value : '2013',
+        label : '收钱',
+        value : '2',
       },
       {
-        label : '2014',
-        value : '2014',
+        label : '付钱',
+        value : '1',
       },
     ];
 
