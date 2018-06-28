@@ -58,6 +58,8 @@
   "inventory.containers.MyPage.button__logout":"退出登录",
 
 
+  "please_input_user_name":"请输入用户名",
+  "please_input_password":"请输入密码",
   "user_name":"用户名",
   "password":"密码",
   "confirm_password":"确认密码",
