@@ -65,3 +65,24 @@ export function options_common(data = {}){
     body: JSON.stringify(data),
   }
 }
+
+
+
+export function onCatch_common(err = {}){
+  console.log('onCatch_common',err);
+  view_util.show_toast(err.toString());
+
+}
+
+
+
+export function onCustomException_common(jsonObj = {}){
+  console.log('onCustomException_common',jsonObj);
+  let {
+    code,
+    msg,
+  } = jsonObj;
+  view_util.show_toast(msg);
+}
+
+

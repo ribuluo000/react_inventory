@@ -7,7 +7,7 @@ import { API_LOGIN } from "./constants";
 import { api_login_error, api_login_success } from "./actions";
 import { action__is_authenticated_success, action__is_authenticated_failure  } from "containers/App/actions";
 
-import { options_common, request } from "utils/request";
+import { options_common, request,onCustomException_common,onCatch_common } from "utils/request";
 import { makeSelect__password, makeSelect__user_name } from "./selectors";
 
 /**
@@ -36,11 +36,13 @@ export function* api_request() {
       let err = jsonObj.msg;
       yield put(api_login_error(err));
       yield put(action__is_authenticated_failure());
+      onCustomException_common(jsonObj);
 
     }
   } catch (err) {
     yield put(api_login_error(err));
     yield put(action__is_authenticated_failure());
+    onCatch_common(err);
 
   }
 }
