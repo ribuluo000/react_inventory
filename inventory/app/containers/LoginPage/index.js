@@ -19,6 +19,7 @@ import { makeSelect__password, makeSelect__user_name } from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
+import PATH from "constants/PATH";
 import { Redirect, Route } from "react-router-dom";
 
 /* eslint-disable react/prefer-stateless-function */
@@ -43,7 +44,7 @@ export class LoginPage extends React.PureComponent {
             ? <ViewIndex {...this.props}/>
             : (
             <Redirect to={{
-              pathname : '/my',
+              pathname : `/${PATH.PATH__my}`,
               state : { from : props.location }
             }}/>
           )
@@ -89,8 +90,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key : 'login', reducer });
-const withSaga = injectSaga({ key : 'login', saga });
+const withReducer = injectReducer({ key : PATH.PATH__login, reducer });
+const withSaga = injectSaga({ key : PATH.PATH__login, saga });
 
 export default compose(
   withReducer,

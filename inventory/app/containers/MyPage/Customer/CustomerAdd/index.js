@@ -12,6 +12,7 @@ import saga from "./saga";
 import ViewIndex from "./ViewIndex";
 import { push } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
+import PATH from "constants/PATH";
 
 /* eslint-disable react/prefer-stateless-function */
 export class MyPage extends BaseComponent {
@@ -82,8 +83,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key : 'my', reducer });
-const withSaga = injectSaga({ key : 'my', saga });
+const withReducer = injectReducer({ key : PATH.PATH__customer__add, reducer });
+const withSaga = injectSaga({ key : PATH.PATH__customer__add, saga });
 
 export default compose(
   withReducer,

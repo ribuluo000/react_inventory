@@ -62,31 +62,31 @@ export default function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={LoginPage}/>
-        <Route path="/login" component={LoginPage}/>
-        <Route path="/my" component={MyPage}/>
-        <PrivateRoute path="/home" component={HomePage}/>
+        <Route path={`/${PATH.PATH__login}`} component={LoginPage}/>
+        <Route path={`/${PATH.PATH__my}`} component={MyPage}/>
+        <PrivateRoute path={`/${PATH.PATH__home}`} component={HomePage}/>
         <Route path="/features" component={FeaturePage}/>
-        <Route path="/base_info" component={FeaturePage}/>
-        <Route path="/bill" component={MyBillPage}/>
-        <Route path="/bill__add" component={BillAddPage}/>
-        <Route path="/bill__add__add_product" component={BillAddAddProductPage}/>
-        <Route path="/bill__detail" component={BillDetailPage}/>
+        <Route path={`/${PATH.PATH__base_info}`} component={FeaturePage}/>
+        <Route path={`/${PATH.PATH__bill}`} component={MyBillPage}/>
+        <Route path={`/${PATH.PATH__bill__add}`} component={BillAddPage}/>
+        <Route path={`/${PATH.PATH__bill__add__add_product}`} component={BillAddAddProductPage}/>
+        <Route path={`/${PATH.PATH__bill__detail}`} component={BillDetailPage}/>
 
-        <Route path="/provider" component={MyProviderPage}/>
-        <Route path="/provider__add" component={ProviderAddPage}/>
-        <Route path="/provider__detail" component={ProviderDetailPage}/>
+        <Route path={`/${PATH.PATH__provider}`} component={MyProviderPage}/>
+        <Route path={`/${PATH.PATH__provider__add}`} component={ProviderAddPage}/>
+        <Route path={`/${PATH.PATH__provider__detail}`} component={ProviderDetailPage}/>
 
-        <Route path="/customer" component={MyCustomerPage}/>
-        <Route path="/customer__add" component={CustomerAddPage}/>
-        <Route path="/customer__detail" component={CustomerDetailPage}/>
+        <Route path={`/${PATH.PATH__customer}`} component={MyCustomerPage}/>
+        <Route path={`/${PATH.PATH__customer__add}`} component={CustomerAddPage}/>
+        <Route path={`/${PATH.PATH__customer__detail}`} component={CustomerDetailPage}/>
 
-        <Route path="/product" component={MyProductPage}/>
-        <Route path="/product__add" component={ProductAddPage}/>
-        <Route path="/product__detail" component={ProductDetailPage}/>
+        <Route path={`/${PATH.PATH__product}`} component={MyProductPage}/>
+        <Route path={`/${PATH.PATH__product__add}`} component={ProductAddPage}/>
+        <Route path={`/${PATH.PATH__product__detail}`} component={ProductDetailPage}/>
 
-        <Route path="/product__batch" component={MyProductBatchPage}/>
-        <Route path="/product__batch__add" component={ProductBatchAddPage}/>
-        <Route path="/product__batch__detail" component={ProductBatchDetailPage}/>
+        <Route path={`/${PATH.PATH__product__batch}`} component={MyProductBatchPage}/>
+        <Route path={`/${PATH.PATH__product__batch__add}`} component={ProductBatchAddPage}/>
+        <Route path={`/${PATH.PATH__product__batch__detail}`} component={ProductBatchDetailPage}/>
 
 
         <Route path="" component={NotFoundPage}/>

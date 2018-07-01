@@ -24,9 +24,7 @@ export function* api_request() {
     user_name,
     password
   };
-  const { API_LOGIN_URL } = REQ_URL;
-
-  const requestURL = API_LOGIN_URL;
+  const requestURL = CONFIG.API_BASE_URL+REQ_URL.REQ_URL___user__login;
 
   try {
     // Call our request helper (see 'utils/request')

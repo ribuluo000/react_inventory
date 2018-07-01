@@ -7,6 +7,8 @@ import PARAM from '../constants/PARAM';
 import CODE from '../constants/CODE.js';
 import TYPE from '../constants/TYPE.js';
 import PERMISSION from '../constants/PERMISSION.js';
+import PATH from '../constants/PATH.js';
+import CONFIG from '../constants/CONFIG.js';
 let obj = {
     DEBUG:'DEBUG',
     RELEASE:'RELEASE',
@@ -16,6 +18,8 @@ let obj = {
     CODE:CODE,
     TYPE:TYPE,
     PERMISSION:PERMISSION,
+    PATH:PATH,
+    CONFIG:CONFIG,
 
 
 };

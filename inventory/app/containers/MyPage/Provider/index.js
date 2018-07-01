@@ -13,6 +13,7 @@ import saga from "./saga";
 import ViewIndex from "./ViewIndex";
 import { push,goBack } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
+import PATH from "constants/PATH";
 
 /* eslint-disable react/prefer-stateless-function */
 export class MyPage extends BaseComponent {
@@ -39,24 +40,25 @@ export function mapDispatchToProps(dispatch) {
   return {
 
     onPress__button__back : () => {
+      console.log('onPress__button__back');
       dispatch(goBack());
 
     },
 
     onPress__button__add : () => {
       console.log('onPress__button__add');
-      dispatch(push('/provider__add'));
+      dispatch(push(`/${PATH.PATH__provider__add}`));
 
     },
 
     onPress__list_item : (item, i) => {
-      console.log(item, i);
-      dispatch(push('/provider__detail'));
+      console.log('onPress__list_item',item, i);
+      dispatch(push(`/${PATH.PATH__provider__detail}`));
 
     },
 
     onPress__button__search : (value) => {
-      console.log('onPress__button__add',value);
+      console.log('onPress__button__search',value);
 
 
     },
@@ -76,8 +78,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key : 'my', reducer });
-const withSaga = injectSaga({ key : 'my', saga });
+const withReducer = injectReducer({ key : PATH.PATH__provider, reducer });
+const withSaga = injectSaga({ key : PATH.PATH__provider, saga });
 
 export default compose(
   withReducer,
