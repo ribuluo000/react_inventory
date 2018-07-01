@@ -1,5 +1,5 @@
 /*
- *  Actions
+ * Actions
  *
  * Actions change things in your application
  * Since this boilerplate uses a uni-directional data flow, specifically redux,
@@ -15,8 +15,106 @@
  *    }
  */
 
+import {
+  RESET_VIEW,
+  CHANGE_SEARCH_KEY,
+  CHANGE_PAGE_NUMBER,
+
+  /****************************** network start **************************************/
+
+
+    API_GET_LIST,
+  API_GET_LIST_SUCCESS,
+  API_GET_LIST_ERROR,
+  /****************************** network end **************************************/
+
+} from './constants';
+
+/**
+ * reset_view
+ *
+ * @param  {data} data The new data of the view
+ *
+ * @return {object}    An action object with a type of RESET_VIEW
+ */
+export function reset_view(data) {
+  return {
+    type: RESET_VIEW,
+    data,
+  };
+}
+
+
+/**
+ * Changes the input field of the form
+ *
+ * @param  {value} value The new text of the input field
+ *
+ * @return {object}    An action object with a type of CHANGE_SEARCH_KEY
+ */
+export function change_search_key(value) {
+  return {
+    type: CHANGE_SEARCH_KEY,
+    value,
+  };
+}
+
+
+/**
+ * Changes the input field of the form
+ *
+ * @param  {value} value The new text of the input field
+ *
+ * @return {object}    An action object with a type of CHANGE_PAGE_NUMBER
+ */
+export function change_page_number(value) {
+  return {
+    type: CHANGE_PAGE_NUMBER,
+    value,
+  };
+}
+
 
 /****************************** network start **************************************/
+
+/**
+ * fetch the interface login, this action starts the request saga
+ *
+ * @return {object} An action object with a type of API_GET_LIST
+ */
+export function api_get_list() {
+  return {
+    type: API_GET_LIST,
+  };
+}
+
+/**
+ * Dispatched when the jsonObj are loaded by the request saga
+ *
+ * @param  {object} jsonObj The data come from the server
+ *
+ * @return {object}      An action object with a type of API_GET_LIST_SUCCESS passing the repos
+ */
+export function api_get_list_success(jsonObj) {
+  return {
+    type: API_GET_LIST_SUCCESS,
+    jsonObj,
+  };
+}
+
+/**
+ * Dispatched when loading the jsonObj fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of API_GET_LIST_ERROR passing the error
+ */
+export function api_get_list_error(error) {
+  return {
+    type: API_GET_LIST_ERROR,
+    error,
+  };
+}
 
 
 /****************************** network end **************************************/

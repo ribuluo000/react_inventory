@@ -6,13 +6,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { Icon, List, NavBar, SearchBar, Text, View } from "antd-mobile";
+import { Icon, List, NavBar, SearchBar, Text, View, ListView } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
 import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
+import MyListView from "components/MyListView";
 const Item = List.Item;
 const Brief = Item.Brief;
+
+
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewIndex extends BaseComponent {
 
@@ -20,13 +23,44 @@ export default class ViewIndex extends BaseComponent {
     super(props);
   }
 
-  componentDidMount() {
 
-  }
+  renderRow = (item, sectionID, rowID) => {
+    console.log('renderRow',item,sectionID,rowID);
+    console.log(this);
+    console.log(this.ref_lv);
+    let {onPress__list_item} = this.props;
+
+    return (
+      <Item
+        key={item.key}
+        arrow="horizontal"
+        multipleLine
+        extra={item.extra}
+        onClick={() => {
+          onPress__list_item && onPress__list_item(item, sectionID, rowID)
+        }}
+
+      >
+        {item.title}
+        {/*<Brief>{item.subtitle}</Brief>*/}
+      </Item>
+    );
+  };
+
+  onEndReached = ()=> {
+    console.log('onEndReached',this);
+    console.log('onEndReached',this.props);
+    console.log('onEndReached',this.props.page_number);
+
+    let page_number_cur = this.props.page_number;
+    this.props.onEndReached && this.props.onEndReached(page_number_cur);
+  };
 
   render() {
 
     const {
+      loading,
+      has_more,
       user_name,
       data,
 
@@ -42,28 +76,37 @@ export default class ViewIndex extends BaseComponent {
 
       onPress__button__search,
 
+      onRefresh,
+
+
     } = this.props;
 
-    let dataList = [];
-    if (data && data.dataList) {
-      dataList = data.dataList;
+    let data_list = [];
+    if(data){
+      if (data.data_list) {
+        data_list = data.data_list;
+      }
     } else {
-      dataList = [
-        {
-          key : 'key',
-          title : 'title',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-        {
-          key : 'key2',
-          title : 'title2',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
+      data_list = [
+        // {
+        //   key : 'key',
+        //   title : 'title',
+        //   subtitle : 'subtitle',
+        //   extra : 'extra',
+        // },
+        // {
+        //   key : 'key2',
+        //   title : 'title2',
+        //   subtitle : 'subtitle',
+        //   extra : 'extra',
+        // },
       ];
     }
 
+
+    console.log('data_list',data_list);
+    const renderRow = this.renderRow;
+    const onEndReached = this.onEndReached;
     return (
       <View>
         <Helmet>
@@ -123,26 +166,38 @@ export default class ViewIndex extends BaseComponent {
 
         <List>
 
-          {
-            dataList.map((item, i) => {
-              let v = (
-                <Item
-                  key={item.key}
-                  arrow="horizontal"
-                  multipleLine
-                  extra={item.extra}
-                  onClick={() => {
-                    onPress__list_item && onPress__list_item(item, i)
-                  }}
+          <MyListView
+            ref={(ref)=>{
+              this.ref_lv = ref;
+            }}
+            dataLv={data_list}
+            hasMore={has_more}
+            onEndReached={onEndReached}
+            onRefresh={onRefresh}
+            renderRow={renderRow}
+          />
 
-                >
-                  {item.title}
-                  {/*<Brief>{item.subtitle}</Brief>*/}
-                </Item>
-              );
-              return v;
-            })
-          }
+
+          {/*{*/}
+            {/*data_list.map((item, i) => {*/}
+              {/*let v = (*/}
+                {/*<Item*/}
+                  {/*key={item.key}*/}
+                  {/*arrow="horizontal"*/}
+                  {/*multipleLine*/}
+                  {/*extra={item.extra}*/}
+                  {/*onClick={() => {*/}
+                    {/*onPress__list_item && onPress__list_item(item, i)*/}
+                  {/*}}*/}
+
+                {/*>*/}
+                  {/*{item.title}*/}
+                  {/*/!*<Brief>{item.subtitle}</Brief>*!/*/}
+                {/*</Item>*/}
+              {/*);*/}
+              {/*return v;*/}
+            {/*})*/}
+          {/*}*/}
 
         </List>
       </View>
