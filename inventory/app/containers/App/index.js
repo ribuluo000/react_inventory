@@ -61,7 +61,7 @@ export default function App() {
       </Helmet>
       <Header />
       <Switch>
-        <Route exact path="/" component={BillAddPage}/>
+        <Route exact path="/" component={LoginPage}/>
         <Route path="/login" component={LoginPage}/>
         <Route path="/my" component={MyPage}/>
         <PrivateRoute path="/home" component={HomePage}/>

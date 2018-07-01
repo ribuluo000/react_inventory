@@ -6,7 +6,8 @@ import { createStructuredSelector } from "reselect";
 
 import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
-import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, makeSelectLoading } from "containers/App/selectors";
+import { makeSelectError, makeSelectLoading } from "containers/App/selectors";
+import { makeSelect__is_authenticated, makeSelect__user_name, } from "containers/LoginPage/selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";

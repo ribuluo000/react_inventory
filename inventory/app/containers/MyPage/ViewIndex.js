@@ -56,9 +56,9 @@ export default class ViewIndex extends BaseComponent {
 
         <List>
           <Item
-            arrow="horizontal"
+            // arrow="horizontal"
             extra={''}
-            onClick={onPress__button__logout}
+            // onClick={onPress__button__logout}
           >
             {user_name}
           </Item>

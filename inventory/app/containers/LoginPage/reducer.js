@@ -25,7 +25,7 @@ import {
 export const initialState = fromJS({
   user_name : '',
   password : '',
-  isAuthenticated : false,
+  is_authenticated : false,
 
   /****************************** network start **************************************/
 
@@ -52,7 +52,7 @@ function loginReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .set('isAuthenticated', false)
+        .set('is_authenticated', false)
         .set('data_user', {
           access_token : '',
           user_id : '',
@@ -64,13 +64,13 @@ function loginReducer(state = initialState, action) {
           access_token : access_token,
           user_id : user_id,
         })
-        .set('isAuthenticated', true)
+        .set('is_authenticated', true)
         .set('loading', false);
     case API_LOGIN_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false)
-        .set('isAuthenticated', false)
+        .set('is_authenticated', false)
         .set('data_user', {
           access_token : '',
           user_id : '',

@@ -6,11 +6,12 @@ import { createStructuredSelector } from "reselect";
 
 import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
-import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, makeSelectLoading } from "containers/App/selectors";
+import { makeSelectError, makeSelectLoading } from "containers/App/selectors";
+import { makeSelect__is_authenticated, makeSelect__user_name } from "containers/LoginPage/selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
-import { push } from "react-router-redux";
+import { push,goBack } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
 
 /* eslint-disable react/prefer-stateless-function */
@@ -37,33 +38,26 @@ MyPage.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
 
-    onPress__button__base_info : () => {
-      dispatch(push('/base_info'));
+    onPress__button__back : () => {
+      dispatch(goBack());
 
     },
 
-    onPress__button__bill : () => {
-      dispatch(push('/bill'));
+    onPress__button__add : () => {
+      console.log('onPress__button__add');
+      dispatch(push('/provider__add'));
 
     },
 
-    onPress__button__provider : () => {
-      dispatch(push('/provider'));
+    onPress__list_item : (item, i) => {
+      console.log(item, i);
+      dispatch(push('/provider__detail'));
 
     },
 
-    onPress__button__customer : () => {
-      dispatch(push('/customer'));
+    onPress__button__search : (value) => {
+      console.log('onPress__button__add',value);
 
-    },
-
-    onPress__button__product : () => {
-      dispatch(push('/product'));
-
-    },
-
-    onPress__button__logout : () => {
-      dispatch(push('/login'));
 
     },
 

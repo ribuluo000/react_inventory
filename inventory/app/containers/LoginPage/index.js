@@ -15,7 +15,7 @@ import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelectError, makeSelectLoading } from "containers/App/selectors";
 import { api_login, change_password, change_user_name } from "./actions";
 import { router_to_login } from "router/actions";
-import { makeSelect_password, makeSelect_user_name } from "./selectors";
+import { makeSelect__password, makeSelect__user_name } from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
@@ -43,7 +43,7 @@ export class LoginPage extends React.PureComponent {
             ? <ViewIndex {...this.props}/>
             : (
             <Redirect to={{
-              pathname : '/home',
+              pathname : '/my',
               state : { from : props.location }
             }}/>
           )
@@ -78,8 +78,8 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   is_authenticated : makeSelect__is_authenticated(),
-  user_name : makeSelect_user_name(),
-  password : makeSelect_password(),
+  user_name : makeSelect__user_name(),
+  password : makeSelect__password(),
   loading : makeSelectLoading(),
   error : makeSelectError(),
 });

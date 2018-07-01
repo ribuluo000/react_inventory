@@ -85,7 +85,7 @@ export default class ViewIndex extends BaseComponent {
                     // type="primary"
                     inline={false}
                     size="small"
-                    onClick={onPress__button__add}
+                    onPress={onPress__button__add}
                   >
                     {msg}
                   </MyButton>
@@ -153,11 +153,7 @@ export default class ViewIndex extends BaseComponent {
 ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
-  repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onPress_login : PropTypes.func,
   user_name : PropTypes.string,
-  onChange_user_name : PropTypes.func,
-  onChange_password : PropTypes.func,
   data : PropTypes.object,
 
 };
