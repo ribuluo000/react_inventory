@@ -1,5 +1,5 @@
 /**
- * ProviderAdd selectors
+ * selectors
  */
 
 import { createSelector } from "reselect";

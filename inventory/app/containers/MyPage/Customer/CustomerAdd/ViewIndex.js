@@ -51,25 +51,6 @@ export default class ViewIndex extends BaseComponent {
 
     } = this.props;
 
-    let dataList = [];
-    if (data && data.dataList) {
-      dataList = data.dataList;
-    } else {
-      dataList = [
-        {
-          key : 'key',
-          title : 'title',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-        {
-          key : 'key2',
-          title : 'title2',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-      ];
-    }
 
     return (
       <View>
@@ -92,7 +73,7 @@ export default class ViewIndex extends BaseComponent {
                     // type="primary"
                     inline={false}
                     size="small"
-                    onClick={onPress__button__done}
+                    onPress={onPress__button__done}
                   >
                     {msg}
                   </MyButton>
