@@ -19,7 +19,6 @@ import {
   RESET_VIEW,
   CHANGE_NAME,
   CHANGE_REMARK,
-  CHANGE_TELEPHONE,
 
   /****************************** network start **************************************/
 
@@ -73,19 +72,6 @@ export function change_remark(value) {
   };
 }
 
-/**
- * Changes the input field of the form
- *
- * @param  {value} value The new text of the input field
- *
- * @return {object}    An action object with a type of CHANGE_TELEPHONE
- */
-export function change_telephone(value) {
-  return {
-    type: CHANGE_TELEPHONE,
-    value,
-  };
-}
 
 /****************************** network start **************************************/
 

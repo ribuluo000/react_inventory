@@ -92,7 +92,7 @@ export default class ViewIndex extends BaseComponent {
                     // type="primary"
                     inline={false}
                     size="small"
-                    onClick={onPress__button__edit}
+                    onPress={onPress__button__edit}
                   >
                     {msg}
                   </MyButton>
@@ -110,7 +110,7 @@ export default class ViewIndex extends BaseComponent {
                     // type="primary"
                     inline={false}
                     size="small"
-                    onClick={onPress__button__done}
+                    onPress={onPress__button__done}
                   >
                     {msg}
                   </MyButton>

@@ -106,7 +106,7 @@ export default class ViewIndex extends BaseComponent {
                     // type="primary"
                     inline={false}
                     size="small"
-                    onClick={onPress__button__done}
+                    onPress={onPress__button__done}
                   >
                     {msg}
                   </MyButton>
