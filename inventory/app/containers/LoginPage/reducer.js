@@ -18,7 +18,7 @@ import {
   /********************************************************** network end ******************************************************************/
 
 
-    CHANGE_PASSWORD, CHANGE_USER_NAME
+    CHANGE_PASSWORD, CHANGE_USER_NAME, RESET_VIEW
 } from "./constants";
 
 // The initial state of the App
@@ -41,6 +41,24 @@ export const initialState = fromJS({
 
 function loginReducer(state = initialState, action) {
   switch (action.type) {
+
+    case RESET_VIEW:
+      state = initialState;
+
+      try {
+        let data = action.data;
+        if(data){
+          for(let k in data){
+            // console.log('data',k,data[k]);
+            state = state.set(k,data[k]);
+          }
+        }
+      } catch (e){
+        console.log(e);
+
+      }
+      return state;
+
     case CHANGE_USER_NAME:
       return state.set('user_name', action.user_name.replace(/@/gi, ''));
     case CHANGE_PASSWORD:

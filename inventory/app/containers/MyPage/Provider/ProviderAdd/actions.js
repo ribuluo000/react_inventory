@@ -16,6 +16,7 @@
  */
 
 import {
+  RESET_VIEW,
   CHANGE_NAME,
   CHANGE_REMARK,
   CHANGE_TELEPHONE,
@@ -29,6 +30,21 @@ import {
   /****************************** network end **************************************/
 
 } from './constants';
+
+/**
+ * reset_view
+ *
+ * @param  {data} data The new data of the view
+ *
+ * @return {object}    An action object with a type of RESET_VIEW
+ */
+export function reset_view(data) {
+  return {
+    type: RESET_VIEW,
+    data,
+  };
+}
+
 
 /**
  * Changes the input field of the form

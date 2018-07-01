@@ -9,6 +9,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
+export const RESET_VIEW = 'inventory/My__Provider_add/RESET_VIEW';
 export const CHANGE_NAME = 'inventory/My__Provider_add/CHANGE_NAME';
 export const CHANGE_REMARK = 'inventory/My__Provider_add/CHANGE_REMARK';
 export const CHANGE_TELEPHONE = 'inventory/My__Provider_add/CHANGE_TELEPHONE';

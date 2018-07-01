@@ -9,6 +9,8 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
+export const RESET_APP = 'inventory/App/RESET_APP';
+
 export const LOAD_REPOS = 'inventory/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'inventory/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'inventory/App/LOAD_REPOS_ERROR';

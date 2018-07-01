@@ -4,9 +4,9 @@
 
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import { API_ADD } from "./constants";
-import { api_add_error, api_add_success } from "./actions";
+import { api_add_error, api_add_success,reset_view } from "./actions";
 
-import { options_common, request,onCustomException_common,onCatch_common } from "utils/request";
+import { options_common, request,onCustomException_common,onCatch_common,onSuccess_common } from "utils/request";
 import { makeSelect__access_token, makeSelect__user_id } from "containers/App/selectors";
 import { makeSelect__name, makeSelect__remark, makeSelect__telephone } from "./selectors";
 
@@ -35,6 +35,8 @@ export function* api_request() {
     const jsonObj = yield call(request, requestURL, options_common(bodyObj));
     if (jsonObj.code == 0) {
       yield put(api_add_success(jsonObj));
+      onSuccess_common(jsonObj);
+      yield put(reset_view());
 
     } else {
       let err = jsonObj.msg;

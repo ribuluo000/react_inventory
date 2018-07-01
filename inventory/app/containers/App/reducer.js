@@ -13,6 +13,9 @@
 import { fromJS } from "immutable";
 
 import {
+
+  RESET_APP,
+
   /************************************************** 授权相关 start ********************************************************************************/
 
     ACTION__IS_AUTHENTICATED_FAILURE, ACTION__IS_AUTHENTICATED_SUCCESS,
@@ -33,6 +36,24 @@ const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
+
+    case RESET_APP:
+      state = initialState;
+
+      try {
+        let data = action.data;
+        if(data){
+          for(let k in data){
+            // console.log('data',k,data[k]);
+            state = state.set(k,data[k]);
+          }
+        }
+      } catch (e){
+        console.log(e);
+
+      }
+      return state;
+
     case LOAD_REPOS:
       return state
         .set('loading', true)

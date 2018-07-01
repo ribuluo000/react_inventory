@@ -9,6 +9,8 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
+export const RESET_VIEW = 'inventory/Login/RESET_VIEW';
+
 export const CHANGE_USER_NAME = 'inventory/Login/CHANGE_USER_NAME';
 export const CHANGE_PASSWORD = 'inventory/Login/CHANGE_PASSWORD';
 

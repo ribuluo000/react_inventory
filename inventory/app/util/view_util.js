@@ -3,6 +3,8 @@
  */
 import React from "react";
 import { View,Toast } from "antd-mobile";
+import { reset_app } from "../containers/App/actions";
+import { goBack, push } from "react-router-redux";
 
 export default {
 
@@ -45,6 +47,8 @@ export default {
     },
 
     reset2Login:(dispatch)=>{
+      dispatch(reset_app());
+
       dispatch(push(`/${PATH.PATH__login}`));
     },
 

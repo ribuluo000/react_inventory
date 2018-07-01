@@ -12,6 +12,7 @@
 import { fromJS } from "immutable";
 
 import {
+  RESET_VIEW,
   CHANGE_NAME,
   CHANGE_REMARK,
   CHANGE_TELEPHONE,
@@ -45,6 +46,22 @@ export const initialState = fromJS({
 
 function mReducer(state = initialState, action) {
   switch (action.type) {
+    case RESET_VIEW:
+      state = initialState;
+
+      try {
+        let data = action.data;
+        if(data){
+          for(let k in data){
+            // console.log('data',k,data[k]);
+            state = state.set(k,data[k]);
+          }
+        }
+      } catch (e){
+        console.log(e);
+
+      }
+      return state;
     case CHANGE_NAME:
       return state.set('name', action.value.replace(/@/gi, ''));
     case CHANGE_REMARK:
@@ -62,11 +79,7 @@ function mReducer(state = initialState, action) {
           id : '',
         });
     case API_ADD_SUCCESS:
-      let { id } = action.jsonObj.data;
       return state
-        .set('data', {
-          id : id,
-        })
         .set('loading', false);
     case API_ADD_ERROR:
       return state

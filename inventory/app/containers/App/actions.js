@@ -16,6 +16,8 @@
  */
 
 import {
+
+  RESET_APP,
   /************************************************** 授权相关 start ********************************************************************************/
 
     ACTION__IS_AUTHENTICATED_FAILURE, ACTION__IS_AUTHENTICATED_SUCCESS,
@@ -23,6 +25,23 @@ import {
 
     LOAD_REPOS, LOAD_REPOS_ERROR, LOAD_REPOS_SUCCESS
 } from "./constants";
+
+
+
+/**
+ * RESET_APP
+ *
+ * @param  {data} data The new data of the app
+ *
+ * @return {object}    An action object with a type of RESET_APP
+ */
+export function reset_app(data) {
+  return {
+    type: RESET_APP,
+    data,
+  };
+}
+
 
 /**
  * Load the repositories, this action starts the request saga

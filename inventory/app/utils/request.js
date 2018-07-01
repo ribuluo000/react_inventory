@@ -85,4 +85,13 @@ export function onCustomException_common(jsonObj = {}){
   view_util.show_toast(msg);
 }
 
+export function onSuccess_common(jsonObj = {}){
+  console.log('onSuccess_common',jsonObj);
+  let {
+    code,
+    msg,
+  } = jsonObj;
+  view_util.show_toast(msg);
+}
+
 
