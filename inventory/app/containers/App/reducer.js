@@ -27,9 +27,8 @@ const initialState = fromJS({
   currentUser : false, //no use
   is_authenticated : false,
   user_name : '',
-  userData : {
-    repositories : false,
-  },
+  user_id : '',
+  access_token : '',
 });
 
 function appReducer(state = initialState, action) {
@@ -47,9 +46,24 @@ function appReducer(state = initialState, action) {
     case LOAD_REPOS_ERROR:
       return state.set('error', action.error).set('loading', false);
     case   ACTION__IS_AUTHENTICATED_SUCCESS:
-      return state.set('is_authenticated', true);
+      let {
+        user_id,
+        access_token,
+        user_name,
+      } = action.jsonObj.data;
+      return state
+        .set('is_authenticated', true)
+        .set('user_id', user_id)
+        .set('access_token', access_token)
+        .set('user_name', user_name)
+        ;
     case ACTION__IS_AUTHENTICATED_FAILURE:
-      return state.set('is_authenticated', false);
+      return state
+        .set('is_authenticated', false)
+        .set('user_id', '')
+        .set('access_token', '')
+        .set('user_name', '')
+        ;
     default:
       return state;
   }

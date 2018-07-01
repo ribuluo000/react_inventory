@@ -28,7 +28,6 @@ export default class ViewIndex extends BaseComponent {
 
     const {
       user_name,
-      data,
 
       onChange_name,
       onChange_telephone,
@@ -51,26 +50,6 @@ export default class ViewIndex extends BaseComponent {
 
     } = this.props;
 
-    let dataList = [];
-    if (data && data.dataList) {
-      dataList = data.dataList;
-    } else {
-      dataList = [
-        {
-          key : 'key',
-          title : 'title',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-        {
-          key : 'key2',
-          title : 'title2',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-      ];
-    }
-
     return (
       <View>
         <Helmet>
@@ -92,7 +71,7 @@ export default class ViewIndex extends BaseComponent {
                     // type="primary"
                     inline={false}
                     size="small"
-                    onClick={onPress__button__done}
+                    onPress={onPress__button__done}
                   >
                     {msg}
                   </MyButton>
@@ -174,8 +153,6 @@ export default class ViewIndex extends BaseComponent {
 ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
-  repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onPress_login : PropTypes.func,
   user_name : PropTypes.string,
   onChange_name : PropTypes.func,
   onChange_telephone : PropTypes.func,
@@ -185,8 +162,6 @@ ViewIndex.propTypes = {
   telephone: PropTypes.string,
   remark: PropTypes.string,
 
-
-  data : PropTypes.object,
 
 };
 

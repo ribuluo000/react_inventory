@@ -30,12 +30,20 @@ const makeSelectLocation = () =>
 const makeSelect__user_name = () =>
   createSelector(selectGlobal, globalState => globalState.get('user_name'));
 
+const makeSelect__user_id = () =>
+  createSelector(selectGlobal, globalState => globalState.get('user_id'));
+
+const makeSelect__access_token = () =>
+  createSelector(selectGlobal, globalState => globalState.get('access_token'));
+
 
 const makeSelect__is_authenticated = () =>
   createSelector(selectGlobal, globalState => globalState.get('is_authenticated'));
 
 
 export {
+  makeSelect__access_token,
+  makeSelect__user_id,
   makeSelect__user_name,
   makeSelect__is_authenticated,
   selectGlobal,

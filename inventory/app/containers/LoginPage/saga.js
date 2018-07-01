@@ -1,5 +1,5 @@
 /**
- * Gets the repositories of the user from Github
+ * Gets data from server
  */
 
 import { call, put, select, takeLatest } from "redux-saga/effects";
@@ -9,7 +9,6 @@ import { action__is_authenticated_success, action__is_authenticated_failure  } f
 
 import { options_common, request } from "utils/request";
 import { makeSelect__password, makeSelect__user_name } from "./selectors";
-import { LOCATION_CHANGE } from "react-router-redux";
 
 /**
  * Github repos request/response handler
@@ -18,7 +17,6 @@ export function* api_request() {
   // Select username from store
   const user_name = yield select(makeSelect__user_name());
   const password = yield select(makeSelect__password());
-  // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
 
   const bodyObj = {
     user_name,
@@ -30,8 +28,9 @@ export function* api_request() {
     // Call our request helper (see 'utils/request')
     const jsonObj = yield call(request, requestURL, options_common(bodyObj));
     if (jsonObj.code == 0) {
+      jsonObj.data.user_name = user_name;
       yield put(api_login_success(jsonObj));
-      yield put(action__is_authenticated_success());
+      yield put(action__is_authenticated_success(jsonObj));
 
     } else {
       let err = jsonObj.msg;

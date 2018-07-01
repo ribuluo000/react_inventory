@@ -10,7 +10,7 @@ import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, m
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
-import { push } from "react-router-redux";
+import { push,goBack } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
 import PATH from "constants/PATH";
 
@@ -46,13 +46,13 @@ export function mapDispatchToProps(dispatch) {
 
     onPress__button__add : () => {
       console.log('onPress__button__add');
-      dispatch(push(`/${PATH.PATH__provider__add}`));
+      dispatch(push(`/${PATH.PATH__product__batch__add}`));
 
     },
 
     onPress__list_item : (item, i) => {
       console.log('onPress__list_item',item, i);
-      dispatch(push(`/${PATH.PATH__provider__detail}`));
+      dispatch(push(`/${PATH.PATH__product__batch__detail}`));
 
     },
 

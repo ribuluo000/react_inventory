@@ -71,9 +71,10 @@ export function repoLoadingError(error) {
  *
  * @return {object}       An action object with a type of ACTION__IS_AUTHENTICATED_SUCCESS
  */
-export function action__is_authenticated_success() {
+export function action__is_authenticated_success(jsonObj) {
   return {
     type : ACTION__IS_AUTHENTICATED_SUCCESS,
+    jsonObj,
   };
 }
 
