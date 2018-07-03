@@ -30,18 +30,20 @@ export default class ViewIndex extends BaseComponent {
     console.log(this.ref_lv);
     let {onPress__list_item} = this.props;
 
+    // return <Text>aaa</Text>;
+
     return (
       <Item
-        key={item.key}
+        key={item.get('key')}
         arrow="horizontal"
         multipleLine
-        extra={item.extra}
+        extra={item.get('extra')}
         onClick={() => {
           onPress__list_item && onPress__list_item(item, sectionID, rowID)
         }}
 
       >
-        {item.title}
+        {item.get('title')}
         {/*<Brief>{item.subtitle}</Brief>*/}
       </Item>
     );
@@ -80,27 +82,30 @@ export default class ViewIndex extends BaseComponent {
 
 
     } = this.props;
+    console.log('data',data);
 
     let data_list = [];
     if(data){
-      if (data.data_list) {
-        data_list = data.data_list;
+      data_list = data.get('data_list');
+      if (!data_list) {
+        data_list = IList([])
       }
     } else {
-      data_list = [
-        // {
-        //   key : 'key',
-        //   title : 'title',
-        //   subtitle : 'subtitle',
-        //   extra : 'extra',
-        // },
-        // {
-        //   key : 'key2',
-        //   title : 'title2',
-        //   subtitle : 'subtitle',
-        //   extra : 'extra',
-        // },
-      ];
+      data_list = IList([]);
+      // data_list = [
+      //   {
+      //     key : 'key',
+      //     title : 'title',
+      //     subtitle : 'subtitle',
+      //     extra : 'extra',
+      //   },
+      //   {
+      //     key : 'key2',
+      //     title : 'title2',
+      //     subtitle : 'subtitle',
+      //     extra : 'extra',
+      //   },
+      // ];
     }
 
 

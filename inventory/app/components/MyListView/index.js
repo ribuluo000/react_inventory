@@ -40,7 +40,7 @@ const data = [
 export default class MyListView extends React.PureComponent{
 
   static propTypes = {
-    dataLv:PropTypes.array.isRequired,
+    // dataLv:PropTypes.array.isRequired,
     hasMore:PropTypes.bool.isRequired,
     onEndReached:PropTypes.func.isRequired,
     onRefresh:PropTypes.func.isRequired,
@@ -132,9 +132,10 @@ export default class MyListView extends React.PureComponent{
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps',nextProps);
     if (nextProps.dataLv !== this.props.dataLv) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(nextProps.dataLv),
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.dataLv.toArray()),
         isLoading: false,
       });
     }

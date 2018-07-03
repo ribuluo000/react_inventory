@@ -9,7 +9,7 @@
  * case YOUR_ACTION_CONSTANT:
  *   return state.set('yourStateVariable', true);
  */
-import { fromJS,Map,List } from "immutable";
+import { fromJS } from "immutable";
 
 import {
   RESET_VIEW,
@@ -106,13 +106,13 @@ function mReducer(state = initialState, action) {
 
          *
          */
-        let item_new = {
+        let item_new = IMap({
           key : item._id,
           title : item.name,
           subtitle : item._id,
           extra : item.remark,
-        };
-        i_data_list_new.push(item_new);
+        });
+        i_data_list_new = i_data_list_new.push(item_new);
         // i_data_list_new.insert(i_data_list_new.size+1,item_new);
         console.log('data_list.map',item,i);
         console.log('data_list.map',item_new,i);
@@ -126,15 +126,19 @@ function mReducer(state = initialState, action) {
         has_more = false;
       }
       console.log('ret i_data_list_new',i_data_list_new);
-      console.log('ret state',state);
-      return state
+      let data = IMap({
+        'total_count':total_count,
+        'data_list':i_data_list_new,
+      });
+      console.log('ret data',data);
+      state = state
         .set('loading', false)
         .set('has_more', has_more)
-        .set('data', Map({
-          'total_count':total_count,
-          'data_list':i_data_list_new,
-        }))
-        ;
+        .set('data', data)
+      ;
+      console.log('ret state',state);
+
+      return state ;
     case API_GET_LIST_ERROR:
       return state
         .set('error', action.error)

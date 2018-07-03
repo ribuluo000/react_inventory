@@ -1,11 +1,19 @@
 /**
  * Created by nick on 2018/7/1.
  */
+import { fromJS,Map,List,Set, } from "immutable";
+
 import my_constant_util from './my_constant_util';
 import style_util from './style_util';
 import view_util from './view_util';
 export default {
   init:()=>{
+
+    global.IfromJS = fromJS;
+    global.IMap = Map;
+    global.IList = List;
+    global.ISet = Set;
+
 
     global.style_util = style_util;
     global.view_util = view_util;
