@@ -45,13 +45,13 @@ export function mapDispatchToProps(dispatch) {
 
     onPress__button__add : () => {
       console.log('onPress__button__add');
-      dispatch(push(`/${PATH.PATH__provider__add}`));
+      dispatch(push(`/${PATH.PATH__customer__add}`));
 
     },
 
     onPress__list_item : (item, sectionID, rowID) => {
       console.log('onPress__list_item', item, sectionID, rowID);
-      dispatch(push(`/${PATH.PATH__provider__detail}`));
+      dispatch(push(`/${PATH.PATH__customer__detail}`));
 
     },
 
