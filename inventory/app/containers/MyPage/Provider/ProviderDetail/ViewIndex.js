@@ -6,7 +6,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { Icon, List, NavBar, SearchBar, Text, View, InputItem, TextareaItem } from "antd-mobile";
+import { Icon, InputItem, List, NavBar, Text, TextareaItem, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
 import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
@@ -16,66 +16,180 @@ const Brief = Item.Brief;
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewIndex extends BaseComponent {
 
+  initData = () => {
+    let detail = this.props.location.state;
+    console.log('come in data', detail);
+
+    this.name = detail.get('item').get('name');
+    this._id = detail.get('item').get('_id');
+    this.remark = detail.get('item').get('remark');
+    this.telephone = detail.get('item').get('telephone');
+    this.create_time = detail.get('item').get('create_time');
+  };
+
   constructor(props) {
     super(props);
+
+    this.initData();
+
+    this.state = {
+      editable : false,
+      setState : (state) => {
+        this.setState(state);
+      },
+    };
+
   }
 
   componentDidMount() {
 
   }
 
+  check_info = () => {
+
+    if (my_string_util.is_empty(this.name)) {
+      view_util.show_toast(MSG.MSG___name_can_not_be_empty);
+      return false;
+
+    }
+
+    return true;
+
+  };
+
+  api_call = async () => {
+
+    let name = this.name;
+    let remark = this.remark;
+    let telephone = this.telephone;
+    let id = this._id;
+
+    let access_token = 'access_token';  //todo need change
+    let user_id = '5b31b58fdd66b03a1dcb5434'; //todo need change
+    let body = {
+      access_token,
+      user_id,
+      name,
+      remark,
+      telephone,
+      id,
+    };
+
+    view_util.show_loading();
+    let jsonObj = await api_util.provider_update_detail(body);
+    view_util.hide_loading();
+
+    if (!jsonObj) {
+      return;
+    }
+
+    if (!(jsonObj.get('code') == CODE.code_0.code)) {
+      api_util.on_custom_exception_common(jsonObj);
+      return;
+    }
+    api_util.on_success_common(jsonObj);
+    this.props.onPress__button__done();
+
+  };
+
+  onPress__button__done = () => {
+    console.log('onPress__button__done');
+
+    if (!this.check_info()) {
+      return;
+    }
+
+    this.api_call();
+
+  };
+
+  onPress__button__edit = async () => {
+    console.log('onPress__button__edit');
+    this.state.setState({
+      editable : true,
+    })
+  };
+
+  onChange_name = (value) => {
+    console.log('onChange_name', value);
+    this.name = value;
+  };
+  onChange_remark = (value) => {
+    console.log('onChange_remark', value);
+    this.remark = value;
+  };
+  onChange_telephone = (value) => {
+    console.log('onChange_telephone', value);
+    this.telephone = value;
+  };
+
   render() {
 
     const {
       user_name,
-      data,
-
-      onChange_name,
-      onChange_telephone,
-      onChange_remark,
-      name,
-      telephone,
-      remark,
-
       onPress__button__back,
-
-      onPress__button__add,
-
-      onPress__button__done,
-
-      onPress__button__edit,
-
-      onPress__list_item,
-
-      onPress__button__search,
 
     } = this.props;
 
-    let dataList = [];
-    if (data && data.dataList) {
-      dataList = data.dataList;
+    const {
+      editable,
+    } = this.state;
+
+    const onPress__button__done = this.onPress__button__done;
+    const onPress__button__edit = this.onPress__button__edit;
+    const onChange_name = this.onChange_name;
+    const onChange_telephone = this.onChange_telephone;
+    const onChange_remark = this.onChange_remark;
+
+    let right_button = null;
+    if (editable) {
+
+      right_button = (
+        <FormattedMessage
+          key={messages.done.id}
+          {...messages.done}>
+          {
+            msg => (
+              <MyButton
+                // type="primary"
+                inline={false}
+                size="small"
+                onPress={onPress__button__done}
+              >
+                {msg}
+              </MyButton>
+            )
+          }
+
+        </FormattedMessage>
+      );
     } else {
-      dataList = [
-        {
-          key : 'key',
-          title : 'title',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-        {
-          key : 'key2',
-          title : 'title2',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-      ];
+      right_button = (
+        <FormattedMessage
+          key={messages.edit.id}
+          {...messages.edit}>
+          {
+            msg => (
+              <MyButton
+                // type="primary"
+                inline={false}
+                size="small"
+                onPress={onPress__button__edit}
+              >
+                {msg}
+              </MyButton>
+            )
+          }
+
+        </FormattedMessage>
+      );
     }
 
     return (
       <View>
         <Helmet>
           {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title>账单</title>
+          <title></title>
         </Helmet>
         <NavBar
           mode="dark"
@@ -83,41 +197,7 @@ export default class ViewIndex extends BaseComponent {
           onLeftClick={onPress__button__back}
           rightContent={[
 
-            <FormattedMessage
-              key={messages.edit.id}
-              {...messages.edit}>
-              {
-                msg => (
-                  <MyButton
-                    // type="primary"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__edit}
-                  >
-                    {msg}
-                  </MyButton>
-                )
-              }
-
-            </FormattedMessage>,
-
-            <FormattedMessage
-              key={messages.done.id}
-              {...messages.done}>
-              {
-                msg => (
-                  <MyButton
-                    // type="primary"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__done}
-                  >
-                    {msg}
-                  </MyButton>
-                )
-              }
-
-            </FormattedMessage>,
+            right_button,
 
           ]}
         >
@@ -135,14 +215,14 @@ export default class ViewIndex extends BaseComponent {
 
         <List>
 
-
           <FormattedMessage {...messages.name}>
             {
               msg => (
                 <InputItem
+                  editable={editable}
+                  defaultValue={this.name}
                   id="name"
                   type="text"
-                  value={name}
                   onChange={onChange_name}
                   placeholder={msg}
                 />
@@ -155,9 +235,10 @@ export default class ViewIndex extends BaseComponent {
             {
               msg => (
                 <InputItem
+                  editable={editable}
+                  defaultValue={this.telephone}
                   id="telephone"
                   type="text"
-                  value={telephone}
                   onChange={onChange_telephone}
                   placeholder={msg}
                 />
@@ -166,13 +247,13 @@ export default class ViewIndex extends BaseComponent {
 
           </FormattedMessage>
 
-
           <FormattedMessage {...messages.remark}>
             {
               msg => (
                 <TextareaItem
+                  editable={editable}
+                  defaultValue={this.remark}
                   id="remark"
-                  value={remark}
                   onChange={onChange_remark}
                   placeholder={msg}
                   rows={5}
@@ -192,19 +273,7 @@ export default class ViewIndex extends BaseComponent {
 ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
-  repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onPress_login : PropTypes.func,
   user_name : PropTypes.string,
-  onChange_name : PropTypes.func,
-  onChange_telephone : PropTypes.func,
-  onChange_remark : PropTypes.func,
-
-  name: PropTypes.string,
-  telephone: PropTypes.string,
-  remark: PropTypes.string,
-
-
-  data : PropTypes.object,
 
 };
 

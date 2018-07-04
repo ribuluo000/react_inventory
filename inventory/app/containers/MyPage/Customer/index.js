@@ -51,7 +51,12 @@ export function mapDispatchToProps(dispatch) {
 
     onPress__list_item : (item, sectionID, rowID) => {
       console.log('onPress__list_item', item, sectionID, rowID);
-      dispatch(push(`/${PATH.PATH__customer__detail}`));
+      let path = {
+        pathname:`/${PATH.PATH__customer__detail}`,
+        state:item,
+      };
+      dispatch(push(path));
+      // dispatch(push(`/${PATH.PATH__customer__detail}`));
 
     },
 

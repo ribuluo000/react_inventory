@@ -92,4 +92,26 @@ export default {
     return await request_common(url, data, callback);
   },
 
+  provider_update_detail : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___provider__update_detail;
+    return await request_common(url, data, callback);
+  },
+
+  customer_update_detail : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___customer__update_detail;
+    return await request_common(url, data, callback);
+  },
+
+
+  product_update_detail : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___product__update_detail;
+    return await request_common(url, data, callback);
+  },
+
+
+  batch_update_detail : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___product__batch__update_detail;
+    return await request_common(url, data, callback);
+  },
+
 };

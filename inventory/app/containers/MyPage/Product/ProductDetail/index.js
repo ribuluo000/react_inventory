@@ -10,7 +10,7 @@ import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, m
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
-import { push } from "react-router-redux";
+import { push,goBack } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
 import PATH from "constants/PATH";
 
@@ -38,33 +38,16 @@ MyPage.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
 
-    onPress__button__base_info : () => {
-      dispatch(push('/base_info'));
+    onPress__button__back : () => {
+      console.log('onPress__button__back');
+      dispatch(goBack());
 
     },
 
-    onPress__button__bill : () => {
-      dispatch(push('/bill'));
+    onPress__button__done : () => {
+      console.log('onPress__button__done');
 
-    },
-
-    onPress__button__provider : () => {
-      dispatch(push('/provider'));
-
-    },
-
-    onPress__button__customer : () => {
-      dispatch(push('/customer'));
-
-    },
-
-    onPress__button__product : () => {
-      dispatch(push('/product'));
-
-    },
-
-    onPress__button__logout : () => {
-      dispatch(push('/login'));
+      dispatch(goBack());
 
     },
 
