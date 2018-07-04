@@ -48,6 +48,10 @@ export default {
     },
 
 
+    "code_99998":{
+        "code":"99998",
+        "code_description":"未知的错误码"
+    },
     "code_99999":{
         "code":"99999",
         "code_description":""

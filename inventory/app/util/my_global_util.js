@@ -6,6 +6,10 @@ import { fromJS,Map,List,Set, } from "immutable";
 import my_constant_util from './my_constant_util';
 import style_util from './style_util';
 import view_util from './view_util';
+import api_util from "../api/api_util";
+import { options_common, request } from "utils/request";
+import { push,goBack } from "react-router-redux";
+
 export default {
   init:()=>{
 
@@ -24,6 +28,13 @@ export default {
     global.PARAM = my_constant_util.PARAM;
     global.PERMISSION = my_constant_util.PERMISSION;
     global.TYPE = my_constant_util.TYPE;
+    global.CODE = my_constant_util.CODE;
 
+    global.api_util = api_util;
+    global.request = request;
+    global.options_common = options_common;
+
+    global.push = push;
+    global.goBack = goBack;
   },
 };

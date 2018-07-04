@@ -8544,6 +8544,10 @@ react-helmet@5.2.0:
     prop-types "^15.5.4"
     react-side-effect "^1.1.0"
 
+react-immutable-proptypes@^2.1.0:
+  version "2.1.0"
+  resolved "http://registry.npm.taobao.org/react-immutable-proptypes/download/react-immutable-proptypes-2.1.0.tgz#023d6f39bb15c97c071e9e60d00d136eac5fa0b4"
+
 react-intl@2.4.0:
   version "2.4.0"
   resolved "http://registry.npm.taobao.org/react-intl/download/react-intl-2.4.0.tgz#66c14dc9df9a73b2fbbfbd6021726e80a613eb15"

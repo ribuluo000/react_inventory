@@ -13,6 +13,7 @@ export default {
     "PARAM___search_key":"search_key",
     "PARAM___page_number":"page_number",
     "PARAM___page_size":"page_size",
+    "PARAM___page_size_value":10,
     "PARAM___name":"name",
     "PARAM___remark":"remark",
     "PARAM___telephone":"telephone",

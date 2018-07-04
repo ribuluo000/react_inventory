@@ -1,12 +1,12 @@
 /*
- * My Bill Page
+ *
  *
  */
 
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { Icon, List, NavBar, SearchBar, Text, View, ListView } from "antd-mobile";
+import { Icon, List, NavBar, SearchBar, Text, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
 import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
@@ -15,20 +15,32 @@ import MyListView from "components/MyListView";
 const Item = List.Item;
 const Brief = Item.Brief;
 
-
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewIndex extends BaseComponent {
 
+  initData = () => {
+    this.search_key = '';
+    this.page_number = 0;
+    this.total_count = 0;
+    this.page_size = PARAM.PARAM___page_size_value;
+  };
+
   constructor(props) {
     super(props);
+    this.initData();
+    this.state = {
+      has_more : true,
+      dataLv : IList([]),
+      setState : (state) => {
+        this.setState(state);
+      },
+    };
   }
 
-
   renderRow = (item, sectionID, rowID) => {
-    console.log('renderRow',item,sectionID,rowID);
-    console.log(this);
-    console.log(this.ref_lv);
-    let {onPress__list_item} = this.props;
+    // console.log('renderRow',item,sectionID,rowID);
+
+    let { onPress__list_item } = this.props;
 
     // return <Text>aaa</Text>;
 
@@ -49,20 +61,108 @@ export default class ViewIndex extends BaseComponent {
     );
   };
 
-  onEndReached = ()=> {
-    console.log('onEndReached',this);
-    console.log('onEndReached',this.props);
-    console.log('onEndReached',this.props.page_number);
+  set_has_more_false = () => {
+    if (this.state.has_more !== false) {
+      this.state.setState({
+        has_more : false,
+      });
+    }
+  };
 
-    let page_number_cur = this.props.page_number;
-    this.props.onEndReached && this.props.onEndReached(page_number_cur);
+  onEndReached = async () => {
+    //load more data
+
+    let search_key = this.search_key;
+
+    let page_number = ++this.page_number;
+    let page_size = this.page_size;
+
+    let access_token = 'access_token';
+    let user_id = '5b31b58fdd66b03a1dcb5434';
+    let body = {
+      access_token,
+      user_id,
+      search_key,
+      page_number,
+      page_size,
+    };
+
+    view_util.show_loading();
+    let jsonObj = await api_util.provider_get_list(body);
+    view_util.hide_loading();
+
+    let has_more = false;
+    let dataLvNew = this.state.dataLv;
+    if (page_number === 1) {
+      dataLvNew = IList([]);
+    }
+    let total_count = this.total_count;
+
+    if (!jsonObj) {
+      this.set_has_more_false();
+      return;
+    }
+
+    if (!(jsonObj.get('code') == CODE.code_0.code)) {
+      api_util.on_custom_exception_common(jsonObj);
+      this.set_has_more_false();
+      return;
+    }
+    total_count = jsonObj.get('data').get('total_count');
+    let data_list = jsonObj.get('data').get('data_list');
+    data_list.map((item, i) => {
+      // console.log(item,'data_list.map.item');
+      let item_new = IMap({
+        item : item,
+        key : item.get('_id'),
+        title : item.get('name'),
+        subtitle : '',
+        extra : item.get('remark'),
+      });
+      dataLvNew = dataLvNew.push(item_new);
+      // console.log(dataLvNew,'data_list.map.dataLvNew');
+
+    });
+
+    if (total_count > dataLvNew.size) {
+      has_more = true;
+    }
+    console.log(dataLvNew, 'data_list.map.dataLvNew');
+    this.total_count = total_count;
+
+    this.state.setState({
+      has_more,
+      dataLv : dataLvNew,
+    })
+
+  };
+
+  onRefresh = async () => {
+    console.log('onRefresh', this);
+    //refresh data
+
+    this.page_number = 0;
+    this.total_count = 0;
+    this.onEndReached();
+
+  };
+  onPress__button__search = async (value) => {
+    console.log('onPress__button__search', value);
+    this.search_key = value;
+    this.timer && clearTimeout(this.timer);
+    //refresh data
+    this.timer = setTimeout(() => {
+      this.onRefresh();
+
+    }, 300);
+    console.log('this.timer', this.timer);
+
   };
 
   render() {
 
     const {
       loading,
-      has_more,
       user_name,
       data,
 
@@ -70,48 +170,17 @@ export default class ViewIndex extends BaseComponent {
 
       onPress__button__add,
 
-      onPress__button__done,
-
-      onPress__button__edit,
-
-      onPress__list_item,
-
-      onPress__button__search,
-
-      onRefresh,
-
-
     } = this.props;
-    console.log('data',data);
 
-    let data_list = [];
-    if(data){
-      data_list = data.get('data_list');
-      if (!data_list) {
-        data_list = IList([])
-      }
-    } else {
-      data_list = IList([]);
-      // data_list = [
-      //   {
-      //     key : 'key',
-      //     title : 'title',
-      //     subtitle : 'subtitle',
-      //     extra : 'extra',
-      //   },
-      //   {
-      //     key : 'key2',
-      //     title : 'title2',
-      //     subtitle : 'subtitle',
-      //     extra : 'extra',
-      //   },
-      // ];
-    }
+    const {
+      has_more,
+      dataLv,
+    } = this.state;
 
-
-    console.log('data_list',data_list);
     const renderRow = this.renderRow;
     const onEndReached = this.onEndReached;
+    const onRefresh = this.onRefresh;
+    const onPress__button__search = this.onPress__button__search;
     return (
       <View>
         <Helmet>
@@ -172,36 +241,35 @@ export default class ViewIndex extends BaseComponent {
         <List>
 
           <MyListView
-            ref={(ref)=>{
+            ref={(ref) => {
               this.ref_lv = ref;
             }}
-            dataLv={data_list}
+            dataLv={dataLv}
             hasMore={has_more}
             onEndReached={onEndReached}
             onRefresh={onRefresh}
             renderRow={renderRow}
           />
 
-
           {/*{*/}
-            {/*data_list.map((item, i) => {*/}
-              {/*let v = (*/}
-                {/*<Item*/}
-                  {/*key={item.key}*/}
-                  {/*arrow="horizontal"*/}
-                  {/*multipleLine*/}
-                  {/*extra={item.extra}*/}
-                  {/*onClick={() => {*/}
-                    {/*onPress__list_item && onPress__list_item(item, i)*/}
-                  {/*}}*/}
+          {/*data_list.map((item, i) => {*/}
+          {/*let v = (*/}
+          {/*<Item*/}
+          {/*key={item.key}*/}
+          {/*arrow="horizontal"*/}
+          {/*multipleLine*/}
+          {/*extra={item.extra}*/}
+          {/*onClick={() => {*/}
+          {/*onPress__list_item && onPress__list_item(item, i)*/}
+          {/*}}*/}
 
-                {/*>*/}
-                  {/*{item.title}*/}
-                  {/*/!*<Brief>{item.subtitle}</Brief>*!/*/}
-                {/*</Item>*/}
-              {/*);*/}
-              {/*return v;*/}
-            {/*})*/}
+          {/*>*/}
+          {/*{item.title}*/}
+          {/*/!*<Brief>{item.subtitle}</Brief>*!/*/}
+          {/*</Item>*/}
+          {/*);*/}
+          {/*return v;*/}
+          {/*})*/}
           {/*}*/}
 
         </List>

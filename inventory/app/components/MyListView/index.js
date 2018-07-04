@@ -4,9 +4,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {ListView} from 'antd-mobile';
+import {PullToRefresh,ListView} from 'antd-mobile';
 
 import ReactDOM from 'react-dom';
+import ImmutablePropTypes from "react-immutable-proptypes";
 
 function MyBody(props) {
   console.log('MyBody.props',props);
@@ -40,7 +41,11 @@ const data = [
 export default class MyListView extends React.PureComponent{
 
   static propTypes = {
-    // dataLv:PropTypes.array.isRequired,
+    dataLv:ImmutablePropTypes.listOf(
+      ImmutablePropTypes.contains({
+        key: PropTypes.string.isRequired
+      })
+    ).isRequired,
     hasMore:PropTypes.bool.isRequired,
     onEndReached:PropTypes.func.isRequired,
     onRefresh:PropTypes.func.isRequired,
@@ -121,22 +126,35 @@ export default class MyListView extends React.PureComponent{
     console.log('onEndReached',event);
     // load new data
     // hasMore: from backend data, indicates whether it is the last page, here is false
-    if (this.state.isLoading && !this.props.hasMore) {
+    if (this.state.isLoading || !this.props.hasMore) {
       return;
     }
     console.log('onEndReached1',event);
 
     this.setState({ isLoading: true });
     this.props.onEndReached && this.props.onEndReached();
-  }
+  };
+
+  onRefresh = ()=>{
+    if(this.state.isRefreshing){
+      return;
+    }
+    this.props.onRefresh && this.props.onRefresh();
+
+  };
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps',nextProps);
+    console.log('componentWillReceiveProps',nextProps,this.props);
     if (nextProps.dataLv !== this.props.dataLv) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(nextProps.dataLv.toArray()),
         isLoading: false,
+      });
+    }else if(!nextProps.hasMore &&this.props.hasMore){
+      this.setState({
+        isLoading: false,
+        isRefreshing: false,
       });
     }
   }
@@ -165,13 +183,18 @@ export default class MyListView extends React.PureComponent{
         renderRow={renderRow}
         renderSeparator={renderSeparator}
         style={{
-          height: this.state.height,
+          // height: this.state.height,
+          height: 200,  //todo need change
           overflow: 'auto',
         }}
         pageSize={1}
         onScroll={() => { console.log('scroll'); }}
         scrollRenderAheadDistance={500}
         onEndReached={this.onEndReached}
+        pullToRefresh={<PullToRefresh
+          refreshing={this.state.isRefreshing}
+          onRefresh={this.onRefresh}
+        />}
         onEndReachedThreshold={10}
       />
     );

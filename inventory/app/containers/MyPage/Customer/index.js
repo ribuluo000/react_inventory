@@ -37,27 +37,21 @@ MyPage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-
     onPress__button__back : () => {
+      console.log('onPress__button__back');
       dispatch(goBack());
 
     },
 
     onPress__button__add : () => {
       console.log('onPress__button__add');
-      dispatch(push(`/${PATH.PATH__customer__add}`));
+      dispatch(push(`/${PATH.PATH__provider__add}`));
 
     },
 
-    onPress__list_item : (item, i) => {
-      console.log('onPress__list_item',item, i);
-      dispatch(push(`/${PATH.PATH__customer__detail}`));
-
-    },
-
-    onPress__button__search : (value) => {
-      console.log('onPress__button__search',value);
-
+    onPress__list_item : (item, sectionID, rowID) => {
+      console.log('onPress__list_item', item, sectionID, rowID);
+      dispatch(push(`/${PATH.PATH__provider__detail}`));
 
     },
 
