@@ -26,7 +26,20 @@ const get_default_msg = (jsonObj) => {
   }
 };
 
+const request_common = async (url, data = {}, callback) => {
+  let ret = null;
+  try {
+    ret = await request(url, options_common(data));
+    ret = fromJS(ret);
+    callback && callback(null, ret);
+  } catch (err) {
+    callback ? callback(err) : on_catch_common(err);
+  }
+  return ret;
+};
+
 export default {
+  request_common : request_common,
   on_success_common : on_success_common,
   on_custom_exception_common : on_custom_exception_common,
   get_msg : (jsonObj) => {
@@ -34,121 +47,49 @@ export default {
   },
   login : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___user__login;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
   provider_get_list : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___provider__get_list;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
   customer_get_list : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___customer__get_list;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
   product_get_list : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___product__get_list;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
   batch_get_list : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___product__batch__get_list;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
   provider_add : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___provider__add;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
   customer_add : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___customer__add;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
 
   product_add : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___product__add;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
 
   batch_add : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___product__batch__add;
-    let ret = null;
-    try {
-      ret = await request(url, options_common(data));
-      ret = fromJS(ret);
-      callback && callback(null, ret);
-    } catch (err) {
-      callback ? callback(err) : on_catch_common(err);
-    }
-    return ret;
+    return await request_common(url, data, callback);
   },
 
 };
