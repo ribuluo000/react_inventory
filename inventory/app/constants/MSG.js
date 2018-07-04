@@ -13,8 +13,8 @@ export default {
     "MSG___does_not_exist":"不存在",
     "MSG___no_more_data":"没有更多数据",
 
-    
-    
+
+
 
     "MSG___user_name_does_not_exist":'用户名不存在',
     "MSG___this_user_name_had_exist":'该用户名已经存在',
@@ -60,7 +60,7 @@ export default {
     "MSG___update_product_failure":'更新产品失败',
     "MSG___find_product_list_success":'查询产品列表成功',
     "MSG___find_product_list_failure":'查询产品列表失败',
-    
+
     "MSG___this_product_batch_name_had_exist":'该产品批次名称已经存在',
     "MSG___this_product_batch_does_not_exist":'该产品批次不存在',
     "MSG___add_product_batch_success":'添加产品批次成功',
@@ -88,6 +88,13 @@ export default {
     "MSG___provider_is_incorrect":'供应商不正确',
     "MSG___customer_is_incorrect":'客户不正确',
     "MSG___products_is_incorrect":'产品不正确',
+
+
+    //front
+
+    "MSG___name_can_not_be_empty":'名称不能为空',
+
+
 
 
     "MSG___":"MSG___",

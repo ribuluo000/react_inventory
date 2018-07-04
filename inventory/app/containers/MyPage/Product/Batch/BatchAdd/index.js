@@ -13,8 +13,6 @@ import ViewIndex from "./ViewIndex";
 import { goBack, push } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
 import PATH from "constants/PATH";
-import { api_add, change_name, change_remark, } from "./actions";
-import { makeSelect__name, makeSelect__remark, } from "./selectors";
 /* eslint-disable react/prefer-stateless-function */
 export class MyPage extends BaseComponent {
   /**
@@ -38,16 +36,6 @@ MyPage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChange_name : value => dispatch(change_name(value)),
-    onChange_remark : value => dispatch(change_remark(value)),
-    onPress_add : evt => {
-      if (evt !== undefined && evt.preventDefault) {
-        evt.preventDefault();
-      }
-      dispatch(api_add());
-    },
-
-
     onPress__button__back : () => {
       console.log('onPress__button__back');
       dispatch(goBack());
@@ -57,11 +45,7 @@ export function mapDispatchToProps(dispatch) {
     onPress__button__done : () => {
       console.log('onPress__button__done');
 
-      //todo need change to do something
-      dispatch(api_add());
-
-      // dispatch(goBack());
-
+      dispatch(goBack());
 
     },
 
@@ -71,8 +55,6 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   is_authenticated : makeSelect__is_authenticated(),
   user_name : makeSelect__user_name(),
-  name : makeSelect__name(),
-  remark : makeSelect__remark(),
   loading : makeSelectLoading(),
   error : makeSelectError(),
 });

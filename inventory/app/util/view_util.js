@@ -51,5 +51,8 @@ export default {
 
       dispatch(push(`/${PATH.PATH__login}`));
     },
+    goBack:(dispatch)=>{
+      dispatch(goBack());
+    },
 
 };

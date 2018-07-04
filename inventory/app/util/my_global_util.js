@@ -3,6 +3,7 @@
  */
 import { fromJS,Map,List,Set, } from "immutable";
 
+import my_string_util from './my_string_util';
 import my_constant_util from './my_constant_util';
 import style_util from './style_util';
 import view_util from './view_util';
@@ -19,6 +20,7 @@ export default {
     global.ISet = Set;
 
 
+    global.my_string_util = my_string_util;
     global.style_util = style_util;
     global.view_util = view_util;
     global.my_constant_util = my_constant_util;
@@ -29,6 +31,7 @@ export default {
     global.PERMISSION = my_constant_util.PERMISSION;
     global.TYPE = my_constant_util.TYPE;
     global.CODE = my_constant_util.CODE;
+    global.MSG = my_constant_util.MSG;
 
     global.api_util = api_util;
     global.request = request;
