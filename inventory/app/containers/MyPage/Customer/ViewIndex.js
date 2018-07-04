@@ -77,8 +77,8 @@ export default class ViewIndex extends BaseComponent {
     let page_number = ++this.page_number;
     let page_size = this.page_size;
 
-    let access_token = 'access_token';
-    let user_id = '5b31b58fdd66b03a1dcb5434';
+    let access_token = 'access_token';  //todo need change
+    let user_id = '5b31b58fdd66b03a1dcb5434'; //todo need change
     let body = {
       access_token,
       user_id,

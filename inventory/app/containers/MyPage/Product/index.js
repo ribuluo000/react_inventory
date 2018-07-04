@@ -50,17 +50,12 @@ export function mapDispatchToProps(dispatch) {
 
     },
 
-    onPress__list_item : (item, i) => {
-      console.log('onPress__list_item',item, i);
+    onPress__list_item : (item, sectionID, rowID) => {
+      console.log('onPress__list_item',item, sectionID, rowID);
       dispatch(push(`/${PATH.PATH__product__detail}`));
 
     },
 
-    onPress__button__search : (value) => {
-      console.log('onPress__button__search',value);
-
-
-    },
 
   };
 }
