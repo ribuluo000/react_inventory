@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Flex, Icon, List, NavBar, Text, TextareaItem, View, WhiteSpace } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
-import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyTopView1 from "./components/MyTopView1";
 import MyTopView2 from "./components/MyTopView2";
@@ -86,19 +85,16 @@ export default class ViewIndex extends BaseComponent {
     if (!order_number) {
       return null;
     }
+
+    const {
+      intl,
+    } = this.props;
     return (
-      <FormattedMessage {...messages.order_number}>
-        {
-          msg => (
-            <MyTextTitleExtra
-              title={msg}
-              extra={order_number}
+      <MyTextTitleExtra
+        title={intl.formatMessage(messages.order_number)}
+        extra={order_number}
 
-            />
-          )
-        }
-
-      </FormattedMessage>
+      />
     );
   };
 
@@ -106,6 +102,10 @@ export default class ViewIndex extends BaseComponent {
     if (!dataList) {
       return null;
     }
+
+    const {
+      intl,
+    } = this.props;
     return (
       <List>
         {
@@ -113,86 +113,39 @@ export default class ViewIndex extends BaseComponent {
 
             let v = (
               <View
-                key={item.get('_id')} //todo need change
+                key={item.get('_id')}
                 justify="between" direction="column">
 
-                <FormattedMessage {...messages.product_name}>
-                  {
-                    msg => (
-                      <MyTextTitleExtra
-                        title={msg}
-                        extra={item.get('name_product')}
+                <MyTextTitleExtra
+                  title={intl.formatMessage(messages.product_name)}
+                  extra={item.get('name_product')}
 
-                      />
-                    )
-                  }
+                />
+                <MyTextTitleExtra
+                  title={intl.formatMessage(messages.batch_name)}
+                  extra={item.get('name_batch')}
 
-                </FormattedMessage>
+                />
+                <MyTextTitleExtra
+                  title={intl.formatMessage(messages.product_price)}
+                  extra={my_string_util.decimal2string_show(item.get('price'))}
 
-                <FormattedMessage {...messages.batch_name}>
-                  {
-                    msg => (
-                      <MyTextTitleExtra
-                        title={msg}
-                        extra={item.get('name_batch')}
+                />
+                <MyTextTitleExtra
+                  title={intl.formatMessage(messages.product_count)}
+                  extra={my_string_util.decimal2string_show(item.get('count'))}
 
-                      />
-                    )
-                  }
+                />
+                <MyTextTitleExtra
+                  title={intl.formatMessage(messages.product_total_price)}
+                  extra={my_string_util.decimal2string_show(item.get('total_price'))}
 
-                </FormattedMessage>
+                />
+                <MyTextTitleExtra
+                  title={intl.formatMessage(messages.remark)}
+                  extra={item.get('remark')}
 
-                <FormattedMessage {...messages.product_price}>
-                  {
-                    msg => (
-                      <MyTextTitleExtra
-                        title={msg}
-                        extra={my_string_util.decimal2string_show(item.get('price'))}
-
-                      />
-                    )
-                  }
-
-                </FormattedMessage>
-
-                <FormattedMessage {...messages.product_count}>
-                  {
-                    msg => (
-                      <MyTextTitleExtra
-                        title={msg}
-                        extra={my_string_util.decimal2string_show(item.get('count'))}
-
-                      />
-                    )
-                  }
-
-                </FormattedMessage>
-
-                <FormattedMessage {...messages.product_total_price}>
-                  {
-                    msg => (
-                      <MyTextTitleExtra
-                        title={msg}
-                        extra={my_string_util.decimal2string_show(item.get('total_price'))}
-
-                      />
-                    )
-                  }
-
-                </FormattedMessage>
-
-                <FormattedMessage {...messages.remark}>
-                  {
-                    msg => (
-                      <MyTextTitleExtra
-                        title={msg}
-                        extra={item.get('remark')}
-
-                      />
-                    )
-                  }
-
-                </FormattedMessage>
+                />
 
               </View>
             );
@@ -227,6 +180,8 @@ export default class ViewIndex extends BaseComponent {
   render() {
 
     const {
+      intl,
+
       user_name,
       onPress__button__back,
 
@@ -273,7 +228,7 @@ export default class ViewIndex extends BaseComponent {
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
+          <title>{intl.formatMessage(messages.bill_detail)}</title>
           <title></title>
         </Helmet>
         <NavBar
@@ -281,16 +236,10 @@ export default class ViewIndex extends BaseComponent {
           icon={<Icon type="left"/>}
           onLeftClick={onPress__button__back}
         >
-          <FormattedMessage {...messages.bill_detail}>
-            {
-              msg => (
-                <Text>
-                  {msg}
-                </Text>
-              )
-            }
 
-          </FormattedMessage>
+          <Text>
+            {intl.formatMessage(messages.bill_detail)}
+          </Text>
         </NavBar>
         <Flex
           direction="column"
@@ -303,18 +252,11 @@ export default class ViewIndex extends BaseComponent {
           </MyTopView2>
         </Flex>
 
-        <FormattedMessage {...messages.create_time}>
-          {
-            msg => (
-              <MyTextTitleExtra
-                title={msg}
-                extra={this.create_time}
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.create_time)}
+          extra={this.create_time}
 
-              />
-            )
-          }
-
-        </FormattedMessage>
+        />
 
         {this.get_view_by_data_and_type(TYPE_VIEW_ORDER_NUMBER)}
 
@@ -322,21 +264,14 @@ export default class ViewIndex extends BaseComponent {
         {this.get_view_by_data_and_type(TYPE_VIEW_PRODUCTS)}
 
         <WhiteSpace/>
-        <FormattedMessage {...messages.remark}>
-          {
-            msg => (
-              <TextareaItem
-                editable={false}
-                id="remark"
-                value={this.remark}
-                placeholder={msg}
-                rows={5}
-                count={100}
-              />
-            )
-          }
-
-        </FormattedMessage>
+        <TextareaItem
+          editable={false}
+          id="remark"
+          value={this.remark}
+          placeholder={intl.formatMessage(messages.remark)}
+          rows={5}
+          count={100}
+        />
 
       </View>
     );

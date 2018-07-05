@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Icon, List, NavBar, SearchBar, Text, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
-import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
 import MyListView from "components/MyListView";
@@ -162,9 +161,10 @@ export default class ViewIndex extends BaseComponent {
   render() {
 
     const {
+      intl,
+
       loading,
       user_name,
-      data,
 
       onPress__button__back,
 
@@ -184,59 +184,36 @@ export default class ViewIndex extends BaseComponent {
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title>账单</title>
+          <title>{intl.formatMessage(messages.product)}</title>
         </Helmet>
         <NavBar
           mode="dark"
           icon={<Icon type="left"/>}
           onLeftClick={onPress__button__back}
           rightContent={[
-
-            <FormattedMessage
+            <MyButton
               key={messages.add.id}
-              {...messages.add}>
-              {
-                msg => (
-                  <MyButton
-                    // type="primary"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__add}
-                  >
-                    {msg}
-                  </MyButton>
-                )
-              }
-
-            </FormattedMessage>,
+              // type="primary"
+              inline={false}
+              size="small"
+              onPress={onPress__button__add}
+            >
+              {intl.formatMessage(messages.add)}
+            </MyButton>,
 
           ]}
         >
-          <FormattedMessage {...messages.product}>
-            {
-              msg => (
-                <Text>
-                  {msg}
-                </Text>
-              )
-            }
+          <Text>
+            {intl.formatMessage(messages.product)}
+          </Text>
 
-          </FormattedMessage>
         </NavBar>
 
-        <FormattedMessage {...messages.please_input_key}>
-          {
-            msg => (
-              <SearchBar
-                placeholder={msg}
-                ref={ref => this.ref__SearchBar = ref}
-                onChange={onPress__button__search}
-              />
-            )
-          }
-
-        </FormattedMessage>
+        <SearchBar
+          placeholder={intl.formatMessage(messages.please_input_key)}
+          ref={ref => this.ref__SearchBar = ref}
+          onChange={onPress__button__search}
+        />
 
         <List>
 
@@ -282,7 +259,6 @@ ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
   user_name : PropTypes.string,
-  data : PropTypes.object,
 
 };
 

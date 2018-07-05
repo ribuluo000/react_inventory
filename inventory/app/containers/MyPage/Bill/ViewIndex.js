@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Icon, List, NavBar, SearchBar, Text, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
-import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton";
 import MyListView from "components/MyListView";
@@ -23,6 +22,7 @@ export default class ViewIndex extends BaseComponent {
     this.total_count = 0;
     this.page_size = PARAM.PARAM___page_size_value;
   };
+
   constructor(props) {
     super(props);
     this.initData();
@@ -38,8 +38,6 @@ export default class ViewIndex extends BaseComponent {
   componentDidMount() {
 
   }
-
-
 
   renderRow = (item, sectionID, rowID) => {
     // console.log('renderRow',item,sectionID,rowID);
@@ -141,19 +139,18 @@ export default class ViewIndex extends BaseComponent {
       let create_time = my_date_time_util.format2MM_DD__HH_mm(item.get('create_time'));
 
       let symbol = '';
-      if(type==1){
+      if (type == 1) {
         symbol = '-';
-      }else if(type==2){
+      } else if (type == 2) {
         symbol = '+';
       }
-
 
       let item_new = IMap({
         item : item,
         key : _id,
         title : name,
         subtitle : create_time,
-        extra : symbol+transaction_amount,
+        extra : symbol + transaction_amount,
       });
       dataLvNew = dataLvNew.push(item_new);
       // console.log(dataLvNew,'data_list.map.dataLvNew');
@@ -195,10 +192,11 @@ export default class ViewIndex extends BaseComponent {
 
   };
 
-
   render() {
 
     const {
+      intl,
+
       loading,
       user_name,
 
@@ -221,8 +219,7 @@ export default class ViewIndex extends BaseComponent {
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title></title>
+          <title>{intl.formatMessage(messages.bill)}</title>
         </Helmet>
         <NavBar
           mode="dark"
@@ -230,50 +227,30 @@ export default class ViewIndex extends BaseComponent {
           onLeftClick={onPress__button__back}
           rightContent={[
 
-            <FormattedMessage
+            <MyButton
               key={messages.add.id}
-              {...messages.add}>
-              {
-                msg => (
-                  <MyButton
-                    // type="primary"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__add}
-                  >
-                    {msg}
-                  </MyButton>
-                )
-              }
-
-            </FormattedMessage>,
+              // type="primary"
+              inline={false}
+              size="small"
+              onPress={onPress__button__add}
+            >
+              {intl.formatMessage(messages.add)}
+            </MyButton>,
 
           ]}
         >
-          <FormattedMessage {...messages.bill}>
-            {
-              msg => (
-                <Text>
-                  {msg}
-                </Text>
-              )
-            }
 
-          </FormattedMessage>
+          <Text>
+            {intl.formatMessage(messages.bill)}
+          </Text>
+
         </NavBar>
 
-        <FormattedMessage {...messages.please_input_key}>
-          {
-            msg => (
-              <SearchBar
-                placeholder={msg}
-                ref={ref => this.ref__SearchBar = ref}
-                onChange={onPress__button__search}
-              />
-            )
-          }
-
-        </FormattedMessage>
+        <SearchBar
+          placeholder={intl.formatMessage(messages.please_input_key)}
+          ref={ref => this.ref__SearchBar = ref}
+          onChange={onPress__button__search}
+        />
 
         <List>
 

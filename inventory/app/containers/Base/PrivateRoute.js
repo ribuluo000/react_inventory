@@ -3,6 +3,7 @@
  */
 import React from "react";
 import { connect } from "react-redux";
+import { injectIntl } from "react-intl";
 
 import { compose } from "redux";
 
@@ -20,6 +21,7 @@ import { router_to_login } from "router/actions";
 /* eslint-disable react/prefer-stateless-function */
 class PrivateRouteContainer extends React.PureComponent {
   render() {
+    console.log(this.props);
     const {
       is_authenticated,
       component : Component,
@@ -31,7 +33,7 @@ class PrivateRouteContainer extends React.PureComponent {
         {...props}
         render={props =>
           is_authenticated
-            ? <Component {...props} />
+            ? <Component {...props} intl={this.props.intl}/>
             : (
             <Redirect to={{
               pathname : '/login',
@@ -60,7 +62,7 @@ const withConnect = connect(
 
 export default compose(
   withConnect,
-)(PrivateRouteContainer);
+)(injectIntl(PrivateRouteContainer));
 
 
 

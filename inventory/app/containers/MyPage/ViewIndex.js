@@ -1,14 +1,7 @@
-/*
- * LoginPage
- *
- * This is the first thing users see of our App, at the '/' route
- */
-
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { FormattedMessage } from "react-intl";
-import messages from "./messages";
+import messages from "containers/App/messages";
 import { List, View, WhiteSpace } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
 const Item = List.Item;
@@ -29,7 +22,7 @@ export default class ViewIndex extends BaseComponent {
   render() {
 
     const {
-      // intl,
+      intl,
       user_name,
 
       onPress__button__base_info,
@@ -45,13 +38,11 @@ export default class ViewIndex extends BaseComponent {
       onPress__button__logout,
 
     } = this.props;
-    // console.log(intl);
 
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title>我的</title>
+          <title>{intl.formatMessage(messages.my)}</title>
         </Helmet>
 
         <List>
@@ -67,81 +58,46 @@ export default class ViewIndex extends BaseComponent {
         <List renderHeader={() => ''}>
           <WhiteSpace />
 
-          <FormattedMessage {...messages.button__base_info}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__base_info}
-                >
-                  {msg}
-                </Item>
-              )
-            }
+          <Item
+            arrow="horizontal"
+            extra={''}
+            onClick={onPress__button__base_info}
+          >
+            {intl.formatMessage(messages.base_info)}
+          </Item>
 
-          </FormattedMessage>
+          <Item
+            arrow="horizontal"
+            extra={''}
+            onClick={onPress__button__bill}
 
-          <FormattedMessage {...messages.button__bill}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__bill}
+          >
+            {intl.formatMessage(messages.bill)}
+          </Item>
 
-                >
-                  {msg}
-                </Item>
-              )
-            }
+          <Item
+            arrow="horizontal"
+            extra={''}
+            onClick={onPress__button__provider}
+          >
+            {intl.formatMessage(messages.provider)}
+          </Item>
 
-          </FormattedMessage>
+          <Item
+            arrow="horizontal"
+            extra={''}
+            onClick={onPress__button__customer}
+          >
+            {intl.formatMessage(messages.customer)}
+          </Item>
 
-          <FormattedMessage {...messages.button__provider}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__provider}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.button__customer}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__customer}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.button__product}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__product}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
+          <Item
+            arrow="horizontal"
+            extra={''}
+            onClick={onPress__button__product}
+          >
+            {intl.formatMessage(messages.product)}
+          </Item>
 
         </List>
         < WhiteSpace/>
@@ -151,20 +107,14 @@ export default class ViewIndex extends BaseComponent {
         < WhiteSpace/>
 
         <List>
-          <FormattedMessage {...messages.button__logout}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__logout}
-                >
-                  {msg}
-                </Item>
-              )
-            }
 
-          </FormattedMessage>
+          <Item
+            arrow="horizontal"
+            extra={''}
+            onClick={onPress__button__logout}
+          >
+            {intl.formatMessage(messages.logout)}
+          </Item>
 
         </List>
 
@@ -176,11 +126,7 @@ export default class ViewIndex extends BaseComponent {
 ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
-  repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onPress_login : PropTypes.func,
   user_name : PropTypes.string,
-  onChange_user_name : PropTypes.func,
-  onChange_password : PropTypes.func,
 
 };
 

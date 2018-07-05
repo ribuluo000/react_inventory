@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Icon, InputItem, List, NavBar, Text, TextareaItem, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
-import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
 const Item = List.Item;
@@ -99,6 +98,8 @@ export default class ViewIndex extends BaseComponent {
   render() {
 
     const {
+      intl,
+
       user_name,
 
       onPress__button__back,
@@ -113,8 +114,7 @@ export default class ViewIndex extends BaseComponent {
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title></title>
+          <title>{intl.formatMessage(messages.add_provider)}</title>
         </Helmet>
         <NavBar
           mode="dark"
@@ -122,82 +122,44 @@ export default class ViewIndex extends BaseComponent {
           onLeftClick={onPress__button__back}
           rightContent={[
 
-            <FormattedMessage
+            <MyButton
               key={messages.done.id}
-              {...messages.done}>
-              {
-                msg => (
-                  <MyButton
-                    // type="primary"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__done}
-                  >
-                    {msg}
-                  </MyButton>
-                )
-              }
-
-            </FormattedMessage>,
+              // type="primary"
+              inline={false}
+              size="small"
+              onPress={onPress__button__done}
+            >
+              {intl.formatMessage(messages.done)}
+            </MyButton>,
 
           ]}
         >
-          <FormattedMessage {...messages.add_provider}>
-            {
-              msg => (
-                <Text>
-                  {msg}
-                </Text>
-              )
-            }
-
-          </FormattedMessage>
+          <Text>
+            {intl.formatMessage(messages.add_provider)}
+          </Text>
         </NavBar>
 
         <List>
 
-          <FormattedMessage {...messages.name}>
-            {
-              msg => (
-                <InputItem
-                  id="name"
-                  type="text"
-                  onChange={onChange_name}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.telephone}>
-            {
-              msg => (
-                <InputItem
-                  id="telephone"
-                  type="number"
-                  onChange={onChange_telephone}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.remark}>
-            {
-              msg => (
-                <TextareaItem
-                  id="remark"
-                  onChange={onChange_remark}
-                  placeholder={msg}
-                  rows={5}
-                  count={100}
-                />
-              )
-            }
-
-          </FormattedMessage>
+          <InputItem
+            id="name"
+            type="text"
+            onChange={onChange_name}
+            placeholder={intl.formatMessage(messages.name)}
+          />
+          <InputItem
+            id="telephone"
+            type="number"
+            onChange={onChange_telephone}
+            placeholder={intl.formatMessage(messages.telephone)}
+          />
+          <TextareaItem
+            id="remark"
+            onChange={onChange_remark}
+            placeholder={intl.formatMessage(messages.remark)}
+            rows={5}
+            count={100}
+          />
 
         </List>
       </View>

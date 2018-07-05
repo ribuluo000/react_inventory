@@ -62,35 +62,35 @@ export default function App() {
       </Helmet>
       <Header />
       <Switch>
-        <Route exact path="/" component={LoginPage}/>
-        <Route path={`/${PATH.PATH__login}`} component={LoginPage}/>
-        <Route path={`/${PATH.PATH__my}`} component={MyPage}/>
+        <PublicRoute exact path="/" component={MyBillPage}/>
+        <PublicRoute path={`/${PATH.PATH__login}`} component={LoginPage}/>
+        <PublicRoute path={`/${PATH.PATH__my}`} component={MyPage}/>
         <PrivateRoute path={`/${PATH.PATH__home}`} component={HomePage}/>
-        <Route path="/features" component={FeaturePage}/>
-        <Route path={`/${PATH.PATH__base_info}`} component={FeaturePage}/>
-        <Route path={`/${PATH.PATH__bill}`} component={MyBillPage}/>
+        <PublicRoute path="/features" component={FeaturePage}/>
+        <PublicRoute path={`/${PATH.PATH__base_info}`} component={FeaturePage}/>
+        <PublicRoute path={`/${PATH.PATH__bill}`} component={MyBillPage}/>
         <PublicRoute path={`/${PATH.PATH__bill__add}`} component={BillAddPage}/>
-        <Route path={`/${PATH.PATH__bill__add__add_product}`} component={BillAddAddProductPage}/>
-        <Route path={`/${PATH.PATH__bill__detail}`} component={BillDetailPage}/>
+        <PublicRoute path={`/${PATH.PATH__bill__add__add_product}`} component={BillAddAddProductPage}/>
+        <PublicRoute path={`/${PATH.PATH__bill__detail}`} component={BillDetailPage}/>
 
-        <Route path={`/${PATH.PATH__provider}`} component={MyProviderPage}/>
-        <Route path={`/${PATH.PATH__provider__add}`} component={ProviderAddPage}/>
-        <Route path={`/${PATH.PATH__provider__detail}`} component={ProviderDetailPage}/>
+        <PublicRoute path={`/${PATH.PATH__provider}`} component={MyProviderPage}/>
+        <PublicRoute path={`/${PATH.PATH__provider__add}`} component={ProviderAddPage}/>
+        <PublicRoute path={`/${PATH.PATH__provider__detail}`} component={ProviderDetailPage}/>
 
-        <Route path={`/${PATH.PATH__customer}`} component={MyCustomerPage}/>
-        <Route path={`/${PATH.PATH__customer__add}`} component={CustomerAddPage}/>
-        <Route path={`/${PATH.PATH__customer__detail}`} component={CustomerDetailPage}/>
+        <PublicRoute path={`/${PATH.PATH__customer}`} component={MyCustomerPage}/>
+        <PublicRoute path={`/${PATH.PATH__customer__add}`} component={CustomerAddPage}/>
+        <PublicRoute path={`/${PATH.PATH__customer__detail}`} component={CustomerDetailPage}/>
 
-        <Route path={`/${PATH.PATH__product}`} component={MyProductPage}/>
-        <Route path={`/${PATH.PATH__product__add}`} component={ProductAddPage}/>
-        <Route path={`/${PATH.PATH__product__detail}`} component={ProductDetailPage}/>
+        <PublicRoute path={`/${PATH.PATH__product}`} component={MyProductPage}/>
+        <PublicRoute path={`/${PATH.PATH__product__add}`} component={ProductAddPage}/>
+        <PublicRoute path={`/${PATH.PATH__product__detail}`} component={ProductDetailPage}/>
 
-        <Route path={`/${PATH.PATH__product__batch}`} component={MyProductBatchPage}/>
-        <Route path={`/${PATH.PATH__product__batch__add}`} component={ProductBatchAddPage}/>
-        <Route path={`/${PATH.PATH__product__batch__detail}`} component={ProductBatchDetailPage}/>
+        <PublicRoute path={`/${PATH.PATH__product__batch}`} component={MyProductBatchPage}/>
+        <PublicRoute path={`/${PATH.PATH__product__batch__add}`} component={ProductBatchAddPage}/>
+        <PublicRoute path={`/${PATH.PATH__product__batch__detail}`} component={ProductBatchDetailPage}/>
 
 
-        <Route path="" component={NotFoundPage}/>
+        <PublicRoute path="" component={NotFoundPage}/>
       </Switch>
       <Footer />
     </AppWrapper>

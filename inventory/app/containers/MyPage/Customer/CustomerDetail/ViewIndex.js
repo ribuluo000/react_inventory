@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Icon, InputItem, List, NavBar, Text, TextareaItem, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
-import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
 const Item = List.Item;
@@ -126,6 +125,8 @@ export default class ViewIndex extends BaseComponent {
   render() {
 
     const {
+      intl,
+
       user_name,
       onPress__button__back,
 
@@ -145,51 +146,37 @@ export default class ViewIndex extends BaseComponent {
     if (editable) {
 
       right_button = (
-        <FormattedMessage
+        <MyButton
           key={messages.done.id}
-          {...messages.done}>
-          {
-            msg => (
-              <MyButton
-                // type="primary"
-                inline={false}
-                size="small"
-                onPress={onPress__button__done}
-              >
-                {msg}
-              </MyButton>
-            )
-          }
+          // type="primary"
+          inline={false}
+          size="small"
+          onPress={onPress__button__done}
+        >
+          {intl.formatMessage(messages.done)}
+        </MyButton>
 
-        </FormattedMessage>
       );
     } else {
       right_button = (
-        <FormattedMessage
-          key={messages.edit.id}
-          {...messages.edit}>
-          {
-            msg => (
-              <MyButton
-                // type="primary"
-                inline={false}
-                size="small"
-                onPress={onPress__button__edit}
-              >
-                {msg}
-              </MyButton>
-            )
-          }
 
-        </FormattedMessage>
+        <MyButton
+          key={messages.edit.id}
+          // type="primary"
+          inline={false}
+          size="small"
+          onPress={onPress__button__edit}
+        >
+          {intl.formatMessage(messages.edit)}
+        </MyButton>
+
       );
     }
 
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title></title>
+          <title>{intl.formatMessage(messages.customer_detail)}</title>
         </Helmet>
         <NavBar
           mode="dark"
@@ -201,68 +188,40 @@ export default class ViewIndex extends BaseComponent {
 
           ]}
         >
-          <FormattedMessage {...messages.customer_detail}>
-            {
-              msg => (
-                <Text>
-                  {msg}
-                </Text>
-              )
-            }
 
-          </FormattedMessage>
+          <Text>
+            {intl.formatMessage(messages.customer_detail)}
+          </Text>
+
         </NavBar>
 
         <List>
 
-          <FormattedMessage {...messages.name}>
-            {
-              msg => (
-                <InputItem
-                  editable={editable}
-                  defaultValue={this.name}
-                  id="name"
-                  type="text"
-                  onChange={onChange_name}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.telephone}>
-            {
-              msg => (
-                <InputItem
-                  editable={editable}
-                  defaultValue={this.telephone}
-                  id="telephone"
-                  type="text"
-                  onChange={onChange_telephone}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.remark}>
-            {
-              msg => (
-                <TextareaItem
-                  editable={editable}
-                  defaultValue={this.remark}
-                  id="remark"
-                  onChange={onChange_remark}
-                  placeholder={msg}
-                  rows={5}
-                  count={100}
-                />
-              )
-            }
-
-          </FormattedMessage>
+          <InputItem
+            editable={editable}
+            defaultValue={this.name}
+            id="name"
+            type="text"
+            onChange={onChange_name}
+            placeholder={intl.formatMessage(messages.name)}
+          />
+          <InputItem
+            editable={editable}
+            defaultValue={this.telephone}
+            id="telephone"
+            type="text"
+            onChange={onChange_telephone}
+            placeholder={intl.formatMessage(messages.telephone)}
+          />
+          <TextareaItem
+            editable={editable}
+            defaultValue={this.remark}
+            id="remark"
+            onChange={onChange_remark}
+            placeholder={intl.formatMessage(messages.remark)}
+            rows={5}
+            count={100}
+          />
 
         </List>
       </View>

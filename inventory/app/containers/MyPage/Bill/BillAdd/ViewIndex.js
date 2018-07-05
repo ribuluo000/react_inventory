@@ -26,6 +26,8 @@ export default class ViewIndex extends BaseComponent {
   }
 
   render() {
+    console.log(this);
+    console.log(messages);
 
     const {
       user_name,
@@ -116,9 +118,9 @@ export default class ViewIndex extends BaseComponent {
       ];
     }
 
-    let please_choose = intl.formatMessage({id: 'please_choose'});
-    let receive_money = intl.formatMessage({id: 'receive_money'});
-    let Pay = intl.formatMessage({id: 'Pay'});
+    let please_choose = intl.formatMessage(messages.please_choose);
+    let receive_money = intl.formatMessage(messages.receive_money);
+    let Pay = intl.formatMessage(messages.Pay);
 
     let bill_type_dataList = [
       {
@@ -169,7 +171,7 @@ export default class ViewIndex extends BaseComponent {
 
           ]}
         >
-          <FormattedMessage {...messages.add_customer}>
+          <FormattedMessage {...messages.add_bill}>
             {
               msg => (
                 <Text>
