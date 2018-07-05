@@ -30,6 +30,7 @@ export default class ViewIndex extends BaseComponent {
     const {
       user_name,
       data,
+      intl,
 
       onChange_name,
       onChange_telephone,
@@ -115,17 +116,26 @@ export default class ViewIndex extends BaseComponent {
       ];
     }
 
-    let bill_type_dataList = [
+    let please_choose = intl.formatMessage({id: 'please_choose'});
+    let receive_money = intl.formatMessage({id: 'receive_money'});
+    let Pay = intl.formatMessage({id: 'Pay'});
 
+    let bill_type_dataList = [
       {
-        label : '收钱',
+        label : please_choose,
+        value : '',
+      },
+      {
+        label : receive_money,
         value : '2',
       },
       {
-        label : '付钱',
+        label : Pay,
         value : '1',
       },
     ];
+
+    console.log('bill_type_dataList',bill_type_dataList);
 
     return (
       <View>

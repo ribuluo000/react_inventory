@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { Route, Switch } from "react-router-dom";
 
+import PublicRoute from "containers/Base/PublicRoute";
 import PrivateRoute from "containers/Base/PrivateRoute";
 import LoginPage from "containers/LoginPage/Loadable";
 import MyPage from "containers/MyPage/Loadable";
@@ -68,7 +69,7 @@ export default function App() {
         <Route path="/features" component={FeaturePage}/>
         <Route path={`/${PATH.PATH__base_info}`} component={FeaturePage}/>
         <Route path={`/${PATH.PATH__bill}`} component={MyBillPage}/>
-        <Route path={`/${PATH.PATH__bill__add}`} component={BillAddPage}/>
+        <PublicRoute path={`/${PATH.PATH__bill__add}`} component={BillAddPage}/>
         <Route path={`/${PATH.PATH__bill__add__add_product}`} component={BillAddAddProductPage}/>
         <Route path={`/${PATH.PATH__bill__detail}`} component={BillDetailPage}/>
 
