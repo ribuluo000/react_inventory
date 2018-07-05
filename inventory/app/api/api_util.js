@@ -70,6 +70,11 @@ export default {
     return await request_common(url, data, callback);
   },
 
+  bill_get_list : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___bill__get_list;
+    return await request_common(url, data, callback);
+  },
+
   provider_add : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___provider__add;
     return await request_common(url, data, callback);
@@ -92,6 +97,11 @@ export default {
     return await request_common(url, data, callback);
   },
 
+  bill_add : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___bill__add;
+    return await request_common(url, data, callback);
+  },
+
   provider_update_detail : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___provider__update_detail;
     return await request_common(url, data, callback);
@@ -111,6 +121,11 @@ export default {
 
   batch_update_detail : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___product__batch__update_detail;
+    return await request_common(url, data, callback);
+  },
+
+  bill_detail : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___bill__detail;
     return await request_common(url, data, callback);
   },
 

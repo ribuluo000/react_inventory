@@ -185,7 +185,7 @@ export default class ViewIndex extends BaseComponent {
       <View>
         <Helmet>
           {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title>账单</title>
+          <title></title>
         </Helmet>
         <NavBar
           mode="dark"

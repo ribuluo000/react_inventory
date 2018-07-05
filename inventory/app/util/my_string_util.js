@@ -17,6 +17,11 @@ let obj = {
     return false;
   },
 
+  decimal2string_show:(decimal)=>{
+    return decimal.get('$numberDecimal').toString()
+  },
+
+
 
 };
 
