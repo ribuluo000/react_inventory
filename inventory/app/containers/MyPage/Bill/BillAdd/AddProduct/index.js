@@ -10,8 +10,11 @@ import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, m
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
-import { push } from "react-router-redux";
+import { goBack, push } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
+import { add_product } from "../actions";
+import { makeSelect__batch, makeSelect__product } from "./selectors";
+import { reset_bill_add_add_product } from "./actions";
 
 /* eslint-disable react/prefer-stateless-function */
 export class MyPage extends BaseComponent {
@@ -37,35 +40,45 @@ MyPage.propTypes = {
 export function mapDispatchToProps(dispatch) {
   return {
 
-    onPress__button__base_info : () => {
-      dispatch(push('/base_info'));
+    onPress__button__back : () => {
+      console.log('onPress__button__back');
+      dispatch(goBack());
+      dispatch(reset_bill_add_add_product());
+    },
+
+    reset_bill_add : () => {
+      console.log('reset_bill_add');
+      dispatch(reset_bill_add_add_product());
 
     },
 
-    onPress__button__bill : () => {
-      dispatch(push('/bill'));
-
-    },
-
-    onPress__button__provider : () => {
-      dispatch(push('/provider'));
-
-    },
-
-    onPress__button__customer : () => {
-      dispatch(push('/customer'));
-
+    onPress__button__done : (product) => {
+      console.log('onPress__button__done');
+      dispatch(add_product(product));
+      dispatch(goBack());
+      dispatch(reset_bill_add_add_product());
     },
 
     onPress__button__product : () => {
-      dispatch(push('/product'));
+      console.log('onPress__button__product');
+
+      let path = {
+        pathname:`/${PATH.PATH__product__select}`,
+      };
+      dispatch(push(path));
 
     },
 
-    onPress__button__logout : () => {
-      dispatch(push('/login'));
+    onPress__button__batch : () => {
+      console.log('onPress__button__batch');
+
+      let path = {
+        pathname:`/${PATH.PATH__product__batch__select}`,
+      };
+      dispatch(push(path));
 
     },
+
 
   };
 }
@@ -75,6 +88,8 @@ const mapStateToProps = createStructuredSelector({
   user_name : makeSelect__user_name(),
   loading : makeSelectLoading(),
   error : makeSelectError(),
+  product : makeSelect__product(),
+  batch : makeSelect__batch(),
 });
 
 const withConnect = connect(
@@ -82,8 +97,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key : 'my', reducer });
-const withSaga = injectSaga({ key : 'my', saga });
+const withReducer = injectReducer({ key : PATH.PATH__bill__add__add_product, reducer });
+const withSaga = injectSaga({ key : PATH.PATH__bill__add__add_product, saga });
 
 export default compose(
   withReducer,

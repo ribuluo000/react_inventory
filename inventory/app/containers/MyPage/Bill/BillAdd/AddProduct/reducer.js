@@ -1,5 +1,5 @@
 /*
- * loginReducer
+ * 
  *
  * The reducer takes care of our data. Using actions, we can change our
  * application state.
@@ -11,32 +11,52 @@
  */
 import { fromJS } from "immutable";
 
-import {
-  /********************************************************* network start ******************************************************************/
-
-  /********************************************************** network end ******************************************************************/
-
-
-} from "./constants";
+import { CHANGE_SELECTED_BATCH, CHANGE_SELECTED_PRODUCT, RESET_BILL_ADD_ADD_PRODUCT } from "./constants";
 
 // The initial state of the App
 export const initialState = fromJS({
 
-
-  /****************************** network start **************************************/
-
-
-  /****************************** network end **************************************/
-
+  "product" : {
+    "object_id" : "",
+    "name" : ""
+  },
+  "batch" : {
+    "object_id" : "",
+    "name" : ""
+  },
 });
 
 function myReducer(state = initialState, action) {
   switch (action.type) {
+    case RESET_BILL_ADD_ADD_PRODUCT:
+      state = initialState;
 
-    /****************************** network start **************************************/
-
-    /****************************** network end **************************************/
-
+      return state;
+      break;
+    case CHANGE_SELECTED_PRODUCT: {
+      let payload = action.payload;
+      let name = payload.getIn([ 'item', 'name' ]);
+      let _id = payload.getIn([ 'item', '_id' ]);
+      let product = IMap({
+        name,
+        object_id : _id,
+      });
+      return state
+        .set('product', product);
+    }
+      break;
+    case CHANGE_SELECTED_BATCH: {
+      let payload = action.payload;
+      let name = payload.getIn([ 'item', 'name' ]);
+      let _id = payload.getIn([ 'item', '_id' ]);
+      let batch = IMap({
+        name,
+        object_id : _id,
+      });
+      return state
+        .set('batch', batch);
+    }
+      break;
     default:
       return state;
   }

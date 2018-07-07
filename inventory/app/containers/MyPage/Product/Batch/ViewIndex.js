@@ -36,10 +36,25 @@ export default class ViewIndex extends BaseComponent {
     };
   }
 
+  onPress__list_item = (item, sectionID, rowID)=>{
+
+    let pathname = this.props.location.pathname;
+    let {
+      onPress__list_item_select,
+      onPress__list_item,
+    } = this.props;
+
+    if(pathname === `/${PATH.PATH__product__batch__select}`){
+      onPress__list_item_select && onPress__list_item_select(item, sectionID, rowID)
+    }else if(pathname === `/${PATH.PATH__product__batch}`){
+      onPress__list_item && onPress__list_item(item, sectionID, rowID)
+    }
+  };
+
   renderRow = (item, sectionID, rowID) => {
     // console.log('renderRow',item,sectionID,rowID);
 
-    let { onPress__list_item } = this.props;
+    let { onPress__list_item } = this;
 
     // return <Text>aaa</Text>;
 

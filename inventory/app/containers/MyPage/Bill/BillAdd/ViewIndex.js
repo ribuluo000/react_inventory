@@ -11,6 +11,9 @@ import BaseComponent from "containers/Base/BaseComponent";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
 import MyTextTitleExtra from "components/Text/MyTextTitleExtra";
+import MyListView from "../../../../components/MyListView/index";
+import my_encryption_util from "util/my_encryption_util";
+import my_decimal_util from "../../../../util/my_decimal_util";
 const Item = List.Item;
 const Brief = Item.Brief;
 /* eslint-disable react/prefer-stateless-function */
@@ -115,13 +118,100 @@ export default class ViewIndex extends BaseComponent {
     this.input_value_remark = value;
   };
 
+
+  onPress__button__product_del = (item, sectionID, rowID)=>{
+    console.log('onPress__button__product_del',item,sectionID,rowID);
+    this.props.onPress__button__remove_product(item, sectionID, rowID);
+
+  };
+
+  get_total_price = ()=>{
+    let total_price = my_decimal_util.get_decimal_from_string(0);
+    let {
+      products,
+    } = this.props;
+    products.map((item,i)=>{
+      total_price = my_decimal_util.get_decimal_x_add_y(total_price,item.get('total_price'));
+    });
+    return total_price;
+  };
+
+  renderRow = (item, sectionID, rowID) => {
+    console.log('renderRow',item,sectionID,rowID);
+
+    let { intl } = this.props;
+
+    // return <Text>aaa</Text>;
+
+    let v = (
+      <View
+        key={item.get('key')} //todo need change
+        justify="between" direction="column">
+
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_name)}
+          extra={item.get('name_product')}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.batch_name)}
+          extra={item.get('name_batch')}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_price)}
+          extra={'' + my_decimal_util.decimal2string_show(item.get('price'))}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_count)}
+          extra={'' + my_decimal_util.decimal2string_show(item.get('count'))}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_total_price)}
+          extra={'' + my_decimal_util.decimal2string_show(item.get('total_price'))}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.remark)}
+          extra={item.get('remark')}
+
+        />
+
+      </View>
+    );
+    let vv = (
+      <View
+        key={item.get('key')} //todo need change
+
+      >
+        {v}
+        <MyButton
+          key={messages.product_del.id}
+          type="warning"
+          inline={false}
+          size="small"
+          onPress={()=>{
+            this.onPress__button__product_del(item, sectionID, rowID);
+          }}
+        >
+          {intl.formatMessage(messages.product_del)}
+        </MyButton>
+
+      </View>
+    );
+
+    return vv;
+  };
+
+
   render() {
     console.log(this);
     console.log(messages);
 
     const {
       user_name,
-      data,
       intl,
 
       provider,
@@ -129,85 +219,16 @@ export default class ViewIndex extends BaseComponent {
       products,
 
       onPress__button__back,
-
-      onPress__button__add,
-
       onPress__button__done,
-
-      onPress__button__edit,
-
-      onPress__list_item,
-
-      onPress__button__search,
       onPress__button__add_product,
-      onPress__button__del_product,
 
     } = this.props;
-
-    let dataList = [];
-    let data2 = {
-      "id" : "id",
-      "type" : "1",
-      "remark" : "remark",
-      "order_number" : "1111111111",
-      "transaction_amount" : 100,
-      "create_time" : 1111111111111,
-      "provider" : {
-        "object_id" : "object_id",
-        "name" : "name"
-      },
-      "customer" : {
-        "object_id" : "object_id",
-        "name" : "name"
-      },
-      "products" : [
-        {
-          "object_id_product" : "object_id_product",
-          "object_id_batch" : "object_id_batch",
-          "name_product" : "name_product",
-          "name_batch" : "name_batch",
-          "remark" : "remark",
-          "price" : 10,
-          "count" : 10,
-          "total_price" : 100
-        }
-      ]
-    };
-
-    if (data2 && data2.products) {
-      dataList = data2.products;
-    } else {
-      dataList = [
-        {
-          key : 'key',
-          "object_id_product" : "object_id_product",
-          "object_id_batch" : "object_id_batch",
-          "name_product" : "name_product",
-          "name_batch" : "name_batch",
-          "remark" : "remark",
-          "price" : 10,
-          "count" : 10,
-          "total_price" : 100
-        },
-        {
-          key : 'key2',
-          "object_id_product" : "object_id_product",
-          "object_id_batch" : "object_id_batch",
-          "name_product" : "name_product",
-          "name_batch" : "name_batch",
-          "remark" : "remark",
-          "price" : 10,
-          "count" : 10,
-          "total_price" : 100
-        },
-      ];
-    }
 
     let please_choose = intl.formatMessage(messages.please_choose);
     let receive_money = intl.formatMessage(messages.receive_money);
     let Pay = intl.formatMessage(messages.Pay);
 
-    let bill_type_dataList = [
+    const bill_type_dataList = [
       {
         label : please_choose,
         value : '',
@@ -232,8 +253,11 @@ export default class ViewIndex extends BaseComponent {
     const onPress__button__customer = this.onPress__button__customer;
     const onChange_remark = this.onChange_remark;
 
-    let provider_name = provider.get('name');
+    const renderRow = this.renderRow;
+
+    const provider_name = provider.get('name');
     let customer_name = customer.get('name');
+    let total_price = my_decimal_util.decimal2string_show(this.get_total_price());
 
     return (
       <View>
@@ -309,77 +333,25 @@ export default class ViewIndex extends BaseComponent {
 
         <List>
           <Item
-            extra={'100'}
+            extra={total_price}
           >
             {intl.formatMessage(messages.total_price)}
           </Item>
           <WhiteSpace/>
           <WhiteSpace/>
 
-          {
-            dataList.map((item, i) => {
+          <MyListView
+            ref={(ref) => {
+              this.ref_lv = ref;
+            }}
+            dataLv={products}
+            hasMore={false}
+            onEndReached={()=>{}}
+            onRefresh={()=>{}}
+            renderRow={renderRow}
+          />
 
-              let v = (
-                <View
-                  key={item.name_product} //todo need change
-                  justify="between" direction="column">
 
-                  <MyTextTitleExtra
-                    title={intl.formatMessage(messages.product_name)}
-                    extra={item.name_product}
-
-                  />
-                  <MyTextTitleExtra
-                    title={intl.formatMessage(messages.batch_name)}
-                    extra={item.name_batch}
-
-                  />
-                  <MyTextTitleExtra
-                    title={intl.formatMessage(messages.product_price)}
-                    extra={'' + item.price}
-
-                  />
-                  <MyTextTitleExtra
-                    title={intl.formatMessage(messages.product_count)}
-                    extra={'' + item.count}
-
-                  />
-                  <MyTextTitleExtra
-                    title={intl.formatMessage(messages.product_total_price)}
-                    extra={'' + item.total_price}
-
-                  />
-                  <MyTextTitleExtra
-                    title={intl.formatMessage(messages.remark)}
-                    extra={item.remark}
-
-                  />
-
-                </View>
-              );
-
-              let vv = (
-                <View
-                  key={item.name_product} //todo need change
-
-                >
-                  {v}
-                  <MyButton
-                    key={messages.add.id}
-                    type="warning"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__add}
-                  >
-                    {intl.formatMessage(messages.product_del)}
-                  </MyButton>
-
-                </View>
-              );
-
-              return vv;
-            })
-          }
         </List>
 
         <WhiteSpace/>

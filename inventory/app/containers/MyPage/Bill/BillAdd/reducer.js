@@ -11,15 +11,7 @@
  */
 import { fromJS } from "immutable";
 
-import {
-
-  RESET_Bill_Add,
-  CHANGE_SELECTED_PROVIDER,
-  CHANGE_SELECTED_CUSTOMER,
-  ADD_PRODUCT,
-  REMOVE_PRODUCT,
-
-} from "./constants";
+import { ADD_PRODUCT, CHANGE_SELECTED_CUSTOMER, CHANGE_SELECTED_PROVIDER, REMOVE_PRODUCT, RESET_Bill_Add } from "./constants";
 
 // The initial state of the App
 export const initialState = fromJS({
@@ -60,9 +52,7 @@ export const initialState = fromJS({
 }]
 
    */
-  "products" : [
-
-  ]
+  "products" : []
 });
 
 function myReducer(state = initialState, action) {
@@ -72,37 +62,51 @@ function myReducer(state = initialState, action) {
 
       return state;
       break;
-    case CHANGE_SELECTED_PROVIDER:
-    {
+    case CHANGE_SELECTED_PROVIDER: {
       let payload = action.payload;
-      let name = payload.getIn(['item','name']);
-      let _id = payload.getIn(['item','_id']);
+      let name = payload.getIn([ 'item', 'name' ]);
+      let _id = payload.getIn([ 'item', '_id' ]);
       let provider = IMap({
         name,
-        object_id:_id,
+        object_id : _id,
       });
       return state
         .set('provider', provider);
     }
       break;
-    case CHANGE_SELECTED_CUSTOMER:
-    {
+    case CHANGE_SELECTED_CUSTOMER: {
       let payload = action.payload;
-      let name = payload.getIn(['item','name']);
-      let _id = payload.getIn(['item','_id']);
+      let name = payload.getIn([ 'item', 'name' ]);
+      let _id = payload.getIn([ 'item', '_id' ]);
       let customer = IMap({
         name,
-        object_id:_id,
+        object_id : _id,
       });
       return state
         .set('customer', customer);
     }
       break;
-    case ADD_PRODUCT:
+    case ADD_PRODUCT: {
       let payload = action.payload;
+      let products = state.get('products');
 
+      products = products.push(payload);
+      state = state
+        .set('products', products);
+    }
+
+      return state;
       break;
-    case REMOVE_PRODUCT:
+    case REMOVE_PRODUCT: {
+      let payload = action.payload;
+      let rowID = payload.get('rowID');
+      let products = state.get('products');
+      products = products.delete(rowID);
+      state = state
+        .set('products', products);
+    }
+
+      return state;
       break;
 
     default:

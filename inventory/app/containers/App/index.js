@@ -83,10 +83,12 @@ export default function App() {
         <PublicRoute path={`/${PATH.PATH__customer__add}`} component={CustomerAddPage}/>
         <PublicRoute path={`/${PATH.PATH__customer__detail}`} component={CustomerDetailPage}/>
 
+        <PublicRoute path={`/${PATH.PATH__product__select}`} component={MyProductPage}/>
         <PublicRoute path={`/${PATH.PATH__product}`} component={MyProductPage}/>
         <PublicRoute path={`/${PATH.PATH__product__add}`} component={ProductAddPage}/>
         <PublicRoute path={`/${PATH.PATH__product__detail}`} component={ProductDetailPage}/>
 
+        <PublicRoute path={`/${PATH.PATH__product__batch__select}`} component={MyProductBatchPage}/>
         <PublicRoute path={`/${PATH.PATH__product__batch}`} component={MyProductBatchPage}/>
         <PublicRoute path={`/${PATH.PATH__product__batch__add}`} component={ProductBatchAddPage}/>
         <PublicRoute path={`/${PATH.PATH__product__batch__detail}`} component={ProductBatchDetailPage}/>

@@ -6,214 +6,284 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { Icon, List, NavBar, SearchBar, Text, View, InputItem, TextareaItem } from "antd-mobile";
+import { Icon, InputItem, List, NavBar, Text, TextareaItem, View } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
-import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
+import my_decimal_util from "util/my_decimal_util";
+import my_encryption_util from "util/my_encryption_util";
 const Item = List.Item;
 const Brief = Item.Brief;
+
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewIndex extends BaseComponent {
 
+  initData = () => {
+    const {
+      product,
+      batch,
+    } = this.props;
+
+    this.input_value_price = my_decimal_util.get_decimal_from_string(0);
+    this.input_value_count = my_decimal_util.get_decimal_from_string(0);
+    this.input_value_total_price = my_decimal_util.get_decimal_from_string(0);
+    this.input_value_remark = '';
+  };
+
   constructor(props) {
     super(props);
+    this.initData();
+
+    this.state = {
+      price : '',
+      count : '',
+      total_price : '',
+      setState : (state) => {
+        this.setState(state);
+      },
+    };
+
   }
 
   componentDidMount() {
 
   }
 
+  set_total_price = () => {
+    if (this.input_value_price && this.input_value_count) {
+      this.input_value_total_price = my_decimal_util.get_decimal_x_mul_y(this.input_value_price, this.input_value_count);
+    } else {
+      this.input_value_total_price = my_decimal_util.get_decimal_from_string(0);
+    }
+    this.state.setState({
+      total_price : my_decimal_util.decimal2string_show(this.input_value_total_price)
+    });
+  };
+
+  onChange_product = (value) => {
+    console.log('onChange_product', value);
+  };
+
+  onChange_batch = (value) => {
+    console.log('onChange_batch', value);
+  };
+
+  onChange_product_price = (value) => {
+    console.log('onChange_product_price', value);
+    if (value === '') {
+      this.input_value_price = my_decimal_util.get_decimal_from_string(0);
+      this.set_total_price();
+      this.state.setState({
+        price : value
+      });
+      return;
+    }
+    if (my_decimal_util.isNaN(value)) {
+      return;
+    }
+    this.input_value_price = my_decimal_util.get_decimal_from_string(value);
+    this.set_total_price();
+
+    this.state.setState({
+      price : value
+    });
+
+  };
+  onChange_product_count = (value) => {
+    console.log('onChange_product_count', value);
+    if (value === '') {
+      this.input_value_count = my_decimal_util.get_decimal_from_string(0);
+      this.set_total_price();
+      this.state.setState({
+        count : value
+      });
+      return;
+    }
+    if (my_decimal_util.isNaN(value)) {
+      return;
+    }
+    this.input_value_count = my_decimal_util.get_decimal_from_string(value);
+    this.set_total_price();
+
+    this.state.setState({
+      count : value
+    });
+
+  };
+  onChange_remark = (value) => {
+    console.log('onChange_remark', value);
+    this.input_value_remark = value;
+  };
+
+  onPress__button__product = () => {
+
+    this.props.onPress__button__product();
+  };
+  onPress__button__batch = () => {
+
+    this.props.onPress__button__batch();
+  };
+
+  onPress__button__done = () => {
+
+    if (!this.check_info()) {
+      return;
+    }
+
+    const {
+      product,
+      batch,
+    } = this.props;
+
+    let key = my_encryption_util.md5(product.get('object_id') + batch.get('object_id') + this.input_value_price + this.input_value_count);
+
+    let product_done = IMap({
+      "key" : key,
+      "object_id_product" : product.get('object_id'),
+      "object_id_batch" : batch.get('object_id'),
+      "name_product" : product.get('name'),
+      "name_batch" : batch.get('name'),
+      "remark" : this.input_value_remark,
+      "price" : this.input_value_price,
+      "count" : this.input_value_count,
+      "total_price" : this.input_value_total_price
+    });
+    this.props.onPress__button__done(product_done);
+  };
+
+  check_info = () => {
+    const {
+      product,
+      batch,
+    } = this.props;
+    const {
+      price,
+      count,
+    } = this.state;
+
+    if (my_string_util.is_empty(product.get('object_id'))) {
+      view_util.show_toast(MSG.MSG___please_select_product_name);
+      return false;
+
+    }
+    if (my_string_util.is_empty(batch.get('object_id'))) {
+      view_util.show_toast(MSG.MSG___please_select_batch_name);
+      return false;
+
+    }
+    if (my_string_util.is_empty(price)) {
+      view_util.show_toast(MSG.MSG___product_price_is_incorrect);
+      return false;
+
+    }
+    if (my_string_util.is_empty(count)) {
+      view_util.show_toast(MSG.MSG___product_count_is_incorrect);
+      return false;
+
+    }
+
+    return true;
+
+  };
+
   render() {
 
     const {
       user_name,
-      data,
+      intl,
 
-      onChange_name,
-      onChange_telephone,
-
-      onChange_remark,
-      name,
-      telephone,
-      remark,
-      product_name,
-      batch_name,
-      product_price,
-      product_count,
-
-      onChange_product_price,
-      onChange_product_count,
-
+      product,
+      batch,
 
       onPress__button__back,
 
-      onPress__button__add,
-
-      onPress__button__done,
-
-      onPress__button__edit,
-
-      onPress__list_item,
-
-      onPress__button__search,
-
     } = this.props;
 
-    let dataList = [];
-    if (data && data.dataList) {
-      dataList = data.dataList;
-    } else {
-      dataList = [
-        {
-          key : 'key',
-          title : 'title',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-        {
-          key : 'key2',
-          title : 'title2',
-          subtitle : 'subtitle',
-          extra : 'extra',
-        },
-      ];
-    }
+    const {
+      price,
+      count,
+      total_price,
+    } = this.state;
 
-    let product_total_price = '';
-    if(false){  //todo need change
+    const onPress__button__done = this.onPress__button__done;
+    const onPress__button__product = this.onPress__button__product;
+    const onPress__button__batch = this.onPress__button__batch;
+    const onChange_product_price = this.onChange_product_price;
+    const onChange_product_count = this.onChange_product_count;
+    const onChange_remark = this.onChange_remark;
 
-    }
+    const product_name = product.get('name');
+    const batch_name = batch.get('name');
 
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title>账单</title>
+          <title>{intl.formatMessage(messages.basic_information_on_trading_products)}</title>
         </Helmet>
         <NavBar
           mode="dark"
           icon={<Icon type="left"/>}
           onLeftClick={onPress__button__back}
           rightContent={[
-
-            <FormattedMessage
+            <MyButton
               key={messages.done.id}
-              {...messages.done}>
-              {
-                msg => (
-                  <MyButton
-                    // type="primary"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__done}
-                  >
-                    {msg}
-                  </MyButton>
-                )
-              }
-
-            </FormattedMessage>,
+              // type="primary"
+              inline={false}
+              size="small"
+              onPress={onPress__button__done}
+            >
+              {intl.formatMessage(messages.done)}
+            </MyButton>,
 
           ]}
         >
-          <FormattedMessage {...messages.basic_information_on_trading_products}>
-            {
-              msg => (
-                <Text>
-                  {msg}
-                </Text>
-              )
-            }
-
-          </FormattedMessage>
+          <Text>
+            {intl.formatMessage(messages.basic_information_on_trading_products)}
+          </Text>
         </NavBar>
 
         <List>
+          <Item
+            arrow="horizontal"
+            extra={product_name}
+            onClick={onPress__button__product}
+          >
+            {intl.formatMessage(messages.product_name)}
+          </Item>
+          <Item
+            arrow="horizontal"
+            extra={batch_name}
+            onClick={onPress__button__batch}
+          >
+            {intl.formatMessage(messages.batch_name)}
+          </Item>
 
-          <FormattedMessage {...messages.product_name}>
-            {
-              msg => (
-                <Item
-                  extra={product_name}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-          <FormattedMessage {...messages.batch_name}>
-            {
-              msg => (
-                <Item
-                  extra={batch_name}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.product_price}>
-            {
-              msg => (
-                <InputItem
-                  id="product_price"
-                  type="text"
-                  value={product_price}
-                  onChange={onChange_product_price}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.product_count}>
-            {
-              msg => (
-                <InputItem
-                  id="product_count"
-                  type="text"
-                  value={product_count}
-                  onChange={onChange_product_count}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.product_total_price}>
-            {
-              msg => (
-                <Item
-                  extra={product_total_price}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.remark}>
-            {
-              msg => (
-                <TextareaItem
-                  id="remark"
-                  value={remark}
-                  onChange={onChange_remark}
-                  placeholder={msg}
-                  rows={5}
-                  count={100}
-                />
-              )
-            }
-
-          </FormattedMessage>
+          <InputItem
+            id="product_price"
+            type="text"
+            value={price}
+            onChange={onChange_product_price}
+            placeholder={intl.formatMessage(messages.product_price)}
+          />
+          <InputItem
+            id="product_count"
+            type="text"
+            value={count}
+            onChange={onChange_product_count}
+            placeholder={intl.formatMessage(messages.product_count)}
+          />
+          <Item
+            extra={total_price}
+          >
+            {intl.formatMessage(messages.product_total_price)}
+          </Item>
+          <TextareaItem
+            id="remark"
+            onChange={onChange_remark}
+            placeholder={intl.formatMessage(messages.remark)}
+            rows={5}
+            count={100}
+          />
 
         </List>
       </View>
@@ -224,19 +294,7 @@ export default class ViewIndex extends BaseComponent {
 ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
-  repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onPress_login : PropTypes.func,
   user_name : PropTypes.string,
-  onChange_name : PropTypes.func,
-  onChange_telephone : PropTypes.func,
-  onChange_remark : PropTypes.func,
-
-  name: PropTypes.string,
-  telephone: PropTypes.string,
-  remark: PropTypes.string,
-
-
-  data : PropTypes.object,
 
 };
 

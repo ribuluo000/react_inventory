@@ -16,9 +16,58 @@
  */
 
 
-/****************************** network start **************************************/
+import {
+
+  RESET_BILL_ADD_ADD_PRODUCT,
+  CHANGE_SELECTED_PRODUCT,
+  CHANGE_SELECTED_BATCH,
+
+} from "./constants";
 
 
-/****************************** network end **************************************/
+/**
+ * RESET_BILL_ADD_ADD_PRODUCT
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of RESET_BILL_ADD_ADD_PRODUCT
+ */
+export function reset_bill_add_add_product(payload) {
+  return {
+    type: RESET_BILL_ADD_ADD_PRODUCT,
+    payload,
+  };
+}
+
+/**
+ * CHANGE_SELECTED_PRODUCT
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_SELECTED_PRODUCT
+ */
+export function change_selected_product(payload) {
+  return {
+    type: CHANGE_SELECTED_PRODUCT,
+    payload,
+  };
+}
+
+
+/**
+ * CHANGE_SELECTED_BATCH
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_SELECTED_BATCH
+ */
+export function change_selected_batch(payload) {
+  return {
+    type: CHANGE_SELECTED_BATCH,
+    payload,
+  };
+}
+
+
 
 

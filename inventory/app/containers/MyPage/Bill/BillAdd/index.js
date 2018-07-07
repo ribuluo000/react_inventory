@@ -8,7 +8,7 @@ import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, makeSelectLoading } from "containers/App/selectors";
 import { makeSelect__customer, makeSelect__products, makeSelect__provider } from "./selectors";
-import {reset_bill_add} from "./actions";
+import { remove_product, reset_bill_add } from "./actions";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
@@ -82,6 +82,16 @@ export function mapDispatchToProps(dispatch) {
     onPress__button__add_product : () => {
       console.log('onPress__button__add_product');
       dispatch(push(`/${PATH.PATH__bill__add__add_product}`));
+
+    },
+    onPress__button__remove_product : (item, sectionID, rowID) => {
+      console.log('onPress__button__remove_product',item, sectionID, rowID);
+      let payload = IMap({
+        item,
+        sectionID,
+        rowID,
+      });
+      dispatch(remove_product(payload));
 
     },
 

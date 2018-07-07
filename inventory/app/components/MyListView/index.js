@@ -105,10 +105,12 @@ export default class MyListView extends React.PureComponent{
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
 
+    let dataLv = dataSource.cloneWithRows(props.dataLv.toArray());
+    let isLoading = props.hasMore;
 
     this.state = {
-      dataSource,
-      isLoading: true,
+      dataSource:dataLv,
+      isLoading: isLoading,
       height: document.documentElement.clientHeight * 3 / 4,
     };
   }
