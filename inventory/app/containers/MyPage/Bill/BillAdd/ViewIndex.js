@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Icon, InputItem, List, NavBar, Picker, Text, TextareaItem, View, WhiteSpace } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
-import { FormattedMessage } from "react-intl";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
 import MyTextTitleExtra from "components/Text/MyTextTitleExtra";
@@ -17,13 +16,104 @@ const Brief = Item.Brief;
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewIndex extends BaseComponent {
 
+  initData = () => {
+
+    const {
+      provider,
+      customer,
+      products,
+
+    } = this.props;
+
+    /**
+     *
+
+
+     {
+      "id" : "id",
+      "type" : "1",
+      "remark" : "remark",
+      "order_number" : "1111111111",
+      "transaction_amount" : 100,
+      "create_time" : 1111111111111,
+      "provider" : {
+        "object_id" : "object_id",
+        "name" : "name"
+      },
+      "customer" : {
+        "object_id" : "object_id",
+        "name" : "name"
+      },
+      "products" : [
+        {
+          "object_id_product" : "object_id_product",
+          "object_id_batch" : "object_id_batch",
+          "name_product" : "name_product",
+          "name_batch" : "name_batch",
+          "remark" : "remark",
+          "price" : 10,
+          "count" : 10,
+          "total_price" : 100
+        }
+      ]
+    }
+
+     */
+    this.input_value_bill_type = '';
+    this.input_value_transaction_amount = '';
+    this.input_value_total_price = '';
+    this.input_value_remark = '';
+  };
+
   constructor(props) {
     super(props);
+    this.initData();
+
+    this.state = {
+      input_value_bill_type : '',
+      setState : (state) => {
+        this.setState(state);
+      },
+    };
+
   }
 
   componentDidMount() {
 
   }
+
+  onOk_bill_type = (value) => {
+    console.log('onOk_bill_type', value);
+    this.input_value_bill_type = value;
+    this.state.setState({
+      input_value_bill_type : value,
+    });
+
+  };
+  onChange_transaction_amount = (value) => {
+    console.log('onChange_transaction_amount', value);
+
+    this.input_value_transaction_amount = value;
+
+  };
+  onPress__button__provider = () => {
+    console.log('onPress__button__provider');
+    this.props.onPress__button__provider && this.props.onPress__button__provider();
+
+  };
+  onPress__button__customer = () => {
+    console.log('onPress__button__customer');
+    this.props.onPress__button__customer && this.props.onPress__button__customer();
+
+  };
+  onPress__button__add_product = () => {
+    console.log('onPress__button__add_product');
+    this.props.onPress__button__add_product && this.props.onPress__button__add_product();
+
+  };
+  onChange_remark = (value) => {
+    this.input_value_remark = value;
+  };
 
   render() {
     console.log(this);
@@ -34,12 +124,9 @@ export default class ViewIndex extends BaseComponent {
       data,
       intl,
 
-      onChange_name,
-      onChange_telephone,
-      onChange_remark,
-      name,
-      telephone,
-      remark,
+      provider,
+      customer,
+      products,
 
       onPress__button__back,
 
@@ -52,8 +139,6 @@ export default class ViewIndex extends BaseComponent {
       onPress__list_item,
 
       onPress__button__search,
-      onPress__button__provider,
-      onPress__button__customer,
       onPress__button__add_product,
       onPress__button__del_product,
 
@@ -137,13 +222,23 @@ export default class ViewIndex extends BaseComponent {
       },
     ];
 
-    console.log('bill_type_dataList',bill_type_dataList);
+    console.log('bill_type_dataList', bill_type_dataList);
+
+    let { input_value_bill_type } = this.state;
+
+    const onOk_bill_type = this.onOk_bill_type;
+    const onChange_transaction_amount = this.onChange_transaction_amount;
+    const onPress__button__provider = this.onPress__button__provider;
+    const onPress__button__customer = this.onPress__button__customer;
+    const onChange_remark = this.onChange_remark;
+
+    let provider_name = provider.get('name');
+    let customer_name = customer.get('name');
 
     return (
       <View>
         <Helmet>
-          {/*<title>{intl.formatMessage(messages.button__base_info)}</title>*/}
-          <title>账单</title>
+          <title>{intl.formatMessage(messages.add_bill)}</title>
         </Helmet>
         <NavBar
           mode="dark"
@@ -151,126 +246,73 @@ export default class ViewIndex extends BaseComponent {
           onLeftClick={onPress__button__back}
           rightContent={[
 
-            <FormattedMessage
+            <MyButton
               key={messages.done.id}
-              {...messages.done}>
-              {
-                msg => (
-                  <MyButton
-                    // type="primary"
-                    inline={false}
-                    size="small"
-                    onPress={onPress__button__done}
-                  >
-                    {msg}
-                  </MyButton>
-                )
-              }
-
-            </FormattedMessage>,
+              // type="primary"
+              inline={false}
+              size="small"
+              onPress={onPress__button__done}
+            >
+              {intl.formatMessage(messages.done)}
+            </MyButton>,
 
           ]}
         >
-          <FormattedMessage {...messages.add_bill}>
-            {
-              msg => (
-                <Text>
-                  {msg}
-                </Text>
-              )
-            }
-
-          </FormattedMessage>
+          <Text>
+            {intl.formatMessage(messages.add_bill)}
+          </Text>
         </NavBar>
 
         <List>
 
-          <FormattedMessage {...messages.bill_type}>
-            {
-              msg => (
-                <Picker data={bill_type_dataList} cols={1}>
-                  <List.Item arrow="horizontal">{msg}</List.Item>
-                </Picker>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.transaction_amount}>
-            {
-              msg => (
-                <InputItem
-                  id="telephone"
-                  type="text"
-                  value={telephone}
-                  onChange={onChange_telephone}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.provider}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__provider}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
-
-          <FormattedMessage {...messages.customer}>
-            {
-              msg => (
-                <Item
-                  arrow="horizontal"
-                  extra={''}
-                  onClick={onPress__button__customer}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
+          <Picker
+            id="bill_type"
+            onOk={onOk_bill_type}
+            value={input_value_bill_type}
+            data={bill_type_dataList}
+            cols={1}
+          >
+            <List.Item arrow="horizontal">{intl.formatMessage(messages.bill_type)}</List.Item>
+          </Picker>
+          <InputItem
+            id="transaction_amount"
+            type="text"
+            value={this.input_value_transaction_amount}
+            onChange={onChange_transaction_amount}
+            placeholder={intl.formatMessage(messages.transaction_amount)}
+          />
+          <Item
+            arrow="horizontal"
+            extra={provider_name}
+            onClick={onPress__button__provider}
+          >
+            {intl.formatMessage(messages.provider)}
+          </Item>
+          <Item
+            arrow="horizontal"
+            extra={customer_name}
+            onClick={onPress__button__customer}
+          >
+            {intl.formatMessage(messages.customer)}
+          </Item>
         </List>
 
         <WhiteSpace/>
 
-        <FormattedMessage {...messages.add_product}>
-          {
-            msg => (
-              <MyButton
-                children={msg}
-                onPress={onPress__button__add_product}
-              />
-            )
-          }
-
-        </FormattedMessage>
+        <MyButton
+          type="primary"
+          children={intl.formatMessage(messages.add_product)}
+          onPress={onPress__button__add_product}
+        />
 
         <WhiteSpace/>
 
         <List>
-          <FormattedMessage {...messages.total_price}>
-            {
-              msg => (
-                <Item
-                  extra={'100'}
-                >
-                  {msg}
-                </Item>
-              )
-            }
-
-          </FormattedMessage>
+          <Item
+            extra={'100'}
+          >
+            {intl.formatMessage(messages.total_price)}
+          </Item>
           <WhiteSpace/>
           <WhiteSpace/>
 
@@ -282,83 +324,36 @@ export default class ViewIndex extends BaseComponent {
                   key={item.name_product} //todo need change
                   justify="between" direction="column">
 
-                  <FormattedMessage {...messages.product_name}>
-                    {
-                      msg => (
-                        <MyTextTitleExtra
-                          title={msg}
-                          extra={item.name_product}
+                  <MyTextTitleExtra
+                    title={intl.formatMessage(messages.product_name)}
+                    extra={item.name_product}
 
-                        />
-                      )
-                    }
+                  />
+                  <MyTextTitleExtra
+                    title={intl.formatMessage(messages.batch_name)}
+                    extra={item.name_batch}
 
-                  </FormattedMessage>
+                  />
+                  <MyTextTitleExtra
+                    title={intl.formatMessage(messages.product_price)}
+                    extra={'' + item.price}
 
-                  <FormattedMessage {...messages.batch_name}>
-                    {
-                      msg => (
-                        <MyTextTitleExtra
-                          title={msg}
-                          extra={item.name_batch}
+                  />
+                  <MyTextTitleExtra
+                    title={intl.formatMessage(messages.product_count)}
+                    extra={'' + item.count}
 
-                        />
-                      )
-                    }
+                  />
+                  <MyTextTitleExtra
+                    title={intl.formatMessage(messages.product_total_price)}
+                    extra={'' + item.total_price}
 
-                  </FormattedMessage>
+                  />
+                  <MyTextTitleExtra
+                    title={intl.formatMessage(messages.remark)}
+                    extra={item.remark}
 
-                  <FormattedMessage {...messages.product_price}>
-                    {
-                      msg => (
-                        <MyTextTitleExtra
-                          title={msg}
-                          extra={'' + item.price}
-
-                        />
-                      )
-                    }
-
-                  </FormattedMessage>
-
-                  <FormattedMessage {...messages.product_count}>
-                    {
-                      msg => (
-                        <MyTextTitleExtra
-                          title={msg}
-                          extra={'' + item.count}
-
-                        />
-                      )
-                    }
-
-                  </FormattedMessage>
-
-                  <FormattedMessage {...messages.product_total_price}>
-                    {
-                      msg => (
-                        <MyTextTitleExtra
-                          title={msg}
-                          extra={'' + item.total_price}
-
-                        />
-                      )
-                    }
-
-                  </FormattedMessage>
-
-                  <FormattedMessage {...messages.remark}>
-                    {
-                      msg => (
-                        <MyTextTitleExtra
-                          title={msg}
-                          extra={item.remark}
-
-                        />
-                      )
-                    }
-
-                  </FormattedMessage>
+                  />
 
                 </View>
               );
@@ -369,18 +364,15 @@ export default class ViewIndex extends BaseComponent {
 
                 >
                   {v}
-
-                  <FormattedMessage {...messages.product_del}>
-                    {
-                      msg => (
-                        <MyButton
-                          children={msg}
-                          onPress={onPress__button__del_product}
-                        />
-                      )
-                    }
-
-                  </FormattedMessage>
+                  <MyButton
+                    key={messages.add.id}
+                    type="warning"
+                    inline={false}
+                    size="small"
+                    onPress={onPress__button__add}
+                  >
+                    {intl.formatMessage(messages.product_del)}
+                  </MyButton>
 
                 </View>
               );
@@ -391,20 +383,14 @@ export default class ViewIndex extends BaseComponent {
         </List>
 
         <WhiteSpace/>
-        <FormattedMessage {...messages.remark}>
-          {
-            msg => (
-              <TextareaItem
-                id="remark"
-                value={remark}
-                placeholder={msg}
-                rows={5}
-                count={100}
-              />
-            )
-          }
-
-        </FormattedMessage>
+        <TextareaItem
+          id="remark"
+          value={this.input_value_remark}
+          onChange={onChange_remark}
+          placeholder={intl.formatMessage(messages.remark)}
+          rows={5}
+          count={100}
+        />
 
       </View>
     );
@@ -414,18 +400,7 @@ export default class ViewIndex extends BaseComponent {
 ViewIndex.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
-  repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  onPress_login : PropTypes.func,
   user_name : PropTypes.string,
-  onChange_name : PropTypes.func,
-  onChange_telephone : PropTypes.func,
-  onChange_remark : PropTypes.func,
-
-  name : PropTypes.string,
-  telephone : PropTypes.string,
-  remark : PropTypes.string,
-
-  data : PropTypes.object,
 
 };
 

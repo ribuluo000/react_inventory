@@ -7,10 +7,11 @@ import { createStructuredSelector } from "reselect";
 import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, makeSelectLoading } from "containers/App/selectors";
+import { makeSelect__customer, makeSelect__products, makeSelect__provider } from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
-import { push,goBack } from "react-router-redux";
+import { goBack, push } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
 import PATH from "constants/PATH";
 
@@ -53,6 +54,24 @@ export function mapDispatchToProps(dispatch) {
 
     },
 
+    onPress__button__provider : () => {
+      console.log('onPress__button__provider');
+      dispatch(push(`/${PATH.PATH__provider__select}`));
+
+    },
+
+    onPress__button__customer : () => {
+      console.log('onPress__button__customer');
+      dispatch(push(`/${PATH.PATH__customer__select}`));
+
+    },
+
+    onPress__button__add_product : () => {
+      console.log('onPress__button__add_product');
+      dispatch(push(`/${PATH.PATH__bill__add__add_product}`));
+
+    },
+
   };
 }
 
@@ -61,6 +80,9 @@ const mapStateToProps = createStructuredSelector({
   user_name : makeSelect__user_name(),
   loading : makeSelectLoading(),
   error : makeSelectError(),
+  provider : makeSelect__provider(),
+  customer : makeSelect__customer(),
+  products : makeSelect__products(),
 });
 
 const withConnect = connect(

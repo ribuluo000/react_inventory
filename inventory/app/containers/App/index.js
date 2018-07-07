@@ -73,10 +73,12 @@ export default function App() {
         <PublicRoute path={`/${PATH.PATH__bill__add__add_product}`} component={BillAddAddProductPage}/>
         <PublicRoute path={`/${PATH.PATH__bill__detail}`} component={BillDetailPage}/>
 
+        <PublicRoute path={`/${PATH.PATH__provider__select}`} component={MyProviderPage}/>
         <PublicRoute path={`/${PATH.PATH__provider}`} component={MyProviderPage}/>
         <PublicRoute path={`/${PATH.PATH__provider__add}`} component={ProviderAddPage}/>
         <PublicRoute path={`/${PATH.PATH__provider__detail}`} component={ProviderDetailPage}/>
 
+        <PublicRoute path={`/${PATH.PATH__customer__select}`} component={MyCustomerPage}/>
         <PublicRoute path={`/${PATH.PATH__customer}`} component={MyCustomerPage}/>
         <PublicRoute path={`/${PATH.PATH__customer__add}`} component={CustomerAddPage}/>
         <PublicRoute path={`/${PATH.PATH__customer__detail}`} component={CustomerDetailPage}/>

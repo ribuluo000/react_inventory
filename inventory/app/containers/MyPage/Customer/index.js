@@ -13,6 +13,7 @@ import ViewIndex from "./ViewIndex";
 import { push,goBack } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
 import PATH from "constants/PATH";
+import { change_selected_customer } from "../Bill/BillAdd/actions";
 
 /* eslint-disable react/prefer-stateless-function */
 export class MyPage extends BaseComponent {
@@ -57,6 +58,15 @@ export function mapDispatchToProps(dispatch) {
       };
       dispatch(push(path));
       // dispatch(push(`/${PATH.PATH__customer__detail}`));
+
+    },
+
+
+    onPress__list_item_select : (item, sectionID, rowID) => {
+      console.log('onPress__list_item_select', item, sectionID, rowID);
+
+      dispatch(change_selected_customer(item));
+      dispatch(goBack());
 
     },
 
