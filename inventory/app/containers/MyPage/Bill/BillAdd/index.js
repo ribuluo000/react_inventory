@@ -8,6 +8,7 @@ import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, makeSelectLoading } from "containers/App/selectors";
 import { makeSelect__customer, makeSelect__products, makeSelect__provider } from "./selectors";
+import {reset_bill_add} from "./actions";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
@@ -17,6 +18,12 @@ import PATH from "constants/PATH";
 
 /* eslint-disable react/prefer-stateless-function */
 export class MyPage extends BaseComponent {
+
+  constructor(props){
+    super(props);
+    console.log('bill_add',props);
+  }
+
   /**
    * when initial state user_name is not null, submit the form to load repos
    */
@@ -44,6 +51,12 @@ export function mapDispatchToProps(dispatch) {
     onPress__button__back : () => {
       console.log('onPress__button__back');
       dispatch(goBack());
+      dispatch(reset_bill_add());
+    },
+
+    reset_bill_add : () => {
+      console.log('reset_bill_add');
+      dispatch(reset_bill_add());
 
     },
 
@@ -51,7 +64,7 @@ export function mapDispatchToProps(dispatch) {
       console.log('onPress__button__done');
 
       dispatch(goBack());
-
+      dispatch(reset_bill_add());
     },
 
     onPress__button__provider : () => {
