@@ -12,7 +12,6 @@ import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
 import MyTextTitleExtra from "components/Text/MyTextTitleExtra";
 import MyListView from "../../../../components/MyListView/index";
-import my_encryption_util from "util/my_encryption_util";
 import my_decimal_util from "../../../../util/my_decimal_util";
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -73,7 +72,7 @@ export default class ViewIndex extends BaseComponent {
     this.initData();
 
     this.state = {
-      input_value_bill_type : '',
+      input_value_bill_type : [ "" ],
       setState : (state) => {
         this.setState(state);
       },
@@ -118,26 +117,25 @@ export default class ViewIndex extends BaseComponent {
     this.input_value_remark = value;
   };
 
-
-  onPress__button__product_del = (item, sectionID, rowID)=>{
-    console.log('onPress__button__product_del',item,sectionID,rowID);
+  onPress__button__product_del = (item, sectionID, rowID) => {
+    console.log('onPress__button__product_del', item, sectionID, rowID);
     this.props.onPress__button__remove_product(item, sectionID, rowID);
 
   };
 
-  get_total_price = ()=>{
+  get_total_price = () => {
     let total_price = my_decimal_util.get_decimal_from_string(0);
     let {
       products,
     } = this.props;
-    products.map((item,i)=>{
-      total_price = my_decimal_util.get_decimal_x_add_y(total_price,item.get('total_price'));
+    products.map((item, i) => {
+      total_price = my_decimal_util.get_decimal_x_add_y(total_price, item.get('total_price'));
     });
     return total_price;
   };
 
   renderRow = (item, sectionID, rowID) => {
-    console.log('renderRow',item,sectionID,rowID);
+    console.log('renderRow', item, sectionID, rowID);
 
     let { intl } = this.props;
 
@@ -192,7 +190,7 @@ export default class ViewIndex extends BaseComponent {
           type="warning"
           inline={false}
           size="small"
-          onPress={()=>{
+          onPress={() => {
             this.onPress__button__product_del(item, sectionID, rowID);
           }}
         >
@@ -204,7 +202,6 @@ export default class ViewIndex extends BaseComponent {
 
     return vv;
   };
-
 
   render() {
     console.log(this);
@@ -228,6 +225,18 @@ export default class ViewIndex extends BaseComponent {
     let receive_money = intl.formatMessage(messages.receive_money);
     let Pay = intl.formatMessage(messages.Pay);
 
+    const onOk_bill_type = this.onOk_bill_type;
+    const onChange_transaction_amount = this.onChange_transaction_amount;
+    const onPress__button__provider = this.onPress__button__provider;
+    const onPress__button__customer = this.onPress__button__customer;
+    const onChange_remark = this.onChange_remark;
+
+    const renderRow = this.renderRow;
+
+    const provider_name = provider.get('name');
+    let customer_name = customer.get('name');
+    let total_price = my_decimal_util.decimal2string_show(this.get_total_price());
+
     const bill_type_dataList = [
       {
         label : please_choose,
@@ -246,18 +255,36 @@ export default class ViewIndex extends BaseComponent {
     console.log('bill_type_dataList', bill_type_dataList);
 
     let { input_value_bill_type } = this.state;
+    console.log('input_value_bill_type', input_value_bill_type);
 
-    const onOk_bill_type = this.onOk_bill_type;
-    const onChange_transaction_amount = this.onChange_transaction_amount;
-    const onPress__button__provider = this.onPress__button__provider;
-    const onPress__button__customer = this.onPress__button__customer;
-    const onChange_remark = this.onChange_remark;
+    let view_provider = null;
+    let view_customer = null;
+    let view_provider_or_customer = null;
+    if (input_value_bill_type[ 0 ] === '') {
 
-    const renderRow = this.renderRow;
+    } else if (input_value_bill_type[ 0 ] === '2') {
+      view_customer = (
+        <Item
+          arrow="horizontal"
+          extra={customer_name}
+          onClick={onPress__button__customer}
+        >
+          {intl.formatMessage(messages.customer)}
+        </Item>
+      );
 
-    const provider_name = provider.get('name');
-    let customer_name = customer.get('name');
-    let total_price = my_decimal_util.decimal2string_show(this.get_total_price());
+    } else if (input_value_bill_type[ 0 ] === '1') {
+      view_provider = (
+        <Item
+          arrow="horizontal"
+          extra={provider_name}
+          onClick={onPress__button__provider}
+        >
+          {intl.formatMessage(messages.provider)}
+        </Item>
+      );
+
+    }
 
     return (
       <View>
@@ -305,20 +332,10 @@ export default class ViewIndex extends BaseComponent {
             onChange={onChange_transaction_amount}
             placeholder={intl.formatMessage(messages.transaction_amount)}
           />
-          <Item
-            arrow="horizontal"
-            extra={provider_name}
-            onClick={onPress__button__provider}
-          >
-            {intl.formatMessage(messages.provider)}
-          </Item>
-          <Item
-            arrow="horizontal"
-            extra={customer_name}
-            onClick={onPress__button__customer}
-          >
-            {intl.formatMessage(messages.customer)}
-          </Item>
+
+          {view_provider}
+          {view_customer}
+
         </List>
 
         <WhiteSpace/>
@@ -346,11 +363,12 @@ export default class ViewIndex extends BaseComponent {
             }}
             dataLv={products}
             hasMore={false}
-            onEndReached={()=>{}}
-            onRefresh={()=>{}}
+            onEndReached={() => {
+            }}
+            onRefresh={() => {
+            }}
             renderRow={renderRow}
           />
-
 
         </List>
 
