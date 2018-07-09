@@ -11,7 +11,15 @@
  */
 import { fromJS } from "immutable";
 
-import { CHANGE_SELECTED_BATCH, CHANGE_SELECTED_PRODUCT, RESET_BILL_ADD_ADD_PRODUCT } from "./constants";
+import {
+  CHANGE_SELECTED_BATCH,
+  CHANGE_SELECTED_PRODUCT,
+  RESET_BILL_ADD_ADD_PRODUCT,
+  CHANGE_INPUT_VALUE_PRICE,
+  CHANGE_INPUT_VALUE_COUNT,
+  CHANGE_INPUT_VALUE_REMARK,
+} from "./constants";
+import my_decimal_util from "../../../../../util/my_decimal_util";
 
 // The initial state of the App
 export const initialState = fromJS({
@@ -24,6 +32,10 @@ export const initialState = fromJS({
     "object_id" : "",
     "name" : ""
   },
+  "price":"",
+  "total_price":"",
+  "count":"",
+  "remark":"",
 });
 
 function myReducer(state = initialState, action) {
@@ -55,6 +67,40 @@ function myReducer(state = initialState, action) {
       });
       return state
         .set('batch', batch);
+    }
+    break;
+    case CHANGE_INPUT_VALUE_PRICE: {
+      let payload = action.payload;
+      let total_price = '';
+      let count = state.get('count');
+      if(count.length>0){
+        total_price = my_decimal_util.get_decimal_x_mul_y(count,payload).toString();
+      }
+      console.log(state);
+
+      return state
+        .set('price', payload)
+        .set('total_price', total_price)
+        ;
+    }
+      break;
+    case CHANGE_INPUT_VALUE_COUNT: {
+      let payload = action.payload;
+      let total_price = '';
+      let price = state.get('price');
+      if(price.length>0){
+        total_price = my_decimal_util.get_decimal_x_mul_y(price,payload).toString();
+      }
+      return state
+        .set('count', payload)
+        .set('total_price', total_price)
+        ;
+    }
+      break;
+    case CHANGE_INPUT_VALUE_REMARK: {
+      let payload = action.payload;
+      return state
+        .set('remark', payload);
     }
       break;
     default:

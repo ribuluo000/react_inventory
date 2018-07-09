@@ -22,12 +22,11 @@ export default class ViewIndex extends BaseComponent {
     const {
       product,
       batch,
+      price,
+      count,
+      total_price,
+      remark,
     } = this.props;
-
-    this.input_value_price = my_decimal_util.get_decimal_from_string(0);
-    this.input_value_count = my_decimal_util.get_decimal_from_string(0);
-    this.input_value_total_price = my_decimal_util.get_decimal_from_string(0);
-    this.input_value_remark = '';
   };
 
   constructor(props) {
@@ -35,9 +34,6 @@ export default class ViewIndex extends BaseComponent {
     this.initData();
 
     this.state = {
-      price : '',
-      count : '',
-      total_price : '',
       setState : (state) => {
         this.setState(state);
       },
@@ -49,16 +45,6 @@ export default class ViewIndex extends BaseComponent {
 
   }
 
-  set_total_price = () => {
-    if (this.input_value_price && this.input_value_count) {
-      this.input_value_total_price = my_decimal_util.get_decimal_x_mul_y(this.input_value_price, this.input_value_count);
-    } else {
-      this.input_value_total_price = my_decimal_util.get_decimal_from_string(0);
-    }
-    this.state.setState({
-      total_price : my_decimal_util.decimal2string_show(this.input_value_total_price)
-    });
-  };
 
   onChange_product = (value) => {
     console.log('onChange_product', value);
@@ -71,48 +57,30 @@ export default class ViewIndex extends BaseComponent {
   onChange_product_price = (value) => {
     console.log('onChange_product_price', value);
     if (value === '') {
-      this.input_value_price = my_decimal_util.get_decimal_from_string(0);
-      this.set_total_price();
-      this.state.setState({
-        price : value
-      });
+      this.props.onChange__input_value_price && this.props.onChange__input_value_price(value);
       return;
     }
     if (my_decimal_util.isNaN(value)) {
       return;
     }
-    this.input_value_price = my_decimal_util.get_decimal_from_string(value);
-    this.set_total_price();
-
-    this.state.setState({
-      price : value
-    });
+    this.props.onChange__input_value_price && this.props.onChange__input_value_price(value);
 
   };
   onChange_product_count = (value) => {
     console.log('onChange_product_count', value);
     if (value === '') {
-      this.input_value_count = my_decimal_util.get_decimal_from_string(0);
-      this.set_total_price();
-      this.state.setState({
-        count : value
-      });
+      this.props.onChange__input_value_count && this.props.onChange__input_value_count(value);
       return;
     }
     if (my_decimal_util.isNaN(value)) {
       return;
     }
-    this.input_value_count = my_decimal_util.get_decimal_from_string(value);
-    this.set_total_price();
-
-    this.state.setState({
-      count : value
-    });
+    this.props.onChange__input_value_count && this.props.onChange__input_value_count(value);
 
   };
   onChange_remark = (value) => {
     console.log('onChange_remark', value);
-    this.input_value_remark = value;
+    this.props.onChange__input_value_remark && this.props.onChange__input_value_remark(value);
   };
 
   onPress__button__product = () => {
@@ -133,9 +101,18 @@ export default class ViewIndex extends BaseComponent {
     const {
       product,
       batch,
+      price,
+      count,
+      total_price,
+      remark,
     } = this.props;
 
-    let key = my_encryption_util.md5(product.get('object_id') + batch.get('object_id') + this.input_value_price + this.input_value_count);
+
+    this.input_value_price = my_decimal_util.get_decimal_from_string(price);
+    this.input_value_count = my_decimal_util.get_decimal_from_string(count);
+    this.input_value_total_price = my_decimal_util.get_decimal_from_string(total_price);
+    this.input_value_remark = remark;
+    let key = my_encryption_util.md5(product.get('object_id') + batch.get('object_id') + price + count);
 
     let product_done = IMap({
       "key" : key,
@@ -155,11 +132,14 @@ export default class ViewIndex extends BaseComponent {
     const {
       product,
       batch,
-    } = this.props;
-    const {
+
       price,
       count,
-    } = this.state;
+      total_price,
+      remark,
+
+    } = this.props;
+
 
     if (my_string_util.is_empty(product.get('object_id'))) {
       view_util.show_toast(MSG.MSG___please_select_product_name);
@@ -195,15 +175,14 @@ export default class ViewIndex extends BaseComponent {
       product,
       batch,
 
-      onPress__button__back,
-
-    } = this.props;
-
-    const {
       price,
       count,
       total_price,
-    } = this.state;
+      remark,
+
+      onPress__button__back,
+
+    } = this.props;
 
     const onPress__button__done = this.onPress__button__done;
     const onPress__button__product = this.onPress__button__product;
@@ -279,6 +258,7 @@ export default class ViewIndex extends BaseComponent {
           </Item>
           <TextareaItem
             id="remark"
+            value={remark}
             onChange={onChange_remark}
             placeholder={intl.formatMessage(messages.remark)}
             rows={5}

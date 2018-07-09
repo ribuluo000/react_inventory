@@ -13,8 +13,8 @@ import ViewIndex from "./ViewIndex";
 import { goBack, push } from "react-router-redux";
 import BaseComponent from "containers/Base/BaseComponent";
 import { add_product } from "../actions";
-import { makeSelect__batch, makeSelect__product } from "./selectors";
-import { reset_bill_add_add_product } from "./actions";
+import { makeSelect__batch, makeSelect__count, makeSelect__price, makeSelect__product, makeSelect__remark, makeSelect__total_price } from "./selectors";
+import { change_input_value_count, change_input_value_price, change_input_value_remark, reset_bill_add_add_product } from "./actions";
 
 /* eslint-disable react/prefer-stateless-function */
 export class MyPage extends BaseComponent {
@@ -79,6 +79,22 @@ export function mapDispatchToProps(dispatch) {
 
     },
 
+    onChange__input_value_price : (value) => {
+      console.log('onChange__input_value_price',value);
+      dispatch(change_input_value_price(value));
+
+    },
+    onChange__input_value_count : (value) => {
+      console.log('onChange__input_value_count',value);
+      dispatch(change_input_value_count(value));
+
+    },
+    onChange__input_value_remark : (value) => {
+      console.log('onChange__input_value_remark',value);
+      dispatch(change_input_value_remark(value));
+
+    },
+
 
   };
 }
@@ -90,6 +106,10 @@ const mapStateToProps = createStructuredSelector({
   error : makeSelectError(),
   product : makeSelect__product(),
   batch : makeSelect__batch(),
+  price : makeSelect__price(),
+  count : makeSelect__count(),
+  total_price : makeSelect__total_price(),
+  remark : makeSelect__remark(),
 });
 
 const withConnect = connect(

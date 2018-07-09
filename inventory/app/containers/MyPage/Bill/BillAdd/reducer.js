@@ -11,10 +11,32 @@
  */
 import { fromJS } from "immutable";
 
-import { ADD_PRODUCT, CHANGE_SELECTED_CUSTOMER, CHANGE_SELECTED_PROVIDER, REMOVE_PRODUCT, RESET_Bill_Add } from "./constants";
+import { CHANGE_INPUT_VALUE_REMARK,CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT,CHANGE_INPUT_VALUE_BILL_TYPE,ADD_PRODUCT, CHANGE_SELECTED_CUSTOMER, CHANGE_SELECTED_PROVIDER, REMOVE_PRODUCT, RESET_Bill_Add } from "./constants";
 
 // The initial state of the App
 export const initialState = fromJS({
+
+  /**
+
+   [
+   {
+     label : please_choose,
+     value : '',
+   },
+   {
+     label : receive_money,
+     value : '2',
+   },
+   {
+     label : Pay,
+     value : '1',
+   },
+   ];
+
+   */
+  input_value_bill_type:'',
+  input_value_transaction_amount:'',
+  input_value_remark:'',
 
   /**
    {
@@ -62,6 +84,27 @@ function myReducer(state = initialState, action) {
 
       return state;
       break;
+    case CHANGE_INPUT_VALUE_BILL_TYPE: {
+      let input_value_bill_type = action.payload;
+      return state
+        .set('input_value_bill_type', input_value_bill_type);
+    }
+      break;
+
+    case CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT: {
+      let input_value_transaction_amount = action.payload;
+      return state
+        .set('input_value_transaction_amount', input_value_transaction_amount);
+    }
+      break;
+
+    case CHANGE_INPUT_VALUE_REMARK: {
+      let input_value_remark = action.payload;
+      return state
+        .set('input_value_remark', input_value_remark);
+    }
+      break;
+
     case CHANGE_SELECTED_PROVIDER: {
       let payload = action.payload;
       let name = payload.getIn([ 'item', 'name' ]);

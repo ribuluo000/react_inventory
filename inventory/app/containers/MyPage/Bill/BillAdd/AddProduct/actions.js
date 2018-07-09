@@ -21,6 +21,9 @@ import {
   RESET_BILL_ADD_ADD_PRODUCT,
   CHANGE_SELECTED_PRODUCT,
   CHANGE_SELECTED_BATCH,
+  CHANGE_INPUT_VALUE_PRICE,
+  CHANGE_INPUT_VALUE_COUNT,
+  CHANGE_INPUT_VALUE_REMARK,
 
 } from "./constants";
 
@@ -64,6 +67,51 @@ export function change_selected_product(payload) {
 export function change_selected_batch(payload) {
   return {
     type: CHANGE_SELECTED_BATCH,
+    payload,
+  };
+}
+
+
+/**
+ * CHANGE_INPUT_VALUE_PRICE
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_INPUT_VALUE_PRICE
+ */
+export function change_input_value_price(payload) {
+  return {
+    type: CHANGE_INPUT_VALUE_PRICE,
+    payload,
+  };
+}
+
+
+/**
+ * CHANGE_INPUT_VALUE_COUNT
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_INPUT_VALUE_COUNT
+ */
+export function change_input_value_count(payload) {
+  return {
+    type: CHANGE_INPUT_VALUE_COUNT,
+    payload,
+  };
+}
+
+
+/**
+ * CHANGE_INPUT_VALUE_REMARK
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_INPUT_VALUE_REMARK
+ */
+export function change_input_value_remark(payload) {
+  return {
+    type: CHANGE_INPUT_VALUE_REMARK,
     payload,
   };
 }

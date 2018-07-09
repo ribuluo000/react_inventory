@@ -24,6 +24,9 @@ export default class ViewIndex extends BaseComponent {
       provider,
       customer,
       products,
+      input_value_bill_type,
+      input_value_transaction_amount,
+      input_value_remark,
 
     } = this.props;
 
@@ -61,18 +64,19 @@ export default class ViewIndex extends BaseComponent {
     }
 
      */
-    this.input_value_bill_type = '';
-    this.input_value_transaction_amount = '';
+    this.input_value_bill_type = input_value_bill_type;
+    this.input_value_transaction_amount = input_value_transaction_amount;
     this.input_value_total_price = '';
-    this.input_value_remark = '';
+    this.input_value_remark = input_value_remark;
   };
 
   constructor(props) {
     super(props);
     this.initData();
 
+
+
     this.state = {
-      input_value_bill_type : [ "" ],
       setState : (state) => {
         this.setState(state);
       },
@@ -86,16 +90,25 @@ export default class ViewIndex extends BaseComponent {
 
   onOk_bill_type = (value) => {
     console.log('onOk_bill_type', value);
-    this.input_value_bill_type = value;
-    this.state.setState({
-      input_value_bill_type : value,
-    });
+    this.input_value_bill_type = value[0];
+    this.props.onChange__input_value_bill_type&&this.props.onChange__input_value_bill_type(this.input_value_bill_type);
 
   };
   onChange_transaction_amount = (value) => {
     console.log('onChange_transaction_amount', value);
 
+    if (value === '') {
+      this.input_value_transaction_amount = '';
+      this.props.onChange__input_value_transaction_amount&&this.props.onChange__input_value_transaction_amount(this.input_value_transaction_amount);
+
+      return;
+    }
+    if (my_decimal_util.isNaN(value)) {
+      return;
+    }
     this.input_value_transaction_amount = value;
+    this.props.onChange__input_value_transaction_amount&&this.props.onChange__input_value_transaction_amount(this.input_value_transaction_amount);
+
 
   };
   onPress__button__provider = () => {
@@ -115,6 +128,7 @@ export default class ViewIndex extends BaseComponent {
   };
   onChange_remark = (value) => {
     this.input_value_remark = value;
+    this.props.onChange__input_value_remark&&this.props.onChange__input_value_remark(value);
   };
 
   onPress__button__product_del = (item, sectionID, rowID) => {
@@ -220,7 +234,7 @@ export default class ViewIndex extends BaseComponent {
       onPress__button__add_product,
 
     } = this.props;
-
+    const input_value_bill_type = [this.props.input_value_bill_type];
     let please_choose = intl.formatMessage(messages.please_choose);
     let receive_money = intl.formatMessage(messages.receive_money);
     let Pay = intl.formatMessage(messages.Pay);
@@ -254,7 +268,6 @@ export default class ViewIndex extends BaseComponent {
 
     console.log('bill_type_dataList', bill_type_dataList);
 
-    let { input_value_bill_type } = this.state;
     console.log('input_value_bill_type', input_value_bill_type);
 
     let view_provider = null;

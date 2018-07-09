@@ -20,6 +20,9 @@
 import {
 
   RESET_Bill_Add,
+  CHANGE_INPUT_VALUE_BILL_TYPE,
+  CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT,
+  CHANGE_INPUT_VALUE_REMARK,
   CHANGE_SELECTED_PROVIDER,
   CHANGE_SELECTED_CUSTOMER,
   ADD_PRODUCT,
@@ -41,6 +44,53 @@ export function reset_bill_add(payload) {
     payload,
   };
 }
+
+/**
+ * CHANGE_INPUT_VALUE_BILL_TYPE
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_INPUT_VALUE_BILL_TYPE
+ */
+export function change_input_value_bill_type(payload) {
+  return {
+    type: CHANGE_INPUT_VALUE_BILL_TYPE,
+    payload,
+  };
+}
+
+
+
+/**
+ * CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT
+ */
+export function change_input_value_transaction_amount(payload) {
+  return {
+    type: CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT,
+    payload,
+  };
+}
+
+
+/**
+ * CHANGE_INPUT_VALUE_REMARK
+ *
+ * @param  {payload} payload The new data of the app
+ *
+ * @return {object}    An action object with a type of CHANGE_INPUT_VALUE_REMARK
+ */
+export function change_input_value_remark(payload) {
+  return {
+    type: CHANGE_INPUT_VALUE_REMARK,
+    payload,
+  };
+}
+
+
 
 
 /**

@@ -10,6 +10,9 @@
  */
 
 export const RESET_Bill_Add = 'inventory/BillAdd/RESET_Bill_Add';
+export const CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT = 'inventory/BillAdd/CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT';
+export const CHANGE_INPUT_VALUE_BILL_TYPE = 'inventory/BillAdd/CHANGE_INPUT_VALUE_BILL_TYPE';
+export const CHANGE_INPUT_VALUE_REMARK = 'inventory/BillAdd/CHANGE_INPUT_VALUE_REMARK';
 export const CHANGE_SELECTED_PROVIDER = 'inventory/BillAdd/CHANGE_SELECTED_PROVIDER';
 export const CHANGE_SELECTED_CUSTOMER = 'inventory/BillAdd/CHANGE_SELECTED_CUSTOMER';
 export const ADD_PRODUCT = 'inventory/BillAdd/ADD_PRODUCT';

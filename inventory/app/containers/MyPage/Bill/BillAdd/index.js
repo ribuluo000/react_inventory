@@ -7,8 +7,10 @@ import { createStructuredSelector } from "reselect";
 import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, makeSelectLoading } from "containers/App/selectors";
-import { makeSelect__customer, makeSelect__products, makeSelect__provider } from "./selectors";
-import { remove_product, reset_bill_add } from "./actions";
+import {
+  makeSelect__customer, makeSelect__input_value_bill_type, makeSelect__input_value_remark, makeSelect__input_value_transaction_amount, makeSelect__products, makeSelect__provider
+} from "./selectors";
+import { change_input_value_bill_type, change_input_value_remark, change_input_value_transaction_amount, remove_product, reset_bill_add } from "./actions";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
@@ -95,6 +97,22 @@ export function mapDispatchToProps(dispatch) {
 
     },
 
+    onChange__input_value_bill_type : (value) => {
+      console.log('onChange__input_value_bill_type',value);
+      dispatch(change_input_value_bill_type(value));
+
+    },
+    onChange__input_value_transaction_amount : (value) => {
+      console.log('onChange__input_value_transaction_amount',value);
+      dispatch(change_input_value_transaction_amount(value));
+
+    },
+    onChange__input_value_remark : (value) => {
+      console.log('onChange__input_value_remark',value);
+      dispatch(change_input_value_remark(value));
+
+    },
+
   };
 }
 
@@ -106,6 +124,9 @@ const mapStateToProps = createStructuredSelector({
   provider : makeSelect__provider(),
   customer : makeSelect__customer(),
   products : makeSelect__products(),
+  input_value_bill_type : makeSelect__input_value_bill_type(),
+  input_value_transaction_amount : makeSelect__input_value_transaction_amount(),
+  input_value_remark : makeSelect__input_value_remark(),
 });
 
 const withConnect = connect(
