@@ -27,6 +27,9 @@ import {
   CHANGE_SELECTED_CUSTOMER,
   ADD_PRODUCT,
   REMOVE_PRODUCT,
+  API_BILL_ADD,
+  API_BILL_ADD_SUCCESS,
+  API_BILL_ADD_ERROR,
 
 } from "./constants";
 
@@ -154,6 +157,44 @@ export function remove_product(payload) {
 }
 
 
+/**
+ * this action starts the request saga
+ *
+ * @return {object} An action object with a type of API_BILL_ADD
+ */
+export function api_bill_add() {
+  return {
+    type : API_BILL_ADD,
+  };
+}
+
+/**
+ * Dispatched when the jsonObj are loaded by the request saga
+ *
+ * @param  {object} jsonObj The jsonObj data
+ *
+ * @return {object}      An action object with a type of API_BILL_ADD_SUCCESS
+ */
+export function api_bill_add_success(jsonObj) {
+  return {
+    type : API_BILL_ADD_SUCCESS,
+    jsonObj,
+  };
+}
+
+/**
+ * Dispatched when loading fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of API_BILL_ADD_ERROR passing the error
+ */
+export function api_bill_add_error(error) {
+  return {
+    type : API_BILL_ADD_ERROR,
+    error,
+  };
+}
 
 
 

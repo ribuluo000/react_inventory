@@ -42,6 +42,7 @@ export default {
   request_common : request_common,
   on_success_common : on_success_common,
   on_custom_exception_common : on_custom_exception_common,
+  on_catch_common : on_catch_common,
   get_msg : (jsonObj) => {
     return jsonObj.get('msg') || get_default_msg();
   },
@@ -126,6 +127,17 @@ export default {
 
   bill_detail : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___bill__detail;
+    return await request_common(url, data, callback);
+  },
+
+  /**
+   * @deprecated instead by saga
+   * @param data
+   * @param callback
+   * @returns {Promise}
+   */
+  bill_add : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___bill__add;
     return await request_common(url, data, callback);
   },
 

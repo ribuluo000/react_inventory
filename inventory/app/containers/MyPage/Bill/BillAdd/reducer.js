@@ -11,10 +11,17 @@
  */
 import { fromJS } from "immutable";
 
-import { CHANGE_INPUT_VALUE_REMARK,CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT,CHANGE_INPUT_VALUE_BILL_TYPE,ADD_PRODUCT, CHANGE_SELECTED_CUSTOMER, CHANGE_SELECTED_PROVIDER, REMOVE_PRODUCT, RESET_Bill_Add } from "./constants";
+import {
+  API_BILL_ADD,
+  API_BILL_ADD_SUCCESS,
+  API_BILL_ADD_ERROR,
+  CHANGE_INPUT_VALUE_REMARK,CHANGE_INPUT_VALUE_TRANSACTION_AMOUNT,CHANGE_INPUT_VALUE_BILL_TYPE,ADD_PRODUCT, CHANGE_SELECTED_CUSTOMER, CHANGE_SELECTED_PROVIDER, REMOVE_PRODUCT, RESET_Bill_Add } from "./constants";
 
 // The initial state of the App
 export const initialState = fromJS({
+  loading : false,
+  error : false,
+  jsonObj:null,
 
   /**
 
@@ -151,6 +158,18 @@ function myReducer(state = initialState, action) {
 
       return state;
       break;
+    case API_BILL_ADD:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set( 'jsonObj' , null);
+    case API_BILL_ADD_SUCCESS:
+      return state
+        .set( 'jsonObj' , action.jsonObj)
+        .set('loading', false)
+        ;
+    case API_BILL_ADD_ERROR:
+      return state.set('error', action.error).set('loading', false);
 
     default:
       return state;

@@ -10,7 +10,7 @@ import { makeSelect__is_authenticated, makeSelect__user_name, makeSelectError, m
 import {
   makeSelect__customer, makeSelect__input_value_bill_type, makeSelect__input_value_remark, makeSelect__input_value_transaction_amount, makeSelect__products, makeSelect__provider
 } from "./selectors";
-import { change_input_value_bill_type, change_input_value_remark, change_input_value_transaction_amount, remove_product, reset_bill_add } from "./actions";
+import { api_bill_add, change_input_value_bill_type, change_input_value_remark, change_input_value_transaction_amount, remove_product, reset_bill_add } from "./actions";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
@@ -65,6 +65,7 @@ export function mapDispatchToProps(dispatch) {
     onPress__button__done : () => {
       console.log('onPress__button__done');
 
+      dispatch(api_bill_add());
       dispatch(goBack());
       dispatch(reset_bill_add());
     },

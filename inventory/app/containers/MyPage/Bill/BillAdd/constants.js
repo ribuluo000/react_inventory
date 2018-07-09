@@ -19,3 +19,13 @@ export const ADD_PRODUCT = 'inventory/BillAdd/ADD_PRODUCT';
 export const REMOVE_PRODUCT = 'inventory/BillAdd/REMOVE_PRODUCT';
 
 
+
+/****************************** network start **************************************/
+
+  //添加账单
+export const API_BILL_ADD = 'inventory/BillAdd/API_BILL_ADD';
+export const API_BILL_ADD_SUCCESS = 'inventory/BillAdd/API_BILL_ADD_SUCCESS';
+export const API_BILL_ADD_ERROR = 'inventory/BillAdd/API_BILL_ADD_ERROR';
+
+
+/****************************** network end **************************************/
