@@ -8,19 +8,40 @@
  */
 
 import React from "react";
-import { injectIntl } from "react-intl";
-import { makeSelectError, makeSelectLoading, } from "containers/App/selectors";
+import { makeSelectError, makeSelectLoading } from "containers/App/selectors";
 /* eslint-disable react/prefer-stateless-function */
 class BaseComponent extends React.PureComponent {
 
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log('Component WILL MOUNT!')
+  }
 
-    // const { intl } = this.props;
-    // console.log(intl);
+  componentDidMount() {
+    console.log('Component DID MOUNT!')
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('Component WILL RECEIVE PROPS!')
+  }
+
+  // shouldComponentUpdate(newProps, newState) {
+  //   return true;
+  // }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('Component WILL UPDATE!');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('Component DID UPDATE!')
+  }
+
+  componentWillUnmount() {
+    console.log('Component WILL UNMOUNT!')
   }
 
 }
