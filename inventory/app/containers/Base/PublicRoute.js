@@ -10,7 +10,6 @@ import { compose } from "redux";
 import { Route } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { makeSelect__is_authenticated, makeSelectError, makeSelectLoading } from "containers/App/selectors";
-import { router_to_login } from "router/actions";
 
 /*
  * PrivateRoute 如果认证失败，则跳转登录页面
