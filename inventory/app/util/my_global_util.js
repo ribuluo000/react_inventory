@@ -39,5 +39,10 @@ export default {
 
     global.push = push;
     global.goBack = goBack;
+
+
+
+    global.access_token = '';
+    global.user_id = '';
   },
 };

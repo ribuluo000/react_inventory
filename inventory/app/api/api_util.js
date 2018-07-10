@@ -2,6 +2,11 @@
  * Created by nick on 2018/6/29.
  */
 import { fromJS } from "immutable";
+import {
+  makeSelect__access_token,
+  makeSelect__user_id,
+} from "containers/App/selectors";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 
 const on_custom_exception_common = (jsonObj) => {
   view_util.show_toast(get_default_msg(jsonObj));
@@ -27,6 +32,9 @@ const get_default_msg = (jsonObj) => {
 };
 
 const request_common = async (url, data = {}, callback) => {
+  //全局通用请求参数
+  data.access_token = access_token;
+  data.user_id = user_id;
   let ret = null;
   try {
     ret = await request(url, options_common(data));

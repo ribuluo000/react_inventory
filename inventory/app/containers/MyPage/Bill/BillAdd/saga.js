@@ -5,7 +5,10 @@
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import { API_BILL_ADD } from "./constants";
 import { api_bill_add_error, api_bill_add_success } from "./actions";
-import { action__is_authenticated_success, action__is_authenticated_failure  } from "containers/App/actions";
+import {
+  makeSelect__access_token,
+  makeSelect__user_id,
+} from "containers/App/selectors";
 
 import { bill_add,request_common,on_custom_exception_common,on_success_common,on_catch_common } from "api/api_util";
 import {
@@ -24,6 +27,8 @@ import { options_common, request,onCustomException_common,onCatch_common } from 
  */
 export function* api_request() {
   // Select username from store
+  const access_token = yield select(makeSelect__access_token());
+  const user_id = yield select(makeSelect__user_id());
   const type = yield select(makeSelect__input_value_bill_type());
   const remark = yield select(makeSelect__input_value_remark());
   const transaction_amount_string = yield select(makeSelect__input_value_transaction_amount());
@@ -74,8 +79,8 @@ export function* api_request() {
    *
    */
   const bodyObj = {
-    "access_token":"access_token",
-    "user_id":"5b31b58fdd66b03a1dcb5434",
+    access_token,
+    user_id,
     type,
     remark,
     transaction_amount,

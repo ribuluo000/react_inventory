@@ -72,6 +72,8 @@ function appReducer(state = initialState, action) {
         access_token,
         user_name,
       } = action.jsonObj.data;
+      global.access_token = access_token;
+      global.user_id = user_id;
       return state
         .set('is_authenticated', true)
         .set('user_id', user_id)
@@ -79,6 +81,9 @@ function appReducer(state = initialState, action) {
         .set('user_name', user_name)
         ;
     case ACTION__IS_AUTHENTICATED_FAILURE:
+
+      global.access_token = '';
+      global.user_id = '';
       return state
         .set('is_authenticated', false)
         .set('user_id', '')
