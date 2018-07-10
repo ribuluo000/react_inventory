@@ -8,7 +8,8 @@ import CODE from '../constants/CODE.js';
 import TYPE from '../constants/TYPE.js';
 import PERMISSION from '../constants/PERMISSION.js';
 import PATH from '../constants/PATH.js';
-import CONFIG from '../constants/CONFIG.js';
+import CONFIG from '../config/default';
+// import CONFIG from '../constants/CONFIG.js';
 let obj = {
     DEBUG:'DEBUG',
     RELEASE:'RELEASE',
