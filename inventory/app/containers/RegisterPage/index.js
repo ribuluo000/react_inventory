@@ -13,7 +13,6 @@ import { createStructuredSelector } from "reselect";
 import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelectError, makeSelectLoading } from "containers/App/selectors";
-import { router_to_login } from "router/actions";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";

@@ -14,7 +14,6 @@ import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelectError, makeSelectLoading } from "containers/App/selectors";
 import { api_login, change_password, change_user_name } from "./actions";
-import { router_to_login } from "router/actions";
 import { makeSelect__password, makeSelect__user_name } from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
