@@ -60,6 +60,7 @@
 
   "please_input_user_name":"请输入用户名",
   "please_input_password":"请输入密码",
+  "please_input_confirm_password":"请输入确认密码",
   "user_name":"用户名",
   "password":"密码",
   "confirm_password":"确认密码",
@@ -138,6 +139,17 @@
   "select_batch":"选择批次",
 
   "please_choose":"请选择",
+
+  "has_account_go_login":"已有账号？去登录",
+
+  "name_can_not_be_empty":"名称不能为空",
+  "user_name_can_not_be_empty":"用户名不能为空",
+  "password_can_not_be_empty":"密码不能为空",
+  "confirm_password_is_different_from_password":"两次密码输入不一致",
+  "please_select_product_name":"请选择产品名称",
+  "please_select_batch_name":"请选择批次名称",
+  "product_price_is_incorrect":"产品单价不正确",
+  "product_count_is_incorrect":"产品数量不正确",
 
   "basic_information_on_trading_products":"交易产品基本信息"
 

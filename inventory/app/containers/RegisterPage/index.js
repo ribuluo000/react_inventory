@@ -1,5 +1,5 @@
 /*
- * LoginPage
+ *
  *
  * This is the first thing users see of our App, at the '/' route
  */
@@ -13,17 +13,16 @@ import { createStructuredSelector } from "reselect";
 import injectReducer from "utils/injectReducer";
 import injectSaga from "utils/injectSaga";
 import { makeSelect__is_authenticated, makeSelectError, makeSelectLoading } from "containers/App/selectors";
-import { api_login, change_password, change_user_name } from "./actions";
 import { router_to_login } from "router/actions";
-import { makeSelect__password, makeSelect__user_name } from "./selectors";
 import reducer from "./reducer";
 import saga from "./saga";
 import ViewIndex from "./ViewIndex";
 import PATH from "constants/PATH";
 import { Redirect, Route } from "react-router-dom";
+import BaseComponent from "../Base/BaseComponent";
 
 /* eslint-disable react/prefer-stateless-function */
-export class LoginPage extends React.PureComponent {
+export class LoginPage extends BaseComponent {
   /**
    * when initial state user_name is not null, submit the form to load repos
    */
@@ -57,36 +56,20 @@ export class LoginPage extends React.PureComponent {
 LoginPage.propTypes = {
   loading : PropTypes.bool,
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
-  repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
-  user_name : PropTypes.string,
-  onChange_user_name : PropTypes.func,
-  onChange_password : PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChange_user_name : value => dispatch(change_user_name(value)),
-    onChange_password : value => dispatch(change_password(value)),
-    onPress_login : evt => {
+    onPress_has_account_go_login : evt => {
       if (evt !== undefined && evt.preventDefault) {
         evt.preventDefault();
       }
-      dispatch(api_login());
-      // dispatch(push('/features'));
-    },
-    onPress_register : evt => {
-      if (evt !== undefined && evt.preventDefault) {
-        evt.preventDefault();
-      }
-      dispatch(push(`/${PATH.PATH__register}`));
+      dispatch(push(`/${PATH.PATH__login}`));
     },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  is_authenticated : makeSelect__is_authenticated(),
-  user_name : makeSelect__user_name(),
-  password : makeSelect__password(),
   loading : makeSelectLoading(),
   error : makeSelectError(),
 });
@@ -96,8 +79,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key : PATH.PATH__login, reducer });
-const withSaga = injectSaga({ key : PATH.PATH__login, saga });
+const withReducer = injectReducer({ key : PATH.PATH__register, reducer });
+const withSaga = injectSaga({ key : PATH.PATH__register, saga });
 
 export default compose(
   withReducer,

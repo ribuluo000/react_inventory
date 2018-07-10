@@ -4,6 +4,7 @@
 
 export default {
   "BASE":"",
+  "PATH__register":"register",
   "PATH__login":"login",
   "PATH__my":"my",
   "PATH__home":"home",

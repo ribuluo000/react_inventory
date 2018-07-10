@@ -14,6 +14,7 @@ import { Route, Switch } from "react-router-dom";
 import PublicRoute from "containers/Base/PublicRoute";
 import PrivateRoute from "containers/Base/PrivateRoute";
 import LoginPage from "containers/LoginPage/Loadable";
+import RegisterPage from "containers/RegisterPage/Loadable";
 import MyPage from "containers/MyPage/Loadable";
 import MyBillPage from "containers/MyPage/Bill/Loadable";
 import BillAddPage from "containers/MyPage/Bill/BillAdd/Loadable";
@@ -62,7 +63,8 @@ export default function App() {
       </Helmet>
       {/*<Header />*/}
       <Switch>
-        <PublicRoute exact path="/" component={MyBillPage}/>
+        <PublicRoute exact path="/" component={RegisterPage}/>
+        <PublicRoute path={`/${PATH.PATH__register}`} component={RegisterPage}/>
         <PublicRoute path={`/${PATH.PATH__login}`} component={LoginPage}/>
         <PublicRoute path={`/${PATH.PATH__my}`} component={MyPage}/>
         <PrivateRoute path={`/${PATH.PATH__home}`} component={HomePage}/>

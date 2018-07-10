@@ -7,11 +7,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { FormattedMessage } from "react-intl";
 import { makeSelectError, makeSelectLoading, makeSelectRepos } from "containers/App/selectors";
 import MyButton from "components/MyButton";
-import messages from "./messages";
-import { InputItem, List, View, WhiteSpace } from "antd-mobile";
+import messages from "containers/App/messages";
+import { InputItem, List, Text, View, WhiteSpace } from "antd-mobile";
+import MyText from "../../components/Text/MyText";
 // import 'antd-mobile/dist/antd-mobile.css';
 /* eslint-disable react/prefer-stateless-function */
 export default class ViewIndex extends React.PureComponent {
@@ -23,69 +23,57 @@ export default class ViewIndex extends React.PureComponent {
   }
 
   render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
+    const {
       loading,
       error,
-      repos,
-    };
+      intl,
+      user_name,
+      password,
+      onChange_user_name,
+      onChange_password,
+      onPress_login,
+      onPress_register,
+    } = this.props;
 
     return (
       <View>
         <Helmet>
-          <title>登录</title>
+          <title>{intl.formatMessage(messages.login)}</title>
         </Helmet>
 
         <List renderHeader={() => ''}>
           <WhiteSpace />
-
-          <FormattedMessage {...messages.placeholder__user_name}>
-            {
-              msg => (
-                <InputItem
-                  id="user_name"
-                  type="text"
-                  value={this.props.user_name}
-                  onChange={this.props.onChange_user_name}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
+          <InputItem
+            id="user_name"
+            type="text"
+            value={user_name}
+            onChange={onChange_user_name}
+            placeholder={intl.formatMessage(messages.user_name)}
+          />
           <WhiteSpace />
 
-          <FormattedMessage {...messages.placeholder__password}>
-            {
-              msg => (
-                <InputItem
-                  id="password"
-                  type="password"
-                  value={this.props.password}
-                  onChange={this.props.onChange_password}
-                  placeholder={msg}
-                />
-              )
-            }
-
-          </FormattedMessage>
+          <InputItem
+            id="password"
+            type="password"
+            value={password}
+            onChange={onChange_password}
+            placeholder={intl.formatMessage(messages.password)}
+          />
 
           <WhiteSpace/>
 
-          <FormattedMessage {...messages.button__login}>
-            {
-              msg => (
-                <MyButton
-                  type="primary"
-                  children={msg}
-                  onPress={this.props.onPress_login}
-                />
-              )
-            }
-
-          </FormattedMessage>
-
+          <MyButton
+            type="primary"
+            children={intl.formatMessage(messages.login)}
+            onPress={onPress_login}
+          />
+          <WhiteSpace/>
+          <MyButton
+            size={'small'}
+            onPress={onPress_register}
+          >
+            {intl.formatMessage(messages.register)}
+          </MyButton>
         </List>
 
         <WhiteSpace />
@@ -100,6 +88,7 @@ ViewIndex.propTypes = {
   error : PropTypes.oneOfType([ PropTypes.object, PropTypes.bool ]),
   repos : PropTypes.oneOfType([ PropTypes.array, PropTypes.bool ]),
   onPress_login : PropTypes.func,
+  onPress_has_account_go_login : PropTypes.func,
   user_name : PropTypes.string,
   onChange_user_name : PropTypes.func,
   onChange_password : PropTypes.func,

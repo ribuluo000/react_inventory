@@ -59,6 +59,11 @@ export default {
     return await request_common(url, data, callback);
   },
 
+  register : async (data = {}, callback) => {
+    let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___user__register;
+    return await request_common(url, data, callback);
+  },
+
   provider_get_list : async (data = {}, callback) => {
     let url = CONFIG.API_BASE_URL + REQ_URL.REQ_URL___provider__get_list;
     return await request_common(url, data, callback);

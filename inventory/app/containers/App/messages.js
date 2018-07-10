@@ -492,6 +492,52 @@ export default defineMessages(
       "defaultMessage":"请选择",
     },
 
+
+    "has_account_go_login":{
+      "id":"has_account_go_login",
+      "defaultMessage":"已有账号？去登录",
+    },
+
+    "name_can_not_be_empty":{
+      "id":"name_can_not_be_empty",
+      "defaultMessage":"名称不能为空",
+    },
+
+    "user_name_can_not_be_empty":{
+      "id":"user_name_can_not_be_empty",
+      "defaultMessage":"用户名不能为空",
+    },
+
+    "password_can_not_be_empty":{
+      "id":"password_can_not_be_empty",
+      "defaultMessage":"密码不能为空",
+    },
+
+    "confirm_password_is_different_from_password":{
+      "id":"confirm_password_is_different_from_password",
+      "defaultMessage":"两次密码输入不一致",
+    },
+
+    "please_select_product_name":{
+      "id":"please_select_product_name",
+      "defaultMessage":"请选择产品名称",
+    },
+
+    "please_select_batch_name":{
+      "id":"please_select_batch_name",
+      "defaultMessage":"请选择批次名称",
+    },
+
+    "product_price_is_incorrect":{
+      "id":"product_price_is_incorrect",
+      "defaultMessage":"产品单价不正确",
+    },
+
+    "product_count_is_incorrect":{
+      "id":"product_count_is_incorrect",
+      "defaultMessage":"产品数量不正确",
+    },
+
     "basic_information_on_trading_products":{
       "id":"basic_information_on_trading_products",
       "defaultMessage":"交易产品基本信息",
