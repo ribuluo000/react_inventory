@@ -42,8 +42,12 @@ export default class ViewIndex extends BaseComponent {
 
   check_info = () => {
 
+    const {
+      intl,
+
+    } = this.props;
     if (my_string_util.is_empty(this.input_value_name)) {
-      view_util.show_toast(MSG.MSG___name_can_not_be_empty);
+      view_util.show_toast(intl.formatMessage(messages.name_can_not_be_empty));
       return false;
 
     }

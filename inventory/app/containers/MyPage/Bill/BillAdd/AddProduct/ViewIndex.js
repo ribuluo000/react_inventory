@@ -130,6 +130,7 @@ export default class ViewIndex extends BaseComponent {
 
   check_info = () => {
     const {
+      intl,
       product,
       batch,
 
@@ -142,22 +143,22 @@ export default class ViewIndex extends BaseComponent {
 
 
     if (my_string_util.is_empty(product.get('object_id'))) {
-      view_util.show_toast(MSG.MSG___please_select_product_name);
+      view_util.show_toast(intl.formatMessage(messages.please_select_product_name));
       return false;
 
     }
     if (my_string_util.is_empty(batch.get('object_id'))) {
-      view_util.show_toast(MSG.MSG___please_select_batch_name);
+      view_util.show_toast(intl.formatMessage(messages.please_select_batch_name));
       return false;
 
     }
     if (my_string_util.is_empty(price)) {
-      view_util.show_toast(MSG.MSG___product_price_is_incorrect);
+      view_util.show_toast(intl.formatMessage(messages.product_price_is_incorrect));
       return false;
 
     }
     if (my_string_util.is_empty(count)) {
-      view_util.show_toast(MSG.MSG___product_count_is_incorrect);
+      view_util.show_toast(intl.formatMessage(messages.product_count_is_incorrect));
       return false;
 
     }

@@ -90,14 +90,6 @@ export default {
     "MSG___products_is_incorrect":'产品不正确',
 
 
-    //front
-
-    "MSG___name_can_not_be_empty":'名称不能为空',
-    "MSG___please_select_product_name":'请选择产品名称',
-    "MSG___please_select_batch_name":'请选择批次名称',
-    "MSG___product_price_is_incorrect":'产品单价不正确',
-    "MSG___product_count_is_incorrect":'产品数量不正确',
-
 
 
 
