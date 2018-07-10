@@ -63,7 +63,7 @@ export default function App() {
       </Helmet>
       {/*<Header />*/}
       <Switch>
-        <PublicRoute exact path="/" component={RegisterPage}/>
+        <PublicRoute exact path="/" component={LoginPage}/>
         <PublicRoute path={`/${PATH.PATH__register}`} component={RegisterPage}/>
         <PublicRoute path={`/${PATH.PATH__login}`} component={LoginPage}/>
         <PublicRoute path={`/${PATH.PATH__my}`} component={MyPage}/>
