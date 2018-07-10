@@ -6,13 +6,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { Icon, InputItem, List, NavBar, Picker, Text, TextareaItem, View, WhiteSpace } from "antd-mobile";
+import { Icon, InputItem, NavBar, Picker, Text, TextareaItem, View, WhiteSpace } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
 import messages from "containers/App/messages";
 import MyButton from "components/MyButton/";
 import MyTextTitleExtra from "components/Text/MyTextTitleExtra";
-import MyListView from "../../../../components/MyListView/index";
+import MyListView from "components/MyListView";
 import my_decimal_util from "../../../../util/my_decimal_util";
+import List from "antd-mobile/es/list/index";
 const Item = List.Item;
 const Brief = Item.Brief;
 /* eslint-disable react/prefer-stateless-function */
