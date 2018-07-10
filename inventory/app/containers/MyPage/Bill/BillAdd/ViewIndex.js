@@ -374,6 +374,7 @@ export default class ViewIndex extends BaseComponent {
             ref={(ref) => {
               this.ref_lv = ref;
             }}
+            heightLv={200}
             dataLv={products}
             hasMore={false}
             onEndReached={() => {

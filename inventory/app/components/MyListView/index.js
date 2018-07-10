@@ -52,6 +52,7 @@ export default class MyListView extends React.PureComponent{
 
     renderRow:PropTypes.func.isRequired,
 
+    heightLv:PropTypes.number,
     renderHeader:PropTypes.func,
     renderSeparator:PropTypes.func,
   };
@@ -61,7 +62,10 @@ export default class MyListView extends React.PureComponent{
     dataLv:[
 
     ],
-    renderHeader:() => {return <span>header1111111</span>},
+    renderHeader:() => {
+      return null;
+      return <span>header1111111</span>
+    },
     renderSeparator:(sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -163,6 +167,7 @@ export default class MyListView extends React.PureComponent{
   render(){
     let {
       // dataLv,
+      heightLv,
       renderHeader,
       renderSeparator,
       renderRow,
@@ -185,8 +190,8 @@ export default class MyListView extends React.PureComponent{
         renderRow={renderRow}
         renderSeparator={renderSeparator}
         style={{
-          // height: this.state.height,
-          height: 200,  //todo need change
+          height: heightLv ||this.state.height,
+          // minHeight: 200,  //todo need change
           overflow: 'auto',
         }}
         pageSize={1}

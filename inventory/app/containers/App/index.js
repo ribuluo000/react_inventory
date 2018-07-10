@@ -60,7 +60,7 @@ export default function App() {
       >
         <meta name="description" content="A React.js Boilerplate application"/>
       </Helmet>
-      <Header />
+      {/*<Header />*/}
       <Switch>
         <PublicRoute exact path="/" component={MyBillPage}/>
         <PublicRoute path={`/${PATH.PATH__login}`} component={LoginPage}/>
@@ -96,7 +96,7 @@ export default function App() {
 
         <PublicRoute path="" component={NotFoundPage}/>
       </Switch>
-      <Footer />
+      {/*<Footer />*/}
     </AppWrapper>
   );
 }

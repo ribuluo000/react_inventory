@@ -13,6 +13,7 @@ import MyTopView1 from "./components/MyTopView1";
 import MyTopView2 from "./components/MyTopView2";
 import MyTextTitleExtra from "components/Text/MyTextTitleExtra";
 import my_date_time_util from "util/my_date_time_util";
+import MyListView from "../../../../components/MyListView/index";
 const FlexItem = Flex.Item;
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -98,6 +99,52 @@ export default class ViewIndex extends BaseComponent {
     );
   };
 
+  renderRow = (item, sectionID, rowID)=>{
+    const {
+      intl,
+    } = this.props;
+    let v = (
+      <View
+        key={item.get('_id')}
+        justify="between" direction="column">
+
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_name)}
+          extra={item.get('name_product')}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.batch_name)}
+          extra={item.get('name_batch')}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_price)}
+          extra={my_string_util.decimal2string_show(item.get('price'))}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_count)}
+          extra={my_string_util.decimal2string_show(item.get('count'))}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.product_total_price)}
+          extra={my_string_util.decimal2string_show(item.get('total_price'))}
+
+        />
+        <MyTextTitleExtra
+          title={intl.formatMessage(messages.remark)}
+          extra={item.get('remark')}
+
+        />
+
+      </View>
+    );
+
+    return v;
+  };
+
   get_view_products = (dataList) => {
     if (!dataList) {
       return null;
@@ -108,51 +155,19 @@ export default class ViewIndex extends BaseComponent {
     } = this.props;
     return (
       <List>
-        {
-          dataList.map((item, i) => {
-
-            let v = (
-              <View
-                key={item.get('_id')}
-                justify="between" direction="column">
-
-                <MyTextTitleExtra
-                  title={intl.formatMessage(messages.product_name)}
-                  extra={item.get('name_product')}
-
-                />
-                <MyTextTitleExtra
-                  title={intl.formatMessage(messages.batch_name)}
-                  extra={item.get('name_batch')}
-
-                />
-                <MyTextTitleExtra
-                  title={intl.formatMessage(messages.product_price)}
-                  extra={my_string_util.decimal2string_show(item.get('price'))}
-
-                />
-                <MyTextTitleExtra
-                  title={intl.formatMessage(messages.product_count)}
-                  extra={my_string_util.decimal2string_show(item.get('count'))}
-
-                />
-                <MyTextTitleExtra
-                  title={intl.formatMessage(messages.product_total_price)}
-                  extra={my_string_util.decimal2string_show(item.get('total_price'))}
-
-                />
-                <MyTextTitleExtra
-                  title={intl.formatMessage(messages.remark)}
-                  extra={item.get('remark')}
-
-                />
-
-              </View>
-            );
-
-            return v;
-          })
-        }
+        <MyListView
+          ref={(ref) => {
+            this.ref_lv = ref;
+          }}
+          heightLv={200}
+          dataLv={dataList}
+          hasMore={false}
+          onEndReached={() => {
+          }}
+          onRefresh={() => {
+          }}
+          renderRow={this.renderRow}
+        />
 
       </List>
     );

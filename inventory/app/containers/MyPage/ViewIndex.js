@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import messages from "containers/App/messages";
-import { List, View, WhiteSpace } from "antd-mobile";
+import { List, NavBar, Text, View, WhiteSpace } from "antd-mobile";
 import BaseComponent from "containers/Base/BaseComponent";
 const Item = List.Item;
 /* eslint-disable react/prefer-stateless-function */
@@ -44,8 +44,15 @@ export default class ViewIndex extends BaseComponent {
         <Helmet>
           <title>{intl.formatMessage(messages.my)}</title>
         </Helmet>
+        <NavBar
+          mode="dark"
+        >
+          <Text>
+            {intl.formatMessage(messages.my)}
+          </Text>
+        </NavBar>
 
-        <List>
+        <List renderHeader={() => ''} >
           <Item
             // arrow="horizontal"
             extra={''}
