@@ -13,7 +13,10 @@ import { makeSelect__password, makeSelect__user_name } from "./selectors";
 /**
  * Github repos request/response handler
  */
-export function* api_request() {
+export function* api_request(action) {
+  console.log('api_request.action',action);
+  console.log('api_request.action',arguments);
+
   // Select username from store
   const user_name = yield select(makeSelect__user_name());
   const password = yield select(makeSelect__password());
